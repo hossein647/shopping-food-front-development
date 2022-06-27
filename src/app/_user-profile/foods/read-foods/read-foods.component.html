@@ -1,0 +1,30 @@
+<div class="read-foods">
+    <div class="custom-container">
+        <div class="toolbar flex-wrap">
+            <a type="submit" class="btn mb-1 add" routerLink="create">اضافه</a>
+            <button type="submit" class="btn mb-1 edit" (click)="editCategory()" [disabled]="!checked">ویرایش</button>
+            <button type="submit" class="btn mb-1 remove" [disabled]="!checked" (click)="removeCategory()">حذف</button>
+        </div>
+        <ng-container *ngIf="totalDocs; else another">
+            <div class="tabel-container">
+                <app-table 
+                            [customColumnName]="customColumnName" 
+                            [dataSource]="dataSource" 
+                            [selection]="selection"
+                            [displayedColumns]="displayedColumns" 
+                            [length]="totalDocs" 
+                            [pageIndex]="pageIndex" 
+                            [pageSize]="limit"
+                            [pageSizeOptions]="pageSizeOptions" 
+                            (onChangePaginateValue)="changePaginateValue($event)"
+                            (changeEventCheckbox)="changeEventCheckbox($event)">
+                </app-table>
+            </div>
+        </ng-container>
+        <ng-template #another>
+            <div class="wrapper">
+                <h6 class="no-file">{{noData}}</h6>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="
+            wrapper 
+            flex 
+            flex-col
+            items-center
+            p-3
+            xs:p-8
+            sm:p-10
+            lg:py-12 
+            lg:px-[75px] 
+            bg-gray-100">
+    <!-- <input  type="text" 
+            placeholder="نام یک غذا را جستجو کنید" 
+            class="
+                search 
+                border-2 
+                border-solid 
+                border-slate-200
+                rounded-md
+                p-2
+                w-full
+                sm:w-4/6
+                md:w-3/5
+                lg:w-1/2
+                xl:w-2/5
+                text-sm
+                focus:outline-none
+                focus:ring-indigo-500 
+                focus:border-indigo-500"> -->
+    <div class="wrapper-list w-full sm:w-4/6 md:w-3/5 lg:w-1/2 xl:w-2/5 mt-8">
+        <ul class="list flex justify-evenly flex-wrap">
+            <a 
+                class=" text-center rounded-lg cursor-pointer" 
+                *ngFor="let list of lists; let i = index;" 
+                (click)="goToPage(list.alias, list.name)">
+                    <img 
+                        class="w-16 h-16 rounded-md" 
+                        [src]="'http://localhost:3000/'+list.userId+'/'+list.image" alt="">
+                    <span  class="list-item-link text-sm">{{list.name}}</span>
+            </a>
+        </ul>
+    </div>
+</div>

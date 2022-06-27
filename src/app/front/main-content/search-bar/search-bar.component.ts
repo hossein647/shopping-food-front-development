@@ -1,0 +1,27 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Upload } from 'src/app/_user-profile/upload/state/upload/upload.model';
+import { ShopCategory } from '../../_interfaces/shop-category.interface';
+
+@Component({
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss']
+})
+export class SearchBarComponent implements OnInit {
+
+  @Input() lists: ShopCategory[];
+  @Input() images: Upload[];
+  @Output() onGoToPage = new EventEmitter<{alias: string, name: string}>()
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+    
+  }
+
+  goToPage(alias: string, name: string) {
+    this.onGoToPage.emit({ alias, name })    
+  }
+
+}

@@ -1,0 +1,19 @@
+
+@mixin snackbar-success {
+  background-color: yellowgreen;
+  color: white;
+  direction: rtl;
+  .mat-simple-snackbar {
+    font-family: 'Vazir';
+  }
+}
+
+
+@mixin snackbar-error {
+  background-color: rgb(205, 50, 50);
+  color: white;
+  direction: rtl;
+  .mat-simple-snackbar {
+    font-family: 'Vazir', Vazir;
+  }
+}

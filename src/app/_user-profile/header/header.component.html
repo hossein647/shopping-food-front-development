@@ -1,0 +1,23 @@
+<div class="header">
+  <div class="right">
+    <mat-icon class="mat-icon-rtl-mirror" (click)="toggleSideNav()">menu</mat-icon>
+    <ng-content select="selector"></ng-content>
+  </div>
+  <div class="left">
+    <div class="account">
+      <button class="profile" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon class="account-icon">account_circle</mat-icon>
+      </button>
+      <mat-menu class="mat-manue" #menu="matMenu">
+        <h6 class="email-title">{{email}}</h6>
+        <button class="manage_accounts" mat-menu-item (click)="home()">
+          <mat-icon>home</mat-icon>
+          <small>صفحه اصلی</small>
+        </button>
+        <button class="logout" mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <small>خروج</small>
+        </button>
+      </mat-menu>
+    </div>
+</div>

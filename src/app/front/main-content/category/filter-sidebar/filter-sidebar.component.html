@@ -1,0 +1,36 @@
+<div class="filter-shops">
+    <ul class="list border overflow-hidden">
+        <li 
+            class="bg-[#fdfdfd]" 
+            *ngFor="let category of categories; let i = index"
+            [class.selected]="category.alias === selected"
+            (click)="clickSelectCategory(category)">
+            <div 
+                class="main flex items-center py-3 pr-5 mb-1" 
+                [ngClass]="{'mb-0': categories.length === i+1}">
+                <img 
+                    class="picture rounded-full w-8 h-8" 
+                    [src]="'http://localhost:3000/' + category.userId + '/' + category.image" 
+                    width="32" 
+                    height="32">
+                <span class="name mr-3">{{category.name}}</span>
+            </div>
+            <ul 
+                class="sub-list" 
+                *ngIf="category.name === nameCategory"
+                [ngClass]="{'reverse-selected': category.name === nameCategory}">
+                <li class="flex items-center py-2 pr-8 mb-1 last:mb-0" 
+                    *ngFor="let sub of subFoodCategories; let i = index;"
+                    (click)="selectSubFoodCategory($event,sub.name, category.name)"
+                    [ngClass]="{'sub-selected': subFoodCategories[i].name === subSelected}">
+                    <img 
+                        class="picture rounded-full" 
+                        src="./../../../../../assets/img/eco-food.png" 
+                        width="16" 
+                        height="16">
+                    <span class="name mr-3">{{sub.name}}</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

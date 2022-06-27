@@ -1,0 +1,146 @@
+<div class="form-shop">
+  <div class="custom-container">
+    <form 
+          class="form" 
+          [formGroup]="shopForm" 
+          (ngSubmit)="onSubmit()" 
+          [ngClass]="{'disable-form': loadingSpinner}"
+          #form="ngForm">
+      <h3>{{title}}</h3>
+
+
+      <mat-form-field appearance="standard">
+        <mat-label>نام</mat-label>
+        <input type="text" matInput placeholder="نام" formControlName="name">
+      </mat-form-field>
+
+      <small *ngIf="
+                    shopForm.controls['name']?.invalid &&
+                    ( shopForm.controls['name']?.touched || 
+                    shopForm.controls['name']?.dirty)">
+        {{nameEmpty}}
+      </small>
+
+
+
+
+      <mat-form-field appearance="standard">
+        <mat-label>توضیحات</mat-label>
+        <mat-chip-list multiple formControlName="description" #chipList>
+          <mat-chip
+              *ngFor="let tag of tags"
+              [value]="tag"
+              (removed)="removeTag(tag)">
+              {{tag}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="کلمه جدید ..."
+            [matChipInputFor]="chipList"
+            (matChipInputTokenEnd)="addTagFromInput($event)"
+            formControlName="description">
+        </mat-chip-list>
+      </mat-form-field>
+
+      <small *ngIf="
+                    shopForm.controls['description']?.invalid && 
+                    (shopForm.controls['description']?.touched || 
+                    shopForm.controls['description']?.dirty)">
+        {{descriptionEmpty}}
+      </small>
+
+
+
+
+      <mat-form-field appearance="standard">
+          <mat-label>دسته بندی</mat-label>
+          <mat-select formControlName="category">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let category of categories" [value]="category.name">
+                  {{category.name}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <small *ngIf="
+                    shopForm.controls['category']?.invalid &&
+                    (shopForm.controls['category']?.touched || 
+                    shopForm.controls['category']?.dirty)">
+        {{categoryEmpty}}
+      </small>
+
+
+
+
+      <mat-form-field appearance="standard">
+        <mat-label>آدرس</mat-label>
+        <input type="text" matInput placeholder="آدرس" formControlName="address" >
+      </mat-form-field>  
+
+      <small *ngIf="
+                    shopForm.controls['address']?.invalid && 
+                    ( shopForm.controls['address']?.touched || 
+                    shopForm.controls['address']?.dirty)">
+        {{addressEmpty}}
+      </small>
+
+
+
+
+      <mat-form-field appearance="standard">
+        <mat-label>تلفن</mat-label>
+        <input pattern="^[0-9]*$" matInput placeholder="تلفن" formControlName="phone" (input)="changePhone($event)">
+      </mat-form-field>  
+
+      <small *ngIf="
+                    (shopForm.controls['phone']?.invalid &&
+                    ( shopForm.controls['phone']?.touched || 
+                    shopForm.controls['phone']?.dirty)) && 
+                    (shopForm.controls['phone']?.errors?.['required'])">
+        {{phoneEmpty}}
+      </small>
+      <small *ngIf="
+                    (shopForm.controls['phone']?.invalid && 
+                    (shopForm.controls['phone']?.touched || 
+                    shopForm.controls['phone']?.dirty)) && 
+                    (!typePhone)">
+          {{phoneMustNumber}} <br>
+      </small>
+
+
+
+
+      <div class="box-image">
+        <button class="image-select" mat-button type="button" (click)="openDialog()">
+          انتخاب تصویر
+        </button>
+        <mat-form-field appearance="standard">
+          <input matInput type="text" placeholder="تصویر" readonly class="image" formControlName="image">
+        </mat-form-field>
+      </div>
+      
+      <small class="image-error" 
+             *ngIf="
+                    shopForm.controls['image']?.invalid && 
+                    (shopForm.controls['image']?.touched || 
+                    shopForm.controls['image']?.dirty)">
+        {{imageEmpty}}
+      </small>
+
+
+
+      <button 
+              [disabled]="!shopForm.valid" 
+              mat-raised-button 
+              class="btn" 
+              type="submit">
+              {{submitLabel}}
+      </button>
+      <div class="spinner" *ngIf="loadingSpinner" [class.animate]="loadingSpinner">
+        <app-spinner></app-spinner>
+      </div>
+    </form>
+  </div>
+</div>

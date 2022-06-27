@@ -1,0 +1,17 @@
+<div class="custom-container">
+    <div class="wrapper-slider lg:mx-[75px]">
+        <app-circular-slider></app-circular-slider>
+    </div>
+    <div class="wrapper-search">
+        <app-search-bar (onGoToPage)="goToPage($event)"
+                        [lists]="lists">
+        </app-search-bar>
+    </div>
+    <div class="wrapper-papular">
+        <app-motst-papular></app-motst-papular>
+    </div>
+    <div class="wrapper-newest">
+        <app-newest></app-newest>
+    </div>
+    <app-footer></app-footer>
+</div>

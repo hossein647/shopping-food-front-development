@@ -1,0 +1,220 @@
+<div class="form-food">
+    <mat-stepper labelPosition="bottom" #stepper>
+        <mat-step class="stepper" [stepControl]="stepFirstFood">
+            <form 
+                class="form" 
+                [formGroup]="stepFirstFood" 
+                [ngClass]="{'disable-form': loadingSpinner}"
+                #firstForm="ngForm">
+
+                <ng-template matStepLabel>اطلاعات پایه</ng-template>
+                <h3>{{title}}</h3>
+
+
+
+                <mat-form-field appearance="standard" #matFormField>
+                    <mat-label>نام</mat-label>
+                    <input type="text" matInput placeholder="نام" formControlName="name">
+                </mat-form-field>
+            
+                <small *ngIf="stepFirstFood.controls['name']?.invalid &&
+                        ( stepFirstFood.controls['name']?.touched || 
+                        stepFirstFood.controls['name']?.dirty)">
+                        {{nameEmpty}}
+                </small>
+            
+            
+
+
+                <mat-form-field appearance="standard">
+                    <mat-label>توضیحات</mat-label>
+                    <input type="text" matInput placeholder="توضیحات" formControlName="description">
+                </mat-form-field>
+                <small 
+                        *ngIf="stepFirstFood.controls['description']?.invalid && 
+                        (stepFirstFood.controls['description']?.touched || 
+                        stepFirstFood.controls['description']?.dirty)">
+                        {{descriptionEmpty}}
+                </small>
+            
+            
+            
+
+                <mat-form-field appearance="standard">
+                    <mat-label>رستوران</mat-label>
+                    <mat-select formControlName="shop">
+                        <mat-option>انتخاب کنید</mat-option>
+                        <mat-option *ngFor="let shop of shops" [value]="shop.name">
+                            {{shop.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <small 
+                        *ngIf="stepFirstFood.controls['shop']?.invalid && 
+                        (stepFirstFood.controls['shop']?.touched || 
+                        stepFirstFood.controls['shop']?.dirty)">
+                        {{shopEmpty}}
+                </small>
+
+
+
+
+                <mat-form-field appearance="standard">
+                    <mat-label>دسته بندی</mat-label>
+                    <mat-select formControlName="category">
+                        <mat-option>انتخاب کنید</mat-option>
+                        <mat-option *ngFor="let category of foodCategories" [value]="category.name">
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <small 
+                        *ngIf="stepFirstFood.controls['category']?.invalid && 
+                        (stepFirstFood.controls['category']?.touched || 
+                        stepFirstFood.controls['category']?.dirty)">
+                        {{categoryEmpty}}
+                </small>
+                 
+
+
+
+                <mat-form-field appearance="standard">
+                    <mat-label>زیردسته</mat-label>
+                    <mat-select formControlName="subFood">
+                        <mat-option>انتخاب کنید</mat-option>
+                        <mat-option *ngFor="let subFood of subFoodCategories" [value]="subFood.name">
+                            {{subFood.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <small 
+                        *ngIf="stepFirstFood.controls['subFood']?.invalid && 
+                        (stepFirstFood.controls['subFood']?.touched || 
+                        stepFirstFood.controls['subFood']?.dirty)">
+                        {{categoryEmpty}}
+                </small>
+            
+            
+
+
+                <mat-form-field appearance="standard">
+                    <mat-label>قیمت</mat-label>
+                    <input type="number" matInput placeholder="قیمت" formControlName="price">
+                </mat-form-field>
+                <small 
+                        *ngIf="stepFirstFood.controls['price']?.invalid && 
+                        ( stepFirstFood.controls['price']?.touched || 
+                        stepFirstFood.controls['price']?.dirty)">
+                        {{priceEmpty}}
+                </small>
+            
+            
+            
+
+                <mat-form-field appearance="standard">
+                    <mat-label>تخفیف</mat-label>
+                    <input type="number" matInput placeholder="تخفیف" formControlName="copon">
+                </mat-form-field>
+
+            
+
+
+                <div class="state-stepper">
+                    <button class="next" mat-button matStepperNext>بعدی</button>
+                </div>
+
+
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="stepSecondFood">
+            <form 
+                class="form" 
+                [formGroup]="stepSecondFood" 
+                [ngClass]="{'disable-form': loadingSpinner}"
+                (ngSubmit)="submit()" 
+                #secondForm="ngForm">
+
+                <ng-template matStepLabel>غذای ویژه</ng-template>
+                <h3>{{title}}</h3>
+            
+
+
+                <mat-slide-toggle 
+                                formControlName="super" 
+                                labelPosition="before" 
+                                color="primary"
+                                (change)="slideToggleChange($event)"
+                                [(ngModel)]="checked">
+                                آیا غذا ویژه است ؟
+                </mat-slide-toggle>
+
+
+
+
+                <div class="box-state">
+                    <label class="label-state">وضعیت غذای ویژه :</label>
+                    <mat-button-toggle-group 
+                                            formControlName="state"
+                                            [value]="state">
+                        <mat-button-toggle 
+                                            *ngFor="let button of buttonGroup"
+                                            [ngStyle]="{'background-color': loadingSpinner ? '#fff0' : ''}"
+                                            [class]="button.class" 
+                                            [value]="button.value">
+                                            {{button.label}}
+                        </mat-button-toggle>
+
+                    </mat-button-toggle-group>
+                </div>
+
+
+
+
+
+
+                <div class="box-image">
+                    <button 
+                            class="image-select" 
+                            mat-button type="button" 
+                            (click)="openDialog()">
+                            انتخاب تصویر
+                    </button>
+                    <mat-form-field appearance="standard">
+                        <input 
+                                matInput 
+                                type="text" 
+                                placeholder="تصویر" 
+                                readonly 
+                                class="image" 
+                                formControlName="image">
+                    </mat-form-field>
+                </div>
+                <small 
+                        class="image-error" 
+                        *ngIf="stepSecondFood.controls['image']?.invalid && 
+                        (stepSecondFood.controls['image']?.touched || 
+                        stepSecondFood.controls['image']?.dirty)">
+                        {{imageEmpty}}
+                </small>
+
+
+
+
+                <button 
+                        [disabled]="!validForm()" 
+                        mat-stroked-button 
+                        class="btn" 
+                        type="submit">
+                        {{submitLabel}}
+                </button>
+
+
+
+                <div class="spinner" *ngIf="loadingSpinner" [class.animate]="loadingSpinner">
+                    <app-spinner></app-spinner>
+                </div>
+            </form>
+        </mat-step>
+    </mat-stepper>
+</div>

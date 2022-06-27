@@ -1,0 +1,20 @@
+<div class="read-upload">
+    <div class="custom-container">
+        <div class="toolbar">
+            <a type="submit" class="btn add" routerLink="upload">آپلود جدید</a>
+        </div>
+        <div class="card-images" *ngIf="files.length > 0">
+            <div 
+                class="box-image" 
+                *ngFor="let file of files; 
+                let i = index;">
+                <img [src]="'http://localhost:3000/' + file.userId + '/' + file.filename" alt="">
+                <small class="image-name">{{file.filename}}</small>
+                <mat-icon class="delete" (click)="remove(i, file._id)">delete</mat-icon>
+            </div>
+        </div>
+        <div *ngIf="files.length === 0">
+            <h6 class="no-file">{{ responseMessage }}</h6>
+        </div>
+    </div>
+</div>

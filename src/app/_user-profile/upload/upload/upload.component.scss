@@ -1,0 +1,134 @@
+@use '../../../__share/sass/button' as button;
+
+.custom-container {
+    // padding: 30px;
+    width: 60%;
+    margin: 30px auto 0;
+    .select-files {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border: 1px solid #eee;
+        box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 0 200px
+        }
+        
+        label {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+        .upload {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            button {
+                @include button.btn;
+                width: 140px;
+                height: 35px;
+                font-size: 16px;
+                font-weight: 500;
+                &:disabled {
+                background-color: #afafaf;
+                }
+                &:not(:disabled) {
+                    cursor: pointer;
+                }
+            }
+        }
+        .error {
+            color: red;
+            text-align: center;
+            font-weight: 500;
+            padding: 8px;
+        }
+    }
+    .read-files {
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        margin-top: 20px;
+        border: 1px solid #eee;
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+        .box-image {
+            margin: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #eee;
+            .image {
+                border-bottom: 1px solid #d3d3d3;
+                width: 180px;
+                height: 120px;
+            }
+            .image-name {
+                font-size: 10px;
+                margin: 10px 0 0;
+                border: 1px solid #fbfbfb;
+                border-radius: 3px;
+                background-color: #f3f3f394;
+                color: black;
+            }
+            .delete {
+                color: white;
+                position: absolute;
+                background-color: red;
+                border-radius: 50%;
+                height: 18px;
+                width: 18px;
+                text-align: center;
+                margin-right: -150px;
+                margin-top: 2px;
+                font-size: 16px;
+                transition: all .3s ease-in-out;
+                padding: 2px;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.2);
+                }
+            }
+        }
+
+}
+
+    .form-upload #upload-file::-webkit-file-upload-button {
+        border: none !important;
+        padding: 5px 10px;
+        background-color: #00b8ff;
+        color: white;
+        border-radius: 3px;
+    }
+    .form-upload #upload-file::-webkit-file-upload-button + span{
+        border: none !important;
+        padding: 5px 10px;
+    }
+
+}
+
+.mat-form-field {
+    text-align: right !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+:host ::ng-deep .mat-form-field-type-mat-select .mat-form-field-label {
+    width: 100%;
+}
+
+@media(max-width: 991px) {
+    .custom-container {
+        width: 100%;
+    }
+}
