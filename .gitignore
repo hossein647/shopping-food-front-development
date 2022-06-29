@@ -1,2 +1,7 @@
+# all files ignored
 *
-!.gitkeep
+
+
+# this files not ignored
+!dist
+!.gitignore
