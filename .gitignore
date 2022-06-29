@@ -4,4 +4,4 @@
 
 # this files not ignored
 !dist/
-*
+!.gitignore
