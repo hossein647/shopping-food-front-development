@@ -1,6 +1,2 @@
-#git ignore all file
 *
-
-# but not this files
 !.gitignore
-!dist
