@@ -3,8 +3,5 @@
 
 
 # this files not ignored
-!dist/*
-*
-
 !dist/
-!.gitignore
+*
