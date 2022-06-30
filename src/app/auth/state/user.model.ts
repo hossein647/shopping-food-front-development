@@ -8,12 +8,6 @@ export interface User {
   image?: string;
 }
 
-// export function createUser(params: Partial<User>) {
-//   return {
-
-//   } as User;
-// }
-
 
 export enum Role {
   Admin = 'admin',
