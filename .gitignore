@@ -1,6 +1,7 @@
-
+# all files ignored
 *
 
 
+#this files not ignored
 !.gitignore
 !dist/
