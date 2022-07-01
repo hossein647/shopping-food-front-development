@@ -6,5 +6,5 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'shoping-food-front-end';
+  title = 'shoping-food';
 }
