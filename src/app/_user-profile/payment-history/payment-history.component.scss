@@ -1,6 +1,0 @@
-@use './../../__share/sass/tabel' as tabel;
-
-
-:host ::ng-deep .payment {
-    @include tabel.matTabel;
-}
