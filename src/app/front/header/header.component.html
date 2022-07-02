@@ -1,0 +1,92 @@
+<div class="header py-3 px-5 sm:px-10 lg:px-0 lg:py-0 lg:mx-[75px]">
+  <div class="row">
+    <div class="menu flex justify-between w-full md:block md:w-auto">
+      <div 
+          class="hamburger-menu" 
+          [ngClass]="{'-mt-[25px]': ((!scrolled && sidebarShow) || (scrolled && sidebarShow))}">
+        <div 
+            class="hamburger" 
+            [class.absolute]="((!scrolled && sidebarShow) || (scrolled && sidebarShow))" 
+            (click)="toggleHamburger($event)" 
+            #hamburger>
+          <div class="line rotated"></div>
+          <div class="line show"></div>
+          <div class="line rotated"></div>
+        </div>
+      </div>
+      <a class="title" routerLink="/" (click)="onLogoClick()">سفارش غذا</a>
+      <ul class="list">
+        <!-- <li>
+          <a class="" routerLink="foods">غذا</a>
+        </li> -->
+        <!-- <li>
+          <a class="" routerLink="contact-us">تماس با ما</a>
+        </li> -->
+      </ul>
+    </div>
+    <ul class="lists">
+      <li *ngIf="!loggedIn" class="flex">
+        <div class="auth">
+          <a routerLink="login" class="customer inline-block">ورود  /  عضویت</a>
+        </div>
+      </li>
+      <li *ngIf="loggedIn" class="account flex items-center">
+        <div class="wrapper-cart flex ml-1">
+            <span *ngIf="orderFoodLength > 0" 
+                  class="
+                        inline-block
+                        bg-lime-500
+                        rounded-full 
+                        pt-[3px]
+                        pl-[2px]
+                        pr-[3px]
+                        text-white 
+                        text-center 
+                        text-[13px]
+                        w-[22px] 
+                        h-[22px] 
+                        mb-[38px] 
+                        -ml-[10px]">
+                        {{orderFoodLength}}
+              </span>
+          <svg 
+              class="cart h-8 w-8 rounded-full m-auto p-1 hover:cursor-pointer" 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+              stroke-width="2"
+              (click)="showSidebarPay()">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <button class="profile" mat-icon-button [matMenuTriggerFor]="menu">
+          <svg 
+              class="h-8 w-8 rounded-full m-auto p-1" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg" 
+              stroke-width="2">
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </button>
+        <mat-menu class="mat-menu" #menu="matMenu">
+          <h6 class="email-title">{{email}}</h6>
+          <button class="manage_accounts" mat-menu-item (click)="manageAccount()">
+            <mat-icon>manage_accounts</mat-icon>
+            <small>حساب کاربری</small>
+          </button>
+          <button class="logout" mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <small>خروج</small>
+          </button>
+        </mat-menu>
+      </li>
+    </ul>
+  </div>
+</div>

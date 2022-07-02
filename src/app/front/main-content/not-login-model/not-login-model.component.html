@@ -1,0 +1,41 @@
+<div class="
+        not-login-modal
+        w-[calc(100%-30px)]
+        xs:w-[400px]
+
+        absolute 
+        bg-white
+        top-[50%]
+        left-[50%]
+        translate-x-[-50%]
+        translate-y-[-50%]
+        shadow-2xl
+        flex-col
+        items-center
+        z-[53]
+        rounded-xl"
+        [ngClass]="{'hidden': !show, 'flex': show}">
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-12 w-12 mt-4 drop-shadow-lg text-[#747474]" 
+        fill="none"
+        viewBox="0 0 24 24" 
+        stroke="currentColor" 
+        stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+    </svg>
+    <span class="px-16 mt-3 text-center">{{message}}</span>
+    <div class="modal-footer flex justify-center w-full mt-7 mb-4 mx-2 xs:mx-0 xs:mt-10">
+        <button 
+                class="bg-sky-600 text-white py-1 px-2 text-[14px] rounded-tr rounded-br" 
+                (click)="closeNoLoginModal()">
+                متوجه شدم
+        </button>
+        <a 
+            routerLink="/login" 
+            class="bg-lime-600 text-white py-1 px-2 text-[14px] rounded-tl rounded-bl">
+            ورود به حساب
+        </a>
+    </div>
+</div>

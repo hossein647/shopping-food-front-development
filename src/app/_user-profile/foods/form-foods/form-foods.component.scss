@@ -1,0 +1,170 @@
+@use '../../../__share/sass/button' as button;
+@use '../../../__share/sass/snackbar_color' as snackbar;
+
+$greenDefault: yellowgreen;
+
+
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #2A79FF !important;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.disable-form {
+  background-color: lightgrey;
+  pointer-events: none;
+}
+
+.form-food {
+  margin: 2% auto;
+  display: flex;
+  justify-content: center;
+}
+:host ::ng-deep .mat-stepper-horizontal {
+  border: 1px solid #eee;
+}
+
+h3 {
+  color: #6f6f6f;
+  text-align: center;
+  margin-top: 0;
+}
+
+
+.form {
+  box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+  margin-top: 20px;
+  border-radius: 2px;
+  padding: 20px 80px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-form-field {
+  text-align: right !important;
+}
+
+
+.btn {
+  @include button.btn;
+  background-color: $greenDefault;
+  margin: 30px auto 10px;
+  width: 50%;
+  padding: 0;
+  font-size: 12px;
+}
+
+small {
+  color: red;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+button[type= submit]:disabled {
+  background-color: #afafaf;
+}
+
+:host ::ng-deep .mat-form-field-type-mat-select .mat-form-field-label {
+  width: 100%;
+}
+
+.image-select {
+  background: #607d8b;
+  color: white;
+  margin-left: 10px;
+}
+
+:host ::ng-deep mat-slide-toggle {
+  margin: 30px 0;
+    .mat-slide-toggle-label {
+      border-bottom: 1px solid #7a7a7aa8;
+      padding-bottom: 5px;
+        .mat-slide-toggle-bar {
+          margin-right: 18px;
+        }
+        .mat-slide-toggle-content {
+          font-family: 'Vazir';
+        }
+    }
+}
+
+.state-stepper {
+  margin: 20px 0;
+  text-align: left;
+    .next {
+      background: #607d8b;
+      color: white;
+    }
+}
+
+:host ::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:last-child)::after {
+  left: 0;
+  right: auto;
+}
+
+:host ::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:first-child)::before {
+  right: 0;
+  left: auto;
+}
+
+:host ::ng-deep .mat-step-header:hover {
+    background-color: rgb(0 0 0 / 2%);
+}
+
+:host ::ng-deep .mat-button-toggle-group {
+  width: 300px;
+  flex: 100% 1 0;
+  pointer-events: none;
+    .mat-button-toggle {
+      flex-basis: 150px;
+      flex-grow: 1;
+      &:first-child{
+        border-left: solid 1px rgba(0,0,0,.12);
+      }
+      &.mat-button-toggle-checked {
+        color: white;
+      }
+      &.wait.mat-button-toggle-checked {
+        background-color: #03a9f4ed;
+      }
+      &.confirm.mat-button-toggle-checked {
+        background-color: #8bc34a;
+      }
+      &.reject.mat-button-toggle-checked {
+        background-color: #f44336;
+      }
+      &.show.mat-button-toggle-checked {
+        background-color: #9c27b0;
+      }
+      &.complete.mat-button-toggle-checked {
+        background-color: #795548;
+      }
+        
+    }
+}
+
+.box-state {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+   .label-state {
+     margin-bottom: 5px;
+   }
+}

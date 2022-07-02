@@ -1,0 +1,190 @@
+<div class="
+        more-modal
+        w-full
+        h-full
+        sm:w-[600px] 
+        sm:h-[400px] 
+        absolute 
+        bg-white
+        top-[50%]
+        left-[50%]
+        translate-x-[-50%]
+        translate-y-[-50%]
+        shadow-2xl
+        flex-col
+        items-center
+        sm:rounded-md
+        z-[51]"
+        [ngClass]="{'hidden': !moreModalShow, 'overflow-hidden': showNotLoginModal, 'overflow-y-auto': !showNotLoginModal}"
+        *ngIf="food"
+        #modal>
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-8 w-8 mt-3 mr-3 absolute left-2 hover:cursor-pointer hover:scale-125 transition text-white sm:text-black"
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        (click)="closeMoreModal()">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+    <div class="min-card flex flex-col sm:flex-row">
+        <div class="wrapper-img w-full sm:w-fit">
+            <img 
+                [src]="'https://api.hosseinnejaty.ir/' + food.userId + '/' + food.image" 
+                alt="" 
+                class="w-full h-56 sm:w-[250px] sm:h-[150px] sm:rounded-tr-md">
+        </div>
+        <div class="description mx-5 flex flex-wrap sm:flex">
+            <div class="name flex w-1/2 mt-3 sm:mt-0 sm:w-full items-center">
+                <img src="./../../../../assets/img/salad.png" class="w-4 h-4" alt="">
+                <p class="name text-sm p-1 font-base mr-3">{{food?.name}}</p>
+            </div>
+            <div class="price flex w-1/2 mt-3 sm:mt-0 sm:w-full items-center">
+                <img src="./../../../../assets/img/dollar-tag.png" class="w-4 h-4" alt="">
+                <p class="price text-sm p-1 mr-3 mt-[4px]">{{food?.price}} تومان</p>
+            </div>
+            <div class="discunt flex w-1/2 mt-3 mb-3 sm:mt-0 sm:mb-0 sm:w-full items-center">
+                <img src="./../../../../assets/img/discount.png" class="w-4 h-4" alt="">
+                <p class="copon text-sm p-1 mr-3">{{food?.copon || 'بدون تخفیف'}}</p>
+            </div>
+            <div class="discunt flex w-1/2 mt-3 mb-3 sm:mt-0 sm:mb-0 sm:w-full items-center">
+                <img src="./../../../../assets/img/rate.png" class="w-4 h-4" alt="">
+                <div class="flex items-center">
+                    <p class="copon text-sm p-1 mr-3 mt-1">{{rate}}</p>
+                    <p class="text-sm mt-1 mr-1">({{lengthRating }} نفر)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rating flex items-center mx-6 mt-2">
+        <div class="flex items-center" *ngIf="loggedIn && user?.role === 'customer'">
+            <span class="block text-sm">امتیاز شما :</span>
+            <bar-rating class="mr-5"
+                        [rate]="iRate"
+                        [max]="5" 
+                        (rateChange)="changeRating($event)"
+                        [readOnly]="false">
+            </bar-rating>
+        </div>
+        <app-not-login-model
+                            [show]="showNotLoginModal"
+                            (onModal)="closeNoLoginModal()"
+                            [message]="message">
+        </app-not-login-model>
+    </div>
+    <div class="comment mx-3 mt-4" #commentAnchor>
+        <div class="write-comment flex flex-col mb-10 mx-3">
+            <label for="comment" class="mb-1 text-sm">نظرتان را بنویسید : <span  *ngIf="!loggedIn"> (ورود به حساب کاربری لازم است) </span> </label>
+            <form class="w-full" [formGroup]="commentForm" (ngSubmit)="submit(commentForm)">
+                <textarea 
+                    class="write border p-2 w-full"
+                    rows="5"
+                    placeholder="hello"
+                    formControlName="text"></textarea>
+                <button 
+                        class="send mt-2 bg-lime-600 text-white py-1 px-4 rounded-sm disabled:bg-slate-400" 
+                        type="submit"
+                        [disabled]="commentForm.invalid">ارسال                  
+                </button>
+            </form>
+        </div>
+        <h2 class="mb-2 text-[#919191] text-base mx-3" [class.ma-bottom]="comments.length === 0">
+             نظرات ({{comments.length}}):</h2>
+        <div class="comment-other mb-5 mt-1 mx-3 border p-4 rounded-[3px]" *ngIf="comments.length > 0">
+            <div class="commented w-full">
+                <div 
+                    class="main-comment p-3 border mt-4 first:mt-0 rounded" 
+                    *ngFor="let comment of comments; let i = index">
+                    <div class="header-comment flex justify-between items-center py-2 px-3">
+                        <div class="profile flex items-center">
+                            <img 
+                                *ngIf="comment.userId.image"
+                                [src]="'https://api.hosseinnejaty.ir/' + comment.userId._id + '/profile/' + comment.userId.image"
+                                class="border w-6 h-6 rounded-full" 
+                                alt="" 
+                                width="24" 
+                                height="24">
+                                <svg 
+                                    *ngIf="!comment.userId.image" 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    class="h-6 w-6 rounded-full border p-1 text-gray-400"
+                                    fill="none" 
+                                    viewBox="0 0 24 24" 
+                                    stroke="currentColor" 
+                                    stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            <span class="username text-[12px] mr-3">
+                                {{comment.userId?.['email'] | username}}
+                            </span>
+                        </div>
+                        <span class="created_at text-[12px]">{{comment.createdAt | persianDate}}</span>
+                    </div>
+                    <textarea 
+                            class="body-comment text-sm py-3 px-2 w-11/12 mx-auto 
+                                rounded-[3px] block focus-visible:outline-none resize-none" 
+                            #textarea 
+                            readonly>{{comment.text}}</textarea >
+                    <div 
+                        class="footer-comment text-left p-2">
+                        <span class="replay text-[12px]" 
+                        (click)="replayMainComment(commentAnchor, commentForm, comment)">replay</span>
+                    </div>
+                    <div 
+                        class="replay-comment border first:mt-0 rounded sm:m-5 mt-2" 
+                        *ngFor="let replay of comment.replayBy; let j = index">
+                        <div class="header-comment flex justify-between items-center py-2 px-3">
+                            <div class="profile flex items-center">
+                                <img *ngIf="replay.userId?.image"
+                                    [src]="'https://api.hosseinnejaty.ir/' + replay.userId._id + '/profile/' + replay.userId.image"
+                                    class="border w-6 h-6 rounded-full" 
+                                    alt="" 
+                                    width="24" 
+                                    height="24">
+                                <svg 
+                                    *ngIf="!replay.userId?.image" 
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 rounded-full border p-1 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                <span class="username text-[12px] mr-3">
+                                    {{replay.userId?.['email'] | username}}
+                                </span>
+                            </div>
+                            <span class="created_at text-[12px]">
+                                {{replay.createdAt | persianDate}}
+                            </span>
+                        </div>
+                        <textarea 
+                                class="body-comment text-sm py-3 w-11/12 mx-auto 
+                                rounded-[3px] block focus-visible:outline-none resize-none" 
+                                #textarea 
+                                readonly>{{replay.text}}</textarea>
+                        <div class="footer-comment text-left p-2">
+                            <span 
+                                class="replay text-[12px]" 
+                                (click)="replaySubComment(commentAnchor, commentForm, comment, replay)">
+                                replay
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div 
+        class="overlay-more w-screen h-screen absolute bg-gray-500 left-0 top-0 opacity-40"
+        [ngClass]="{'hidden': !showNotLoginModal}"
+         #overlayMore>
+    </div>
+</div>
+
+
+
+
+

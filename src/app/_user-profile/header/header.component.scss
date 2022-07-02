@@ -1,0 +1,49 @@
+
+.header {
+  display: flex;
+  background-color: #009affb8;
+  align-items: center;
+  justify-content: space-between;
+  height: 61px;
+}
+.right {
+  padding: 8px 30px 8px;
+}
+
+.left {
+  padding: 8px 15px 7px;
+}
+
+.right .mat-icon,
+.profile .mat-icon {
+  display: flex;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+button.profile {
+  background-color: transparent;
+  border: none;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+.mat-menu-item {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+    .mat-icon {
+      margin: 0 0 0 15px;
+    }
+}
+
+::ng-deep .mat-menu-content h6 {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  margin: 0;
+  padding: 5px 20px;
+  color: #919191;
+}

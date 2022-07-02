@@ -1,0 +1,46 @@
+<h2 class="
+                section-title 
+                font-semibold 
+                text-xl
+                text-white
+                text-center
+                bg-[#cddc39] 
+                md:text-right
+                mb-2 
+                pt-[3px]
+                pb-[5px]
+                px-6
+                rounded-sm
+                block
+                md:inline-block
+                mx-[15px] sm:mx-[40px] lg:mx-[60px] xl:mx-[75px]">
+    جدیدترین
+</h2>
+<app-food-card 
+                [averageRate]="averageRate" 
+                [buyMessage]="buyMessage" 
+                [foods]="foods" 
+                (onCart)="onCart($event)" 
+                (onShowOrModal)="showMoreModal($event)">
+
+</app-food-card>
+
+<div 
+    class="overlay-card w-screen h-screen absolute bg-gray-500 left-0 top-0 opacity-40 z-40"
+    [ngClass]="{'hidden': !showOverlay}">
+</div>
+
+<app-not-login-model 
+                    [show]="showNotLoginModal"
+                    (onModal)="closeNoLoginModal()" 
+                    [message]="buyMessage">
+</app-not-login-model>
+
+<app-more-modal 
+                *ngIf="moreModalShow"
+                [food]="food"
+                [ref]="'newest'"
+                [moreModalShow]="moreModalShow" 
+                (onCloseMoreModal)="closeMoreModal()"
+                (onSendDataToFoodCard)="refreshFoodCard($event)">
+</app-more-modal>

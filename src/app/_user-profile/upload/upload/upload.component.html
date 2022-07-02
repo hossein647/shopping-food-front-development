@@ -1,0 +1,56 @@
+<div class="form-upload">
+    <div class="custom-container">
+        <div class="select-files">
+            <form [formGroup]="uploadForm" (ngSubmit)="upload()">
+
+
+               <div class="upload">
+                    <label for="upload-file">برای انتخاب یک یا چند فایل کلیک کنید</label>
+                    <input 
+                            type="file" 
+                            placeholder="تصویر" 
+                            formControlName="images" 
+                            id="upload-file"    
+                            multiple 
+                            style="display: none;"
+                            (change)="changeFileSelect($event)" 
+                            accept="image/png, image/jpg, image/jpeg" 
+                            #inputFileSelect>
+               </div>
+                
+                
+                <mat-form-field appearance="standard" *ngIf="user?.role !== 'admin'">
+                    <mat-label>رستوران</mat-label>
+                    <mat-select formControlName="shop">
+                        <mat-option>انتخاب کنید</mat-option>
+                        <mat-option *ngFor="let shop of shops" [value]="shop.name">
+                            {{shop.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <small *ngIf="uploadForm.controls['shop']?.invalid && 
+                                        (uploadForm.controls['shop']?.touched || 
+                                        uploadForm.controls['shop']?.dirty)">
+                    {{shopEmpty}}
+                </small>
+
+
+                
+
+                <div class="upload">
+                    <button type="submit" [disabled]="!uploadForm.valid">آپلود</button>
+                </div>
+            </form>
+            <small class="error" *ngIf="image?.invalid && (image?.touched || image?.dirty)">
+                {{emptyImage}}
+            </small>
+        </div>
+        <div class="read-files" *ngIf="files.length > 0">
+            <div class="box-image"  *ngFor="let image of images; let i = index;"  >
+                <img class="image" [src]="image.url" [alt]="image.name">
+                <small class="image-name">{{image.name}}</small>
+                <mat-icon class="delete" (click)="removePreviewFile(i)">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

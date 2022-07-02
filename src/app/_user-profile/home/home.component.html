@@ -1,0 +1,134 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" [opened]="open" [position]="'end'" fixedInViewport="true">
+    <div class="content">
+      <div class="title-sidebar">
+        <div class="header">
+          <a class="title" routerLink="/">سفارش غذا</a>
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <div class="profile py-6 flex flex-col items-center border-l">
+          <div class="camera-upload relative">
+            <label for="upload">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7 absolute bottom-0 translate-x-[70%] translate-y-[535%] bg-[#6e6e6eba] rounded-full p-1 text-white"
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </label>
+            <input type="file" hidden  id="upload" (change)="changeFileSelect($event)">
+          </div>
+          <div class="profile-image ml-[15px] w-36 h-36">
+            <img
+                *ngIf="upload"
+                class="rounded-full border"
+                [src]="'https://api.hosseinnejaty.ir/' + file?.userId + '/profile/' + file?.filename" 
+                alt="" #imgProfile>
+                <svg
+                    *ngIf="!upload" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="h-36 w-36 rounded-full border p-4 text-gray-400" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+          </div>
+          <div class="profile-email text-[12px] ml-[15px] mt-3">{{email}}</div>
+        </div>
+        <ul class="list border-t">
+          <li *ngIf="role === 'admin'">
+            <a
+            routerLink="users"
+            (click)="listSelected('users')"
+            [ngClass]="{'selected': item === 'users'}"
+            >کاربران</a>
+          </li>
+          <li *ngIf="role === 'admin' || role ==='seller' || role === 'customer'">
+            <a
+            routerLink="profile"
+            (click)="listSelected('profile')"
+            [ngClass]="{'selected': item === 'profile'}"
+            >پروفایل</a>
+          </li>
+          <li *ngIf="role === 'admin'">
+            <a
+              routerLink="super-food"
+              (click)="listSelected('superFood')"
+              [ngClass]="{'selected': item === 'superFood'}">غذای ویژه
+            </a>
+          </li>
+          <li *ngIf="role === 'seller'">
+            <a
+              routerLink="foods"
+              (click)="listSelected('foods')"
+              [ngClass]="{'selected': item === 'foods'}">غذاها
+            </a>
+          </li>
+          <li *ngIf="role === 'seller'">
+            <a
+              routerLink="sub-foods"
+              (click)="listSelected('subFoods')"
+              [ngClass]="{'selected': item === 'subFoods'}">زیر دسته های غذا
+            </a>
+          </li>
+          <li *ngIf="role === 'seller'">
+            <a
+              routerLink="shops"
+              (click)="listSelected('shops')"
+              [ngClass]="{'selected': item === 'shops'}">رستوران ها
+            </a>
+          </li>
+          <li *ngIf="role === 'admin'">
+            <a
+              routerLink="categories"
+              (click)="listSelected('categories')"
+              [ngClass]="{'selected': item === 'categories'}">
+              دسته بندی رستوران
+            </a>
+          </li>
+          <li *ngIf="role === 'admin'">
+            <a
+              routerLink="food-category"
+              (click)="listSelected('foodCategory')"
+              [ngClass]="{'selected': item === 'foodCategory'}">دسته بندی غذا
+            </a>
+          </li>
+          <li *ngIf="role === 'customer'">
+            <a
+              routerLink="payment-history"
+              (click)="listSelected('payment-history')"
+              [ngClass]="{'selected': item === 'payment-history'}">سابقه پرداخت
+            </a>
+          </li>
+          <li *ngIf="role === 'seller' ||  role === 'admin'">
+            <a
+              routerLink="home-upload"
+              (click)="listSelected('home-upload')"
+              [ngClass]="{'selected': item === 'home-upload'}">آپلود تصاویر
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="{'custom-margin-right': open}">
+    <app-header
+                (onToggle)="toggleSidebar()"
+                (onlogout)="logout()"
+                [email]="email">
+    </app-header>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+

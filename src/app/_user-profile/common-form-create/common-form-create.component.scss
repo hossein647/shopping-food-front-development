@@ -1,0 +1,20 @@
+@use '../../__share/sass/button' as button;
+
+.form {
+  box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+  margin-top: 50px;
+  border-radius: 2px;
+  padding: 20px 30px 10px;
+  display: inline-block;
+}
+
+.mat-form-field {
+  text-align: right !important;
+  font-family: 'Vazir';
+}
+
+
+.btn {
+  @include button.btn;
+  background-color: yellowgreen;
+}

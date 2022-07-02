@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hossein8/public_html/
+    - /bin/cp -R dist $DEPLOYPATH
+    - /bin/cp .gitignore $DEPLOYPATH

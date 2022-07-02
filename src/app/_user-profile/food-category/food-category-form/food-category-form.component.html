@@ -1,0 +1,49 @@
+<div class="food-category-form">
+    <div class="custom-container">
+        <form class="form" 
+                            [formGroup]="formFoodCategory" 
+                            (ngSubmit)="submit()" 
+                            #form="ngForm">
+
+
+            <h3>{{title}}</h3>
+
+
+
+            <mat-form-field appearance="standard">
+                <mat-label>دسته بندی</mat-label>
+                <mat-select formControlName="shopCategory">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let category of shopCategories" [value]="category?.name">
+                        {{category.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <small 
+                    *ngIf="formFoodCategory.controls['shopCategory'].invalid &&
+                            (formFoodCategory.controls['shopCategory'].touched || 
+                            formFoodCategory.controls['shopCategory'].dirty)">
+                    {{shopCategoryError}}
+            </small>
+
+
+
+
+            <mat-form-field appearance="standard">
+                <mat-label>نام</mat-label>
+                <input type="text" matInput placeholder="نام" formControlName="name">
+            </mat-form-field>
+            <small 
+                    *ngIf="formFoodCategory.controls['name'].invalid && 
+                    (formFoodCategory.controls['name'].touched || 
+                    formFoodCategory.controls['name'].dirty)">
+                {{nameError}}
+            </small>
+
+
+
+
+            <button class="btn" type="submit" [disabled]="!formFoodCategory.valid">{{submitLabel}}</button>
+        </form>
+    </div>
+</div>

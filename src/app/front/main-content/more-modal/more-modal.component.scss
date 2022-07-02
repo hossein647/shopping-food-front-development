@@ -1,0 +1,21 @@
+:host ::ng-deep .br-default {
+    direction: ltr;
+    margin-top: 3px;
+}
+
+.ma-bottom {
+    margin-bottom: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+}
+
+:host ::ng-deep .br-unit {
+    font-size: 18px !important;
+}
+
+.write::-webkit-input-placeholder {
+    padding: 8px;
+}

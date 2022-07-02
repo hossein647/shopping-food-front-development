@@ -1,0 +1,119 @@
+
+<div class="shop sm:flex border-gray-400 mx-5 sm:mx-10 lg:mx-[95px] ">
+    <div class="sidebr sm:w-1/4 mt-3 border-t" #sidebar>
+        <div 
+            class="shop-info overflow-hidden flex sm:flex-col items-center p-2 border border-t-0 sm:border-b">
+            <img class="rounded-full w-16 h-16 sm:w-28 sm:h-28" src="https://api.hosseinnejaty.ir/6228636fd7263b1f38c73d09/(33)-ea35.jpg" alt="">
+            <div class="info-detailes sm:flex sm:flex-col sm:items-center mr-3 sm:mr-0 sm:my-3">
+                <span class="text-xl font-semibold text-gray-600">{{shop?.name}}</span>
+                <div class="rating flex items-center sm:flex-col sm:justify-between mt-1">
+                    <bar-rating class="" 
+                        [readOnly]="true"
+                        [rate]="shopRate">
+                    </bar-rating>
+                    <span class="text-xs mr-3 sm:mr-0 text-gray-600">({{shopRate}})</span>
+                </div>
+            </div>
+        </div>
+        <div class="sub-food-title border border-t-0 p-5" *ngIf="subFood.length">
+           <ul class="relative flex sm:flex-col flex-wrap">
+               <div 
+                    class="circle w-3 h-3 ml-4  mt-[16px] -mr-[6px] absolute bg-red-600 hidden md:block transition-transform duration-500 ease-in-out"
+                    #shapeSelector>
+                </div>
+               <div 
+                    class="circle w-[1px] h-[44px] ml-4  absolute bg-red-600 hidden md:block transition-transform duration-500 ease-in-out" 
+                    #borderSelector>
+                </div>
+                
+               <li 
+                    class="md:pl-5 md:pr-0 px-5 py-1 md:py-3 flex items-center md:border-r border-r-0 transition-colors duration-200 ease-in-out " 
+                    [ngClass]="{
+                        'bg-red-500 md:bg-transparent text-white md:text-black font-medium md:font-normal': sub.name === subFoodSelected
+                    }"
+                    *ngFor="let sub of subFood; let i = index;"
+                    (click)="onSubFoodClick(shapeSelector, borderSelector, sub, i)" #subItem>
+                   <div  
+                        class="circle w-3 h-3 bg-gray-200 ml-4 -mr-[7px] hidden md:block" 
+                        #selectedSubFood>
+                    </div>
+                   <span class="text-sm">{{sub.name}}</span>
+                </li>
+           </ul>
+        </div>
+    </div>
+    <div class="main sm:w-3/4 relative mt-3 min-h-[calc(100vh-106px)] overflow-hidden">
+        <div 
+            class="food-menu absolute md:px-1 w-full mt-0" 
+            #foodMenu>
+            <div 
+                class="section-bar h-[calc(100vh-106px)] overflow-auto" 
+                *ngFor="let sub of subFood; let i = index"
+
+                #sectionSubFood>
+                <span 
+                    class="sub-title block text-center text-lg p-3 border text-slate-500"
+                    [ngClass]="{'border-b mt-[1px]': filterFoods.length === 0}">
+                    {{sub.name}}
+                </span>
+                <section class="sub-food-list">
+                    <ul class="xl:flex xl:flex-wrap">
+                        <li class="border border-t-0 last:border-b flex sm:h-40 xl:w-1/2 last:mb-28" 
+                            *ngFor="let food of filterFoods; let i = index"
+                            >
+                            <img 
+                                *ngIf="food.subFood === sub.name"
+                                class="w-[120px] sm:w-[150px] aspect-square hover:cursor-pointer"
+                                [src]="'https://api.hosseinnejaty.ir/' + food.userId + '/' + food.image"
+                                (click)="showMoreModal(food)"
+                                alt="">
+                            <div 
+                                class="details flex flex-col w-full justify-around xl:mx-5 m-2"
+                                *ngIf="food.subFood === sub.name">
+                                <div class="details-top w-full">
+                                    <span class="title block text-base mr-3 font-medium text-slate-600 mb-1">
+                                        {{food.name}}
+                                    </span>
+                                    <span class="description block text-[11px] mx-3 mb-5 h-[50px]">
+                                        {{food.description}}
+                                    </span>
+                                </div>
+                                <div class="shop-footer w-full flex justify-between items-center">
+                                    <span class="block text-sm mr-3 py-1">
+                                        {{food.price}} تومان
+                                    </span>
+                                    <button 
+                                            class="text-sm ml-3 bg-lime-500 px-4 py-1 text-white"
+                                            (click)="addToCart($event, food)">
+                                        افزودن
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <div 
+            class="min-h-full flex justify-center items-center text-2xl font-medium text-[#8d8d8d] mt-10 sm:mt-0" 
+            *ngIf="!foods.length">
+            <h2>{{foodsMessage}}</h2>
+        </div>
+    </div>
+</div>
+<div 
+    class="overlay-card w-screen h-screen absolute bg-gray-500 left-0 top-0 opacity-40 z-40"
+    [ngClass]="{'hidden': !showNotLoginModal}" 
+    #overlay>
+</div>
+<app-more-modal 
+                *ngIf="moreModalShow"
+                [food]="food" 
+                [moreModalShow]="moreModalShow" 
+                (onCloseMoreModal)="closeMoreModal()">
+</app-more-modal>
+<app-not-login-model 
+                    [show]="showNotLoginModal"
+                    (onModal)="closeNoLoginModal()" 
+                    [message]="message">
+</app-not-login-model>
