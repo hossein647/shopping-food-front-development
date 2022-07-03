@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { environment } from 'src/environments/environment';
 import { Upload } from '../state/upload/upload.model';
 import { UploadService } from '../state/upload/upload.service';
 
@@ -13,6 +14,7 @@ export class ReadUploadComponent implements OnInit {
   files: Upload[] = [];
   responseMessage: string;
   nameImage: string;
+  baseApi: string = environment.url;
 
   constructor(
     private uploadService: UploadService,

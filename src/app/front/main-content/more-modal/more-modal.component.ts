@@ -5,6 +5,7 @@ import { GlobalQuery } from 'src/app/state/global.query';
 import { Food } from 'src/app/_user-profile/foods/state/food.model';
 import { FoodService } from 'src/app/_user-profile/foods/state/food.service';
 import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { environment } from 'src/environments/environment';
 import { Comment } from '../../_interfaces/comment.interface';
 import { CardsService } from '../../_services/cards.service';
 import { CommentService } from '../../_services/comment.service';
@@ -30,7 +31,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
   showNotLoginModal: boolean = false;
   mainCommentId    : number;
   isReplay         : boolean = false;
-  // replayComments   : any[];
+  baseApi          : string = environment.url;
 
   
   @Input() loggedIn        : boolean | undefined;

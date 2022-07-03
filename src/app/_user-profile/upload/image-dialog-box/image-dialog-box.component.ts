@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 import { Upload } from '../state/upload/upload.model';
 
 @Component({
@@ -14,7 +15,7 @@ export class ImageDialogBoxComponent implements OnInit {
   urlImages        : string[] = [];
   name             : string;
   imageNameSelected: string = '';
- 
+  baseApi: string = environment.url;
 
   @ViewChildren('img') imgElement: QueryList<ElementRef>;
   

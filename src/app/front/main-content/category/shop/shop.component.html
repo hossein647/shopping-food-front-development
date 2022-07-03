@@ -64,7 +64,7 @@
                             <img 
                                 *ngIf="food.subFood === sub.name"
                                 class="w-[120px] sm:w-[150px] aspect-square hover:cursor-pointer"
-                                [src]="'http://localhost:3000/' + food.userId + '/' + food.image"
+                                [src]="baseApi + '/' + food.userId + '/' + food.image"
                                 (click)="showMoreModal(food)"
                                 alt="">
                             <div 

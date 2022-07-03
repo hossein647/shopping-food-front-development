@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Food } from 'src/app/_user-profile/foods/state/food.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-food-card',
@@ -8,6 +9,7 @@ import { Food } from 'src/app/_user-profile/foods/state/food.model';
 })
 export class FoodCardComponent implements OnInit {
 
+  baseApi: string = environment.url;
   @Input() foods      : Food[];
   @Input() averageRate: number[];
   @Input() buyMessage : string;

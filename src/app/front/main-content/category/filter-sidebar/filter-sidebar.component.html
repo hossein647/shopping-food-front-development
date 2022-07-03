@@ -10,7 +10,7 @@
                 [ngClass]="{'mb-0': categories.length === i+1}">
                 <img 
                     class="picture rounded-full w-8 h-8" 
-                    [src]="'http://localhost:3000/' + category.userId + '/' + category.image" 
+                    [src]="baseApi + '/' + category.userId + '/' + category.image" 
                     width="32" 
                     height="32">
                 <span class="name mr-3">{{category.name}}</span>

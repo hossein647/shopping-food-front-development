@@ -12,6 +12,7 @@ import { UploadService } from '../upload/state/upload/upload.service';
 import { User } from 'src/app/auth/state/user.model';
 import { FilesUpload } from 'src/app/__share/interface/files-upload.interface';
 import { Upload } from '../upload/state/upload/upload.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   role    : string;
   file    : Upload;
   upload  : boolean = false;
+  baseApi : string = environment.url;
 
   @ViewChild('cameraParent') cameraParent: ElementRef;
   @ViewChild('imgProfile') imgProfile: ElementRef;

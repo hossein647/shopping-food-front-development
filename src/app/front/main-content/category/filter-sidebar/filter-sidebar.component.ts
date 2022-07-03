@@ -4,6 +4,7 @@ import { ShopCategory } from 'src/app/front/_interfaces/shop-category.interface'
 import { FoodCategoryService } from 'src/app/front/_services/food-category.service';
 import { ShopCategoryService } from 'src/app/front/_services/shop-category.service';
 import { SubFood } from 'src/app/_user-profile/sub-category-food/state/sub-food.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -19,6 +20,7 @@ export class FilterSidebarComponent implements OnInit {
   @Output() filterShops = new EventEmitter<any>();
   subSelected: string;
   nameCategory: string;
+  baseApi: string = environment.url;
 
   constructor(
     private shopCategoryService: ShopCategoryService,

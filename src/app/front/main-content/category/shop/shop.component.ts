@@ -12,6 +12,7 @@ import { SubFood } from 'src/app/_user-profile/sub-category-food/state/sub-food.
 import { Upload } from 'src/app/_user-profile/upload/state/upload/upload.model';
 import { UploadService } from 'src/app/_user-profile/upload/state/upload/upload.service';
 import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shop',
@@ -36,6 +37,7 @@ export class ShopComponent implements OnInit {
   changeSubFood    : boolean = false;
   showModalClicked : boolean = false;
   indexSubFood     : number;
+  baseApi          : string = environment.url;
 
   @ViewChildren('sectionSubFood') sectionSubFood: QueryList<ElementRef>;
   @ViewChild('foodMenu') foodMenu               : ElementRef;

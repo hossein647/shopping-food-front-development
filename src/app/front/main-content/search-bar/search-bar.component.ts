@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Upload } from 'src/app/_user-profile/upload/state/upload/upload.model';
+import { environment } from 'src/environments/environment';
 import { ShopCategory } from '../../_interfaces/shop-category.interface';
 
 @Component({
@@ -11,7 +12,8 @@ export class SearchBarComponent implements OnInit {
 
   @Input() lists: ShopCategory[];
   @Input() images: Upload[];
-  @Output() onGoToPage = new EventEmitter<{alias: string, name: string}>()
+  @Output() onGoToPage = new EventEmitter<{alias: string, name: string}>();
+  baseApi: string = environment.url;
 
   constructor() { }
 
