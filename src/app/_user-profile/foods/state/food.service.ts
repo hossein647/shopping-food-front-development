@@ -82,20 +82,20 @@ export class FoodService {
   }
   
   
-  getPopulatedPublicImages(id: number) {
-    const params = new HttpParams().set('id', id);
-    return this.http.get(`${this.baseUrl}/foods/populated-public-image`, { params })
-    .pipe(
-      catchError(err => of(err))
-    )
-  }
+  // getPopulatedPublicImages(id: number) {
+  //   const params = new HttpParams().set('id', id);
+  //   return this.http.get(`${this.baseUrl}/foods/populated-public-image`, { params })
+  //   .pipe(
+  //     catchError(err => of(err))
+  //   )
+  // }
   
   
-  getPopulatedPrivateImages() {
-    return this.http.get(`${this.baseUrl}/foods/populated-private-image`, { withCredentials: true })
-    .pipe(
-      catchError(err => of(err))
-    )
-  }
+  // getPopulatedPrivateImages() {
+  //   return this.http.get(`${this.baseUrl}/foods/populated-private-image`, { withCredentials: true })
+  //   .pipe(
+  //     catchError(err => of(err))
+  //   )
+  // }
 
 }

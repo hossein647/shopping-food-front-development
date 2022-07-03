@@ -11,7 +11,7 @@ import { GlobalQuery } from './../../../state/global.query'
   templateUrl: './motst-papular.component.html',
   styleUrls: ['./motst-papular.component.scss']
 })
-export class MotstPapularComponent implements OnInit, AfterViewInit {
+export class MotstPapularComponent implements OnInit {
 
   @ViewChildren('price')  price : QueryList<ElementRef>;
   @ViewChildren('copon')  copon : QueryList<ElementRef>;
@@ -40,24 +40,6 @@ export class MotstPapularComponent implements OnInit, AfterViewInit {
     private elRef             : ElementRef,
   ) { }
 
-
-  ngAfterViewInit(): void {
-    
-    // this.price.forEach(price => {
-    //   const widthPrice: number = price.nativeElement.getBoundingClientRect().width;
-    //   this.rating.forEach(rating => {
-    //     this.renderer.setStyle(rating.nativeElement, 'width', `${widthPrice}px`);
-    //   })
-    // })
-
-    // this.copon.forEach(copon => {
-    //   const widthCopon: number = copon.nativeElement.getBoundingClientRect().width;
-    //   this.more.forEach(more => {
-    //     this.renderer.setStyle(more.nativeElement, 'width', `${widthCopon}px`);
-    //   })
-    // })
-  }
-
   
   ngOnInit(): void {
     this.notLoginModal = this.elRef.nativeElement.querySelector('.not-login-modal');
@@ -74,7 +56,9 @@ export class MotstPapularComponent implements OnInit, AfterViewInit {
   mostPopularFood() {
     this.cardsService.popular().subscribe(
       res => {
-        if (res) {                              
+        if (res) {          
+          console.log(res);
+                              
           this.foods = res.foods;          
           this.getAverageRate(this.foods);        
         }

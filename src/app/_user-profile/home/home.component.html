@@ -27,7 +27,7 @@
             <img
                 *ngIf="upload"
                 class="rounded-full border"
-                [src]="'https://api.hosseinnejaty.ir/' + file?.userId + '/profile/' + file?.filename" 
+                [src]="'http://localhost:3000/' + file?.userId + '/profile/' + file?.filename" 
                 alt="" #imgProfile>
                 <svg
                     *ngIf="!upload" 

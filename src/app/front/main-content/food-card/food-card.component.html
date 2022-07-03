@@ -11,7 +11,7 @@
                     overflow-hidden" 
                     *ngFor="let food of foods; let i = index;">
             <div class="card-hedear">
-                <img [src]="'https://api.hosseinnejaty.ir/' + food.userId + '/' + food.image"
+                <img [src]="'http://localhost:3000/' + food.userId + '/' + food.image"
                     class="h-60 rounded-md w-full" alt="">
             </div>
             <div class="card-body relative bg-white -top-4">

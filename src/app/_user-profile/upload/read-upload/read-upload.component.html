@@ -8,7 +8,7 @@
                 class="box-image" 
                 *ngFor="let file of files; 
                 let i = index;">
-                <img [src]="'https://api.hosseinnejaty.ir/' + file.userId + '/' + file.filename" alt="">
+                <img [src]="'http://localhost:3000/' + file.userId + '/' + file.filename" alt="">
                 <small class="image-name">{{file.filename}}</small>
                 <mat-icon class="delete" (click)="remove(i, file._id)">delete</mat-icon>
             </div>

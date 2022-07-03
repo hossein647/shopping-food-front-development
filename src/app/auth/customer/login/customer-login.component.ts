@@ -17,7 +17,6 @@ export class CustomerLoginComponent implements OnInit {
 
   title         : string;
   submitLabel   : string;
-  goToRegiser   : string;
   goToForget    : string;
   loadingSpinner: boolean;
   allowRequest  : boolean = true;
@@ -35,8 +34,6 @@ export class CustomerLoginComponent implements OnInit {
   ngOnInit(): void {
     this.title = 'ورود کاربران'
     this.submitLabel="ورود";
-    this.goToRegiser = 'ثبت نام کاربران';
-    this.goToForget = 'فراموشی رمز عبور';
   }
 
   submit(data: Form){    

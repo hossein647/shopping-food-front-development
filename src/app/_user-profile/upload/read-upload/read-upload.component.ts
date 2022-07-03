@@ -25,9 +25,9 @@ export class ReadUploadComponent implements OnInit {
 
 
   getUploadedDataForImage() {
-    this.files = [];
     this.uploadService.getAllPrivate().subscribe(res => {
       if (res) {        
+        this.files = [];
         const result = JSON.parse(JSON.stringify(res));
         this.files = result.files;    
       }
@@ -38,7 +38,8 @@ export class ReadUploadComponent implements OnInit {
 
   remove(i: number, id: number) {
     this.uploadService.remove(id).subscribe(res => {
-      if (res) {        
+      if (res) {   
+        this.getUploadedDataForImage();
         const result = JSON.parse(JSON.stringify(res));
         this._snackbar.addSnackbar(result.message, result?.err, 3000);
       }

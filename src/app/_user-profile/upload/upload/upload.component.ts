@@ -13,13 +13,13 @@ import { UploadService } from '../state/upload/upload.service';
 })
 export class UploadComponent implements OnInit {
   
-  uploadForm: FormGroup;
-  files: any = [];
-  images: any[] = [];
-  emptyImage: string;
-  shops: Shop[] = [];
-  shopEmpty: string;
-  user: any;
+  uploadForm    : FormGroup;
+  files         : any = [];
+  images        : any[] = [];
+  emptyImage    : string;
+  loadingSpinner: boolean = false;
+  shopEmpty     : string;
+  user          : any;
 
   @ViewChild('inputFileSelect') input: ElementRef;
 
@@ -27,23 +27,20 @@ export class UploadComponent implements OnInit {
     private uploadService: UploadService,
     private _sncakbar: Snackbar,
     private location: Location,
-    private shopService: ShopsService,
     ) { }
 
   
 
     ngOnInit(): void {
       this.initForm();
-      this.getShopsByUser();
       this.emptyImage = 'لطفا یک یا چند تصویر انتخاب کنید'
-  }
+    }
   
   
   initForm() {
     this.user = JSON.parse(window.localStorage.getItem('elsfu') || '{}')
     this.uploadForm = new FormGroup({
       images: new FormControl(null, Validators.required),
-      shop  : new FormControl(null, this.user?.role === 'admin' ? null : Validators.required)
     })
   }
 
@@ -64,11 +61,13 @@ export class UploadComponent implements OnInit {
     }    
   }
   
-  upload() {    
+  upload() {   
+    this.loadingSpinner = true; 
     if (this.files.length > 0 && this.uploadForm.valid) {      
-      this.uploadService.uploadImage(this.files, this.uploadForm.value.shop).subscribe(
+      this.uploadService.uploadImage(this.files).subscribe(
         (res: any) => {
-          if (res ) {            
+          if (res ) { 
+            this.loadingSpinner = false;        
             this._sncakbar.addSnackbar(res.message, res?.err, 3000);
             if (!res?.err) {
               this.images.splice(0);
@@ -80,6 +79,7 @@ export class UploadComponent implements OnInit {
         },
         err => {          
           let message = '';
+          this.loadingSpinner = false;
           message = err.error.message;
           if (err?.error?.statusCode === 403) message = err.error.message;
           if (err?.error?.error === 'Payload Too Large') message = "حجم تصویر بیش از اندازه است (حداکثر تا 1Mb)";
@@ -90,22 +90,16 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  removePreviewFile(i: number) {
+  
+  removePreviewFile(i: number, name: string) {
     this.images.splice(i, 1);
-    this.files.splice(i, 1);
+    this.files.splice(this.files.indexOf(name).name, 1);
     if (this.files.length === 0) this.uploadForm.reset();
   }
+
 
   get image() {
     return this.uploadForm.get('images');
   }
 
-
-  getShopsByUser() {
-    this.shopService.getAllPrivate().subscribe(
-      res => {
-        this.shops = res.shops;
-      }
-    )
-  }
 }

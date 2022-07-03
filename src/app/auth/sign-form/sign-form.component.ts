@@ -14,14 +14,12 @@ export class SignFormComponent implements OnInit {
   emailError: string;
   passwordError: string;
 
-  @Input() title: string;
-  @Input() submitLabel: string;
-  @Input() goToRegiser: string;
-  @Input() goToForget: string;
-  @Input() emailInit: string;
-  @Input() passwordInit: string;
+  @Input() title         : string;
+  @Input() submitLabel   : string;
+  @Input() emailInit     : string;
+  @Input() passwordInit  : string;
   @Input() loadingSpinner: boolean;
-  @Input() show: boolean;
+  @Input() show          : boolean;
 
   @ViewChild('form') form!: NgForm;
   @Output() onSubmit = new EventEmitter<Form>();

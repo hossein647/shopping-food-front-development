@@ -1,11 +1,10 @@
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, tap, toArray } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Upload } from './upload.model';
 import { UploadStore } from './upload.store';
-import { Role } from 'src/app/auth/state/user.model';
-import { concat, forkJoin, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UploadService {
@@ -16,14 +15,13 @@ export class UploadService {
     private http: HttpClient
     ) {}
 
-  uploadImage(file: any, shop: string) {
-    const params = new HttpParams().set('shop', shop)
+  uploadImage(file: any) {
     const formData = new FormData();
     for (let i = 0; i < file.length; i++) {
       formData.append('images', file[i]);
     }
     return this.http.post<Upload>(`${this.baseApi}/file-upload/image`, formData, 
-      { params, withCredentials: true });
+      { withCredentials: true });
   }
   
   
@@ -51,18 +49,6 @@ export class UploadService {
   
   
   
-  // getAllPublicById(id: number, shop: string) {    
-  //   const params = new HttpParams()
-  //   .set('id', id)
-  //   .set('shop', shop);
-
-  //   return this.http.get(`${this.baseApi}/file-upload/all-public/id-and-shop`, { params })
-  //   .pipe(
-  //     catchError(err => of(err))
-  //   )
-  // }
-  
-  
   getAllPublic() {
     return this.http.get<Upload[]>(`${this.baseApi}/file-upload/all-public`)
     .pipe(
@@ -71,33 +57,6 @@ export class UploadService {
       })
     )
   }
-  
-
-
-
-  // get(imageName: string, status: string, id?: string, role?: string) {    
-  //   const params = new HttpParams()
-  //   .set('imageName', imageName)
-  //   .set('id', id || 0)
-  //   .set('role', role || '');
-  //   let withCredentials = status === 'single-private' ? true : false;
-    
-  //   return this.http.get(`${this.baseApi}/file-upload/${status}`, {
-  //     params, 
-  //     responseType: 'blob',
-  //     withCredentials
-  //   });
-  // }
-
-
-
-  // getSinglePublic(imageName: string) {
-  //   const params = new HttpParams().set('imageName', imageName)
-  //   return this.http.get(`${this.baseApi}/file-upload/single-public/by-name`, { params })
-  //   .pipe(
-  //     catchError(err => of(err))
-  //   )
-  // }
   
 
   remove(id: number) {

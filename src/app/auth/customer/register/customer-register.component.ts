@@ -12,11 +12,11 @@ import { UserService } from '../../state/user.service';
 })
 export class CustomerRegisterComponent implements OnInit {
 
-  title!: string;
-  submitLabel!: string;
-  loadingSpinner!: boolean;
-  allowRequest: boolean = true;
-  @Input() show: boolean;
+  title         : string;
+  submitLabel   : string;
+  loadingSpinner: boolean;
+  allowRequest  : boolean = true;
+  @Input() show : boolean;
 
   constructor(
     private userService: UserService,

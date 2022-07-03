@@ -31,7 +31,7 @@
     <div class="min-card flex flex-col sm:flex-row">
         <div class="wrapper-img w-full sm:w-fit">
             <img 
-                [src]="'https://api.hosseinnejaty.ir/' + food.userId + '/' + food.image" 
+                [src]="'http://localhost:3000/' + food.userId + '/' + food.image" 
                 alt="" 
                 class="w-full h-56 sm:w-[250px] sm:h-[150px] sm:rounded-tr-md">
         </div>
@@ -100,7 +100,7 @@
                         <div class="profile flex items-center">
                             <img 
                                 *ngIf="comment.userId.image"
-                                [src]="'https://api.hosseinnejaty.ir/' + comment.userId._id + '/profile/' + comment.userId.image"
+                                [src]="'http://localhost:3000/' + comment.userId._id + '/profile/' + comment.userId.image"
                                 class="border w-6 h-6 rounded-full" 
                                 alt="" 
                                 width="24" 
@@ -138,7 +138,7 @@
                         <div class="header-comment flex justify-between items-center py-2 px-3">
                             <div class="profile flex items-center">
                                 <img *ngIf="replay.userId?.image"
-                                    [src]="'https://api.hosseinnejaty.ir/' + replay.userId._id + '/profile/' + replay.userId.image"
+                                    [src]="'http://localhost:3000/' + replay.userId._id + '/profile/' + replay.userId.image"
                                     class="border w-6 h-6 rounded-full" 
                                     alt="" 
                                     width="24" 

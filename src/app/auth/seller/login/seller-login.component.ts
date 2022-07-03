@@ -15,12 +15,11 @@ import { UserService } from '../../state/user.service';
 })
 export class SellerLoginComponent implements OnInit {
 
-  title!: string;
-  submitLabel!: string;
-  goToRegiser!: string;
-  loadingSpinner!: boolean;
-  allowRequest: boolean = true;
-  @Input() show: boolean;
+  title         : string;
+  submitLabel   : string;
+  loadingSpinner: boolean;
+  allowRequest  : boolean = true;
+  @Input() show : boolean;
 
   constructor(
     private userService: UserService,
@@ -33,7 +32,6 @@ export class SellerLoginComponent implements OnInit {
   ngOnInit(): void {
     this.title = 'ورود فروشندگان'
     this.submitLabel = "ورود";
-    this.goToRegiser = 'ثبت نام فروشندگان';
   }
 
   submit(data: Form) {

@@ -61,11 +61,11 @@ export class CategoryService {
 
 
 
-  getPopulatedPrivateImages() {
-    return this.http.get(`${this.baseUrl}/shop-category/populated-private-image`, { withCredentials: true })
-      .pipe(
-        catchError(err => of(err))
-      )
-  }
+  // getPopulatedPrivateImages() {
+  //   return this.http.get(`${this.baseUrl}/shop-category/populated-private-image`, { withCredentials: true })
+  //     .pipe(
+  //       catchError(err => of(err))
+  //     )
+  // }
 
 }

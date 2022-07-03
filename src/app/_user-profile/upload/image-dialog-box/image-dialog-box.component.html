@@ -11,7 +11,7 @@
                     [matTooltip]="image.filename" 
                     matTooltipPosition="below">
                         <img 
-                            [src]="'https://api.hosseinnejaty.ir/' + image.userId + '/' + image.filename"
+                            [src]="'http://localhost:3000/' + image.userId + '/' + image.filename"
                             [alt]="image.filename" 
                             (click)="selected($event, image)"
                             [ngClass]="{'selected': image.filename === imageNameSelected}"
