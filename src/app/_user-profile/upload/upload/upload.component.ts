@@ -2,8 +2,6 @@ import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Snackbar } from 'src/app/__share/helper/snackbar';
-import { Shop } from '../../shops/state/shop/shop.model';
-import { ShopsService } from '../../shops/state/shop/shops.service';
 import { UploadService } from '../state/upload/upload.service';
 
 @Component({
@@ -46,8 +44,8 @@ export class UploadComponent implements OnInit {
 
   
   changeFileSelect(event: any) {
-    this.files.splice(0);
-    this.images.splice(0);
+    this.files = [];
+    this.images = [];
     this.files = Array.from(event.target.files);        
     for (let i = 0; i < this.files.length; i++) {
       const reader = new FileReader();
@@ -63,7 +61,9 @@ export class UploadComponent implements OnInit {
   
   upload() {   
     this.loadingSpinner = true; 
-    if (this.files.length > 0 && this.uploadForm.valid) {      
+    this.limitSizeFile(this.files);
+
+    if (this.files.length > 0 && this.uploadForm.valid && !this.limitSizeFile(this.files)) {      
       this.uploadService.uploadImage(this.files).subscribe(
         (res: any) => {
           if (res ) { 
@@ -92,9 +92,12 @@ export class UploadComponent implements OnInit {
 
   
   removePreviewFile(i: number, name: string) {
+    const index = this.files.findIndex((file: any) => file.name === name)
     this.images.splice(i, 1);
-    this.files.splice(this.files.indexOf(name).name, 1);
+    this.files.splice(index, 1);
+    this.limitSizeFile(this.files);
     if (this.files.length === 0) this.uploadForm.reset();
+    
   }
 
 
@@ -102,4 +105,14 @@ export class UploadComponent implements OnInit {
     return this.uploadForm.get('images');
   }
 
+
+  limitSizeFile(files: any[]): boolean {
+    const file = files.some(file => file.size / (1024 ** 2) >= 1)
+    if (file) {
+      this._sncakbar.addSnackbar('حجم تصویر بیش از اندازه است (حداکثر تا 1Mb)', true, 3000);
+      this.loadingSpinner = false;
+      return true;
+    }
+    return false;
+  }
 }
