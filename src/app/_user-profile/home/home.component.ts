@@ -1,16 +1,12 @@
 import { UiService } from '../state/ui/ui.service';
-import { ProfileService } from '../profile/profile.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UiQuery } from '../state/ui/ui.query';
 import { UserService } from 'src/app/auth/state/user.service';
 import { GlobalService } from 'src/app/state/global.service';
-import { GlobalQuery } from 'src/app/state/global.query';
 import { Snackbar } from 'src/app/__share/helper/snackbar';
 import { LocalStorageData } from 'src/app/__share/helper/local-storage-data';
 import { UploadService } from '../upload/state/upload/upload.service';
-import { User } from 'src/app/auth/state/user.model';
-import { FilesUpload } from 'src/app/__share/interface/files-upload.interface';
 import { Upload } from '../upload/state/upload/upload.model';
 import { environment } from 'src/environments/environment';
 
@@ -46,7 +42,7 @@ export class HomeComponent implements OnInit {
     private uploadService: UploadService,
     ) {}
 
-  // @Hostl
+
   ngOnInit(): void {
     this.hasCookie();
     this.queryUi.getVisibilityUi().subscribe(isOpen => {      
@@ -61,7 +57,6 @@ export class HomeComponent implements OnInit {
 
   listSelected(key: string) {
     this.item = key;
-    // this.profileService.setShow(false);
   }
 
 
@@ -104,7 +99,9 @@ export class HomeComponent implements OnInit {
 
   changeFileSelect(event: any) {
     if (event.target.files.length > 0) {
-      const id = this.file ? this.file._id : 0
+      const id = Object.keys(this.file).length ? this.file._id : 0
+      console.log(id);
+      
       this.uploadService.uploadProfileImage(event.target.files[0], id).subscribe(
         res => {
           if (res && !res?.err) {
