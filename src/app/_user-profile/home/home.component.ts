@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
 
   changeFileSelect(event: any) {
     if (event.target.files.length > 0) {      
-      this.uploadService.uploadProfileImage(event.target.files[0], this.file._id).subscribe(
+      this.uploadService.uploadProfileImage(event.target.files[0], this.file?._id).subscribe(
         res => {
           if (res && !res?.err) {
             this.file = res.file;
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
   getImageProfile() {
     this.uploadService.getImageProfile().subscribe(
       res => {        
-        if (res && !res?.err) {
+        if (res && !res?.err && !res.message) {
           this.file = res   
           this.upload = true;       
         }
