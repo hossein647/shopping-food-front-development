@@ -10,6 +10,7 @@
 /node_modules
 /.angular
 /.vscode
+/dist
 # profiling files
 chrome-profiler-events*.json
 
