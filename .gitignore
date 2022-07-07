@@ -46,5 +46,5 @@ testem.log
 Thumbs.db
 
 # config route webserver
-!./htaccess
-!dist/
+#!./htaccess
+#!dist/
