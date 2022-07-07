@@ -98,11 +98,8 @@ export class HomeComponent implements OnInit {
 
 
   changeFileSelect(event: any) {
-    if (event.target.files.length > 0) {
-      const id = Object.keys(this.file).length ? this.file._id : 0
-      console.log(id);
-      
-      this.uploadService.uploadProfileImage(event.target.files[0], id).subscribe(
+    if (event.target.files.length > 0) {      
+      this.uploadService.uploadProfileImage(event.target.files[0], this.file._id).subscribe(
         res => {
           if (res && !res?.err) {
             this.file = res.file;
