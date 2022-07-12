@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardModule } from './_dashboard/dashboard.module';
 import { UserProfileModule } from './_user-profile/user-profile.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -56,7 +55,6 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
     AppRoutingModule,
     FrontModule,
     UserProfileModule,
-    DashboardModule,
     BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
