@@ -5,14 +5,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserProfileModule } from './_user-profile/user-profile.module';
+import { UserProfileModule } from './__dashboard/user-profile.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material/input';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from 'src/environments/environment';
-import { AlertComponent } from './__share/module/alert/alert.component';
+import { AlertComponent } from './___share/module/alert/alert.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guard/auth.guard';
@@ -21,7 +21,7 @@ import { SellerLoginComponent } from './auth/seller/login/seller-login.component
 import { CustomerRegisterComponent } from './auth/customer/register/customer-register.component';
 import { SellerRegisterComponent } from './auth/seller/register/seller-register.component';
 import { CustomerLoginComponent } from './auth/customer/login/customer-login.component';
-import { SpinnerModule } from './__share/module/spinner/spinner.module';
+import { SpinnerModule } from './___share/module/spinner/spinner.module';
 import { LoginComponent } from './auth/login/login.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BarRatingModule } from "ngx-bar-rating";

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RatingService } from 'src/app/front/_services/rating.service';
 import { ShopCategoryService } from 'src/app/front/_services/shop-category.service';
 import { ShopsService } from 'src/app/front/_services/shops.service';
-import { Shop } from 'src/app/_user-profile/shops/state/shop/shop.model';
+import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 import { environment } from 'src/environments/environment';
 
 @Component({

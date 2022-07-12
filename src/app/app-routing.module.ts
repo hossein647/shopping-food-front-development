@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./front/front.module').then(m => m.FrontModule)},
   { 
     path: '', 
-    loadChildren: () => import('./_user-profile/user-profile.module').then(m => m.UserProfileModule), 
+    loadChildren: () => import('./__dashboard/user-profile.module').then(m => m.UserProfileModule), 
     canActivate: [AuthGuard]
   },
   { path: 'login',    component: LoginComponent,    canActivate: [LoggedInUserGuard] },

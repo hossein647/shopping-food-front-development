@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
-import { Form } from 'src/app/__share/interface/form.interface';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
+import { Form } from 'src/app/___share/interface/form.interface';
 import { Role, User } from '../../state/user.model';
 import { UserService } from '../../state/user.service';
 

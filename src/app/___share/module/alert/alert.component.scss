@@ -1,0 +1,5 @@
+@use '../../../___share/sass/snackbar_color' as snackbar;
+
+:host ::ng-deep .snackbar-color {
+  @include snackbar.snackbar-success;
+}

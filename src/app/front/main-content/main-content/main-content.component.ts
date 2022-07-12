@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShopCategoryService } from '../../_services/shop-category.service';
 import { ShopCategory } from '../../_interfaces/shop-category.interface'
-import { Upload } from 'src/app/_user-profile/upload/state/upload/upload.model';
+import { Upload } from 'src/app/__dashboard/upload/state/upload/upload.model';
 import { User } from 'src/app/auth/state/user.model';
 
 @Component({

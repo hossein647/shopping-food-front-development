@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { GlobalQuery } from '../state/global.query';
-import { LocalStorageData } from '../__share/helper/local-storage-data';
+import { LocalStorageData } from '../___share/helper/local-storage-data';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class RoleGuard implements CanActivate {
       if (roles.some(role => user.role.includes(role))) return true;
     }
     
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/__dashboard']);
     return false
   }
 }

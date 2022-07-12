@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { BehaviorSubject, merge, Subject, Subscription, timer, EMPTY  } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { Food } from 'src/app/_user-profile/foods/state/food.model';
+import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { CircularService } from '../state/circular.service';
 
 @Component({

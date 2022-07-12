@@ -9,7 +9,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { FoodService } from 'src/app/front/_services/food.service';
-import { Shop } from 'src/app/_user-profile/shops/state/shop/shop.model';
+import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 
 @Injectable({
   providedIn: 'root'

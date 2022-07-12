@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { GlobalQuery } from 'src/app/state/global.query';
-import { Food } from 'src/app/_user-profile/foods/state/food.model';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { Food } from 'src/app/__dashboard/foods/state/food.model';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { GlobalFront } from '../../_interfaces/global-front.interface';
 import { CardsService } from '../../_services/cards.service';
 import { GlobalFrontService } from '../../_services/global-front.service';

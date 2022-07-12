@@ -6,12 +6,12 @@ import { GlobalFrontService } from 'src/app/front/_services/global-front.service
 import { ShopsService } from 'src/app/front/_services/shops.service';
 import { SubFoodService } from 'src/app/front/_services/sub-food.service';
 import { GlobalQuery } from 'src/app/state/global.query';
-import { Food } from 'src/app/_user-profile/foods/state/food.model';
-import { Shop } from 'src/app/_user-profile/shops/state/shop/shop.model';
-import { SubFood } from 'src/app/_user-profile/sub-category-food/state/sub-food.model';
-import { Upload } from 'src/app/_user-profile/upload/state/upload/upload.model';
-import { UploadService } from 'src/app/_user-profile/upload/state/upload/upload.service';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { Food } from 'src/app/__dashboard/foods/state/food.model';
+import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
+import { SubFood } from 'src/app/__dashboard/sub-category-food/state/sub-food.model';
+import { Upload } from 'src/app/__dashboard/upload/state/upload/upload.model';
+import { UploadService } from 'src/app/__dashboard/upload/state/upload/upload.service';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { environment } from 'src/environments/environment';
 
 @Component({

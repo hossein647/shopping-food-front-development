@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { GlobalQuery } from '../state/global.query';
-import { LocalStorageData } from '../__share/helper/local-storage-data';
+import { LocalStorageData } from '../___share/helper/local-storage-data';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { UserService } from '../state/user.service';
 
 @Component({

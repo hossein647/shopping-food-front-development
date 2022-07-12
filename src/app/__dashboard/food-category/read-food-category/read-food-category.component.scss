@@ -1,0 +1,41 @@
+@use './../../../___share/sass/button' as button;
+@use './../../../___share/sass/general' as general;
+@use './../../../___share/sass/tabel' as tabel;
+
+.read-food-category {
+    .custom-container {
+        .toolbar {
+          display: flex;
+          align-items: center;
+          margin-top: 50px;
+            .btn {
+              @include button.btn
+            }
+            .edit {
+              @include button.edit
+            }
+            .add {
+              @include button.add
+              
+            }
+            .remove {
+              @include button.remove
+             
+            }
+        }
+        ::ng-deep .tabel-container {
+          width: 50%;
+          th:first-child {
+            width: 30%;
+          }
+          @include tabel.matTabel;
+        }
+    }
+  }
+  
+
+
+
+.no-file {
+  @include general.noData;
+}

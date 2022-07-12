@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Food } from 'src/app/_user-profile/foods/state/food.model';
+import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { environment } from 'src/environments/environment';
 
 @Component({

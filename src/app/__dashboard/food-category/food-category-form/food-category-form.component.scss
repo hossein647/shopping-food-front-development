@@ -1,0 +1,79 @@
+@use '../../../___share/sass/button' as button;
+
+$greenDefault: yellowgreen;
+
+:host ::ng-deep .mat-form-field-infix {
+  width: 250px !important;
+}
+
+:host ::ng-deep .form {
+  margin: 10% auto;
+}
+
+:host ::ng-deep h3 {
+  color: #6f6f6f;
+  text-align: center;
+  margin-top: 0;
+}
+
+
+.food-category-form {
+  display: flex;
+  justify-content: center;
+}
+
+
+.form {
+  box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+  margin-top: 50px;
+  border-radius: 2px;
+  padding: 20px 80px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-form-field {
+  text-align: right !important;
+  font-family: 'Vazir';
+}
+
+
+.btn {
+  @include button.btn;
+  background-color: $greenDefault;
+  margin: 30px auto 10px;
+  width: 50%;
+}
+
+.form #upload-image::-webkit-file-upload-button {
+  border: none !important;
+  padding: 5px 10px;
+}
+.form #upload-image::-webkit-file-upload-button + span{
+  border: none !important;
+  padding: 5px 10px;
+}
+small {
+  // margin-top: -15px;
+  color: red;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+button[type= submit]:disabled {
+  background-color: #9b9999;
+}
+
+:host ::ng-deep .mat-form-field-type-mat-select .mat-form-field-label {
+  width: 100%;
+}

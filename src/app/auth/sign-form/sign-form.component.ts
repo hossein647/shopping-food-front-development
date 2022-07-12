@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Form } from 'src/app/__share/interface/form.interface';
+import { Form } from 'src/app/___share/interface/form.interface';
 
 @Component({
   selector: 'app-sign-form',

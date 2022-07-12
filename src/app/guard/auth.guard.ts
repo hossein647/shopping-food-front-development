@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { UserService } from '../auth/state/user.service';
 import { GlobalQuery } from '../state/global.query';
 import { GlobalService } from '../state/global.service';
-import { LocalStorageData } from '../__share/helper/local-storage-data';
+import { LocalStorageData } from '../___share/helper/local-storage-data';
 
 @Injectable({
   providedIn: 'root'

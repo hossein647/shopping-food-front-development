@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Shop } from 'src/app/_user-profile/shops/state/shop/shop.model';
+import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

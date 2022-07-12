@@ -1,0 +1,50 @@
+@use './../../../___share/sass/button' as button;
+@use './../../../___share/sass/general' as general;
+@use './../../../___share/sass/tabel' as tabel;
+
+.super-food {
+    .custom-container {
+        .toolbar {
+          display: flex;
+          align-items: center;
+          margin-top: 50px;
+            .btn {
+              @include button.btn
+            }
+            .confirm {
+              @include button.add;
+              &:not(:disabled) {
+                cursor: pointer;
+              }
+            }
+            .reject {
+              @include button.remove;
+              margin-right: 3px;             
+            }
+            .reset {
+              @include button.edit;
+              margin-right: 3px;             
+            }
+        }
+        ::ng-deep .tabel-container {
+          width: 100%;
+          th:first-child {
+            width: 10%;
+          }
+          th:nth-of-type(7) {
+            width: 10%;
+          }
+          th:last-child {
+            width: 15%;
+          }
+          @include tabel.matTabel;
+        }
+    }
+  }
+  
+
+
+
+.no-file {
+  @include general.noData;
+}

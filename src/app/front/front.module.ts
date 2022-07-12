@@ -28,7 +28,7 @@ import { ShopComponent } from './main-content/category/shop/shop.component';
 import { ShopsComponent } from './main-content/category/shops/shops.component';
 import { CardShopComponent } from './main-content/category/shop-card/shop-card.component';
 import { FoodCardComponent } from './main-content/food-card/food-card.component';
-import { SpinnerModule } from '../__share/module/spinner/spinner.module';
+import { SpinnerModule } from '../___share/module/spinner/spinner.module';
 import { PriceDividerPipe } from './main-content/food-card/price-divider.pipe';
 
 

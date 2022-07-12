@@ -1,0 +1,39 @@
+@use '../../../___share/sass/button' as button;
+@use '../../../___share/sass/snackbar_color' as snackbar;
+@use '../../../___share/sass/general' as general;
+@use '../../../___share/sass/tabel' as tabel;
+
+.sub-foods {
+    .toolbar {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+        .btn {
+            @include button.btn;
+        }
+        .edit {
+            @include button.edit;
+        }
+        .add {
+            @include button.add;
+            
+        }
+        .remove {
+            @include button.remove;
+            
+        }
+    }
+}
+
+::ng-deep .tabel-container {
+  @include tabel.matTabel
+}
+
+
+::ng-deep .snackbar-color {
+  @include snackbar.snackbar-success;
+}
+
+.no-file {
+  @include general.noData();
+}

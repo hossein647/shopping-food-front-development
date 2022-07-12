@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Global } from 'src/app/state/global.model';
 import { GlobalService } from 'src/app/state/global.service';
-import { LocalStorageData } from 'src/app/__share/helper/local-storage-data';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
-import { Form } from 'src/app/__share/interface/form.interface';
+import { LocalStorageData } from 'src/app/___share/helper/local-storage-data';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
+import { Form } from 'src/app/___share/interface/form.interface';
 import { Role, User } from '../../state/user.model';
 import { UserService } from '../../state/user.service';
 

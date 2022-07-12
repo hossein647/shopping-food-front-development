@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { UserService } from '../state/user.service';
 
 @Component({

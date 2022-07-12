@@ -2,9 +2,9 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, Rendere
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/auth/state/user.service';
 import { GlobalService } from 'src/app/state/global.service';
-import { Food } from 'src/app/_user-profile/foods/state/food.model';
-import { LocalStorageData } from 'src/app/__share/helper/local-storage-data';
-import { Snackbar } from 'src/app/__share/helper/snackbar';
+import { Food } from 'src/app/__dashboard/foods/state/food.model';
+import { LocalStorageData } from 'src/app/___share/helper/local-storage-data';
+import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { GlobalFrontService } from '../_services/global-front.service';
 import { OrderFood } from '../_interfaces/order-food.interface';
 import { OrderFoOdService } from '../_services/order-food.service';
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
 
   manageAccount() {    
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/__dashboard']);
   }
   
   
