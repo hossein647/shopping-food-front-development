@@ -81,7 +81,8 @@ export class ShopComponent implements OnInit {
   getFoodsOfShop(id: number) {
     this.foodService.getAllByShopId(id).subscribe(
       res => {
-        if (res) {        
+        if (res) {       
+          console.log(res);
           if (res.foods) {            
             this.foods = res.foods;            
             this.foods.forEach((food, index) => {
