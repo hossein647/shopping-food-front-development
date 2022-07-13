@@ -1,13 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, NgForm, FormBuilder, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, NgForm, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogHelper } from 'src/app/___share/helper/mat-dialog-helper';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { Category } from '../../categories/state/category.model';
 import { CategoryService } from '../../categories/state/category.service';
-import { Upload } from '../../upload/state/upload/upload.model';
 import { UploadService } from '../../upload/state/upload/upload.service';
 import { ShopPaginateQuery } from '../state/shop-paginate/shop-paginate.query';
 import { Shop } from '../state/shop/shop.model';
@@ -34,8 +33,6 @@ export class FormShopComponent implements OnInit {
   submitLabel     : string;
   typePhone       : boolean;
   categories      : Category[] = [];
-  tags            : string[] = []
-  helperWords     : string[] = [];
   imageInit       : string;
   shopId          : number;
   loadingSpinner  : boolean = false;
@@ -43,10 +40,10 @@ export class FormShopComponent implements OnInit {
   
   
   @ViewChild('form') form: NgForm;
+  @ViewChild('chipList') chipList: MatChipList;
   
   constructor(
     private formBuilder: FormBuilder,
-    private cdRef: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
     private shopPaginateQuery: ShopPaginateQuery,
     private shopService: ShopsService,
@@ -58,26 +55,6 @@ export class FormShopComponent implements OnInit {
     private categoryService: CategoryService,
     ) {}
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes) {
-  //     for (const key in changes) {
-  //         if (key === 'shopEdit') this.shopForm?.patchValue(changes[key].currentValue);
-  //         if (this.tags.length > 0) {
-  //           this.shopForm?.controls.description.setErrors(null);
-  //         } else {            
-  //           this.shopForm?.controls.description.setErrors({required: true});
-  //         }        
-  //     }
-  //   }
-  // }
-
-  // ngAfterViewInit(): void {
-  //   if (this.tags.length > 0) {      
-  //     this.shopForm.controls.description.setErrors(null);
-  //     this.cdRef.detectChanges();
-  //   }
-  // }
-
      
   ngOnInit(): void {
     this.initValueForm();
@@ -85,15 +62,6 @@ export class FormShopComponent implements OnInit {
     this.initLabel();
     this.getCategoryState();
     if (!this.isCreateForm()) this.getShopEditFrom();
-    this.shopForm.valueChanges.subscribe(
-      valueForm => {        
-        if (valueForm.description?.length > 0) {
-          if (this.tags.length > 0) this.shopForm?.controls.description.setErrors(null);
-          else this.shopForm?.controls.description.setErrors({ required: true });
-        }
-      } 
-      
-    )
   }
 
 
@@ -105,24 +73,19 @@ export class FormShopComponent implements OnInit {
   initValueForm() {    
     this.shopForm = this.formBuilder.group({
       name       : [ '', Validators.required],
-      description: [ '', Validators.required],
+      description: this.formBuilder.array([], this.validateArrayNotEmpty),
       category   : [ '', Validators.required],
       address    : [ '', Validators.required],
       phone      : [ null, [Validators.required, Validators.pattern("^[0-9]*$")]],
       image      : [ '', Validators.required],
     })
   }
- 
-  
-  onSubmit() {
-    const formValue = {
-      ...this.shopForm.value,
-      description: this.tags,
-      imageId: this.shopEdit.imageId
-    }
 
-    if (this.isCreateForm()) this.subimitCreateForm(formValue)
-    else this.subimitEditForm(formValue);
+
+  onSubmit() {
+    const formValue = { ...this.shopForm.value, imageId: this.shopEdit.imageId }
+    if (this.isCreateForm()) this.submitCreateForm(formValue)
+    else this.submitEditForm(formValue);
   }
 
   changePhone(e: any) {  
@@ -134,7 +97,7 @@ export class FormShopComponent implements OnInit {
   }
 
 
-  subimitCreateForm(shop: Shop) {
+  submitCreateForm(shop: Shop) {
     if (this.shopForm.valid) {
       this.shopService.create(shop).subscribe(res => {
         if (res) {
@@ -149,7 +112,7 @@ export class FormShopComponent implements OnInit {
     }
   }
 
-  subimitEditForm(shop: Shop) {
+  submitEditForm(shop: Shop) {
     if (this.shopForm.valid) {
       this.shopService.update(this.shopId, shop).subscribe(res => {
         const result = JSON.parse(JSON.stringify(res));
@@ -205,17 +168,16 @@ export class FormShopComponent implements OnInit {
 
 
   addTagFromInput(chipInput: MatChipInputEvent) {
-    if (chipInput.value && this.tags.length < 3) {
-      this.helperWords.push(chipInput.value.trim());
-    }
-    this.tags = this.helperWords;
-    chipInput.chipInput!.clear()
+    const value = chipInput.value;
+    if (value.trim()) this.newChip(value);
+    chipInput.chipInput!.clear();
+    if ((<FormArray>this.shopForm.get('description')).length > 0) this.chipList.errorState = false;
   }
 
 
-  removeTag(tag: string) {
-    this.tags.splice(this.tags.indexOf(tag), 1);
-    if (this.tags.length === 0) this.tags = []
+  removeTag(shopForm: FormGroup, i: number) {
+    (<FormArray>shopForm.get('description')).removeAt(i);
+    if ((<FormArray>shopForm.get('description')).length === 0) this.chipList.errorState = true;
   }
 
 
@@ -228,10 +190,9 @@ export class FormShopComponent implements OnInit {
           this.shopEdit       = shops?.filter(shop => shop._id === this.shopId)[0];
 
           if (this.shopEdit) {
-            this.shopForm.patchValue({ ...this.shopEdit, description: ''})
+            this.shopForm.patchValue({ ...this.shopEdit })
             this.selectedImage        = this.shopEdit.image;
-            this.tags                 = this.shopEdit.description;
-            this.shopEdit.description = [];
+            this.shopEdit.description.forEach(desc => this.newChip(desc))
           }
         } else {
           this.router.navigate(['/__dashboard/shops'])
@@ -240,6 +201,12 @@ export class FormShopComponent implements OnInit {
     })
   }
 
+
+  validateArrayNotEmpty(c: AbstractControl) {
+    if (c.value && c.value.length === 0) return { required: true }
+    return null;
+  }
+  
 
   getCategoryState() {
     this.categoryService.getAll().subscribe(
@@ -252,4 +219,22 @@ export class FormShopComponent implements OnInit {
     );
   }
 
+
+
+  get formShop() {    
+    return this.shopForm.get('description') as FormArray;
+  }
+
+
+  onInputFocus(chipList: MatChipList) {
+    const chipsControle = (<FormArray>this.shopForm.get('description'));
+    if (chipsControle.length === 0) chipList.errorState = true;
+  }
+
+
+  newChip(desc: string) {
+    const controls   = <FormArray>this.shopForm.get('description');
+    const newControl = this.formBuilder.control(desc.trim());
+    controls.push(newControl)
+  }
 }

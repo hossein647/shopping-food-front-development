@@ -46,7 +46,7 @@ import { ShopCategoriesComponent } from './categories/shop-categories/shop-categ
 import { SpinnerModule } from '../___share/module/spinner/spinner.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component'; 
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [

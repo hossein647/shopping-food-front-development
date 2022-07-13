@@ -26,31 +26,24 @@
 
       <mat-form-field appearance="standard">
         <mat-label>توضیحات</mat-label>
-        <mat-chip-list multiple formControlName="description" #chipList>
+        <mat-chip-list multiple formArrayName="description" #chipList>
           <mat-chip
-              *ngFor="let tag of tags"
-              [value]="tag"
-              (removed)="removeTag(tag)">
-              {{tag}}
+              *ngFor="let control of formShop.controls; let i = index"
+              [value]="control.value"
+              (removed)="removeTag(shopForm, i)">
+              {{control.value}}
             <button matChipRemove>
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip>
-          <input
+          <input 
             placeholder="کلمه جدید ..."
             [matChipInputFor]="chipList"
             (matChipInputTokenEnd)="addTagFromInput($event)"
-            formControlName="description">
+            (focusout)="onInputFocus(chipList)">
         </mat-chip-list>
+        <mat-error *ngIf="chipList.errorState">Atleast 1 name need to be added</mat-error>
       </mat-form-field>
-
-      <small *ngIf="
-                    shopForm.controls['description']?.invalid && 
-                    (shopForm.controls['description']?.touched || 
-                    shopForm.controls['description']?.dirty)">
-        {{descriptionEmpty}}
-      </small>
-
 
 
 
