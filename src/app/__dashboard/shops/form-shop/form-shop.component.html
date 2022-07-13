@@ -42,7 +42,8 @@
             (matChipInputTokenEnd)="addTagFromInput($event)"
             (focusout)="onInputFocus(chipList)">
         </mat-chip-list>
-        <mat-error *ngIf="chipList.errorState">Atleast 1 name need to be added</mat-error>
+        <mat-error *ngIf="chipList.errorState">یک کلمه کلیدی تایپ کرده و اینتر را بزنید.</mat-error>
+        <mat-error *ngIf="chipList.errorState">حداکثر 3 برچسب مجاز است.</mat-error>
       </mat-form-field>
 
 

@@ -169,9 +169,10 @@ export class FormShopComponent implements OnInit {
 
   addTagFromInput(chipInput: MatChipInputEvent) {
     const value = chipInput.value;
-    if (value.trim()) this.newChip(value);
+    const chips = (<FormArray>this.shopForm.get('description'));
+    if (value.trim() && chips.length <= 2) this.newChip(value);
     chipInput.chipInput!.clear();
-    if ((<FormArray>this.shopForm.get('description')).length > 0) this.chipList.errorState = false;
+    if (chips.length > 0) this.chipList.errorState = false;
   }
 
 
