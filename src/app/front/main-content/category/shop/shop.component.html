@@ -1,6 +1,6 @@
 
 <div class="shop sm:flex border-gray-400 mx-5 sm:mx-10 lg:mx-[95px] ">
-    <div class="sidebr sm:w-1/4 mt-3 border-t" #sidebar>
+    <div class="sidebr sm:w-1/4 mt-3 border-t" *ngIf="shop" #sidebar>
         <div 
             class="shop-info overflow-hidden flex sm:flex-col items-center p-2 border border-t-0 sm:border-b">
             <img 
@@ -8,7 +8,7 @@
                 [src]="baseApi + '/' + shop.userId + '/' + shop.image"
                 alt="">
             <div class="info-detailes sm:flex sm:flex-col sm:items-center mr-3 sm:mr-0 sm:my-3">
-                <span class="text-xl font-semibold text-gray-600">{{shop?.name}}</span>
+                <span class="text-xl font-semibold text-gray-600">{{shop.name}}</span>
                 <div class="rating flex items-center sm:flex-col sm:justify-between mt-1">
                     <bar-rating class="" 
                         [readOnly]="true"
