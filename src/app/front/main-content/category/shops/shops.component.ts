@@ -40,6 +40,8 @@ export class ShopsComponent implements OnInit {
       res => {        
         if (res?.shops?.docs) {
           this.shops = res.shops?.docs;
+          console.log(this.shops);
+          
           this.paginate = res;
           this.totalPages = [];
           this.ratesHelper = [];

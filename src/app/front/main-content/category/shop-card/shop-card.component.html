@@ -7,7 +7,7 @@
         *ngFor="let shop of shops; let i = index;">
         <div class="header-card flex justify-center">
             <img class="rounded-full xs:p-6 aspect-square p-6"
-                [src]="'https://api.hosseinnejaty.ir' + '/' + shop.userId + '/' + shop.image" alt="">
+                [src]="baseApi + '/' + shop.userId + '/' + shop.image" alt="">
         </div>
         <div class="body-card flex flex-col items-center ">
             <div class="title text-center text-xl text-[#606060f2] font-semibold">{{shop.name}}</div>

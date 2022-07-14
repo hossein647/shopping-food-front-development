@@ -71,6 +71,8 @@ export class ShopComponent implements OnInit {
     this.shopService.getSingleShops(id).subscribe(
       res => {
         if (res) {
+          console.log(res);
+
           this.shop = res.shops;          
         }
       }
