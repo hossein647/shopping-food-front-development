@@ -16,7 +16,6 @@ export class CardShopComponent implements OnInit {
   @Input() shops: Shop[];
   @Input() rates: number[];
   @Input() message: string;
-  baseApi: string = environment.url;
 
   constructor(
     private activatedRoute: ActivatedRoute,
