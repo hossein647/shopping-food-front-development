@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { environment } from 'src/environments/environment';
 
@@ -32,29 +34,17 @@ export class CircularService {
   
   updateToCompleteState() {
     return this.http.put<Food[]>(`${this.baseApi}/foods/update/complete`, {}, { withCredentials: true });
-  }
-
-
-  getImageFood(id: number, imageName: string) {
+  } 
+ 
+ 
+  getPopulatedShop(shop: string, name: string) {
     const params = new HttpParams()
-    .set('imageName', imageName)
-    .set('id', id)
-    return this.http.get(`${this.baseApi}/file-upload/single-public`, {
-      params,
-      responseType: 'blob',
-      withCredentials: true
-    });
-  }
-
-
-  async createUrl(image: Blob, images: any[]) {
-    const reader = new FileReader();
-    await reader.readAsDataURL(image);
-    reader.onload = (event) => {
-      const url = event.target?.result;
-      images.push(url);
-    }
-  }
-  
+    .set('shop', shop)
+    .set('name', name)
+    return this.http.get(`${this.baseApi}/foods/get/populate-shop`, { params })
+    .pipe(
+      catchError(err => of(err))
+    )
+  } 
 
 }

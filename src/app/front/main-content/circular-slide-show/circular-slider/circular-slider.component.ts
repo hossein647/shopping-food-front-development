@@ -1,8 +1,10 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, merge, Subject, Subscription, timer, EMPTY  } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
+import { environment } from 'src/environments/environment';
 import { CircularService } from '../state/circular.service';
 
 @Component({
@@ -34,7 +36,6 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   savedTime          = 0;
   
   skip             : boolean = false;
-  images           : string[] = [];
   foods            : Food[] = [];
   outlinWidthSlider: number;
   savedDegree      : number;
@@ -46,12 +47,14 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   arrowClicked     : boolean = false;
   notSeenPage      : boolean = false;
   clickSliding     : boolean = true;
+  baseApi          : string  = environment.url;
   
 
   constructor(
     private renderer: Renderer2,
     private circularService: CircularService,
     private breakPoint: BreakpointObserver,
+    private router: Router
     ) {
     }
     
@@ -98,7 +101,6 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
         this.changeWidthEffect('out');
         return this.savedTime + time;
       }),
-      // distinctUntilChanged()
       )
       .subscribe(time => {   
         timer(300).subscribe(no => {
@@ -128,6 +130,8 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   updateToShowState() {
     this.circularService.getConfirmToday().subscribe(res => {
       if (res) {
+        console.log(res);
+        
         const result = JSON.parse(JSON.stringify(res)).superFoods;          
         result.forEach((food: any) => {   
           this.circularService.updateToShowState(food._id).subscribe()
@@ -145,14 +149,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
   getShowStateImages() {
     this.circularService.getShowStates().subscribe(res => {
-      if (res) {
-        this.foods = JSON.parse(JSON.stringify(res)).foods;
-        this.foods.forEach(food => {
-          this.circularService.getImageFood(food.userId,food.image).subscribe(async image => {
-            if (image) await this.circularService.createUrl(image, this.images);
-          })
-        })        
-      }
+      if (res) this.foods = JSON.parse(JSON.stringify(res)).foods;      
     })
   }
 
@@ -277,6 +274,17 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
       this.renderer.setStyle(this.counter.nativeElement, 'transition', 'all .3s ease-in');
     }
   }
+
+
+  navigetToFood(foods: Food[], foodTitle: string) {
+    const food = foods.filter(food => food.name === foodTitle)[0];
+    this.circularService.getPopulatedShop(food.shop, food.name).subscribe(
+      res => {
+        if (res) this.router.navigate([`shops/${res[0].shop_category.alias}/${res[0].shop._id}`])
+      }
+    )
+  }
+
 
   ngOnDestroy(): void {
     this.isVisible$.next('hidden')
