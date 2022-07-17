@@ -56,9 +56,7 @@ export class MotstPapularComponent implements OnInit {
   mostPopularFood() {
     this.cardsService.popular().subscribe(
       res => {
-        if (res) {          
-          console.log(res);
-                              
+        if (res) {                                        
           this.foods = res.foods;          
           this.getAverageRate(this.foods);        
         }

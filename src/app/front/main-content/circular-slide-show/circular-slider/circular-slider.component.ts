@@ -129,9 +129,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
   updateToShowState() {
     this.circularService.getConfirmToday().subscribe(res => {
-      if (res) {
-        console.log(res);
-        
+      if (res) {        
         const result = JSON.parse(JSON.stringify(res)).superFoods;          
         result.forEach((food: any) => {   
           this.circularService.updateToShowState(food._id).subscribe()

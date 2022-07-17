@@ -39,9 +39,7 @@ export class ShopsComponent implements OnInit {
     this.shopService.getShops().subscribe(
       res => {        
         if (res?.shops?.docs) {
-          this.shops = res.shops?.docs;
-          console.log(this.shops);
-          
+          this.shops = res.shops?.docs;          
           this.paginate = res;
           this.totalPages = [];
           this.ratesHelper = [];

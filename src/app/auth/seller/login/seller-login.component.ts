@@ -44,14 +44,10 @@ export class SellerLoginComponent implements OnInit {
     };
     this.userService.login(requiredRoles).subscribe(
       res => {
-        if (res) {     
-          console.log('seller login : ', res);
-               
+        if (res) {                    
           const result = JSON.parse(JSON.stringify(res));
           const auth: Global = { loggedIn: result.loggedIn };
-          const expire: number = Number(new Date(result.expire));
-          console.log('expire login : ', expire);
-          
+          const expire: number = Number(new Date(result.expire));          
           this.localStorageData.setLoginExpire(
             'elsfu', 
             expire, 

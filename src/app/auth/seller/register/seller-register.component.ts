@@ -39,9 +39,7 @@ export class SellerRegisterComponent implements OnInit {
         role: Role.Seller
       };      
       this.userService.register(formWithRole).subscribe(res => {
-        if (res) {  
-          console.log('seller register : ', res);
-                  
+        if (res) {                    
           this.allowRequest = true;
           this.loadingSpinner = false;
           const result = JSON.parse(JSON.stringify(res));
