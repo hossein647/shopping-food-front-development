@@ -1,7 +1,7 @@
 .sidenav {
     width: 400px;
     height: 100vh;
-    background-color: red;
+    background-color: #1b2a54;
     position: absolute;
     transform: translateX(100%);
     transition: transform .4s ease-in-out;
@@ -13,11 +13,7 @@
             list-style: none;
             padding: 0;
             height: 100vh;
-            margin-top: 100px;
-            // display: flex;
-            // align-items: center;
-            // flex-direction: column;
-            // justify-content: center;
+            margin-top: 25px;
                 .item {
                     // text-align: center;
                     margin: 10px 0;
