@@ -30,6 +30,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -63,6 +64,12 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
     BarRatingModule,
     MatCardModule,
     MatButtonModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
