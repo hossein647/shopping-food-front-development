@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { UploadService } from '../state/upload/upload.service';
 
@@ -11,7 +11,7 @@ import { UploadService } from '../state/upload/upload.service';
 })
 export class UploadComponent implements OnInit {
   
-  uploadForm    : FormGroup;
+  uploadForm    : UntypedFormGroup;
   files         : any = [];
   images        : any[] = [];
   emptyImage    : string;
@@ -37,8 +37,8 @@ export class UploadComponent implements OnInit {
   
   initForm() {
     this.user = JSON.parse(window.localStorage.getItem('elsfu') || '{}')
-    this.uploadForm = new FormGroup({
-      images: new FormControl(null, Validators.required),
+    this.uploadForm = new UntypedFormGroup({
+      images: new UntypedFormControl(null, Validators.required),
     })
   }
 
