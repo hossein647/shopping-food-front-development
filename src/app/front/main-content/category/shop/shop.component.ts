@@ -80,7 +80,7 @@ export class ShopComponent implements OnInit {
 
 
   getFoodsOfShop(id: number) {
-    this.foodService.getAllByShopId(id).subscribe(
+    this.foodService.getAllByShopId(14).subscribe(
       res => {
         if (res) {       
           if (res.foods) {     
