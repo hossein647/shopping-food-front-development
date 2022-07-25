@@ -76,3 +76,8 @@
         }
     }
 }
+
+
+.picture::after {
+    content: url('./../../../../../assets/img/andy-hermawan-By43FHM_PJM-unsplash.jpg');
+}

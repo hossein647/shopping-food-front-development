@@ -147,6 +147,8 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
   getShowStateImages() {
     this.circularService.getShowStates().subscribe(res => {
+      console.log(res);
+      
       if (res) this.foods = JSON.parse(JSON.stringify(res)).foods;      
     })
   }

@@ -38,6 +38,7 @@ export class ShopComponent implements OnInit {
   showModalClicked : boolean = false;
   indexSubFood     : number;
   baseApi          : string = environment.url;
+  imagePlaceholder : boolean = true;
 
   @ViewChildren('sectionSubFood') sectionSubFood: QueryList<ElementRef>;
   @ViewChild('foodMenu') foodMenu               : ElementRef;
@@ -82,7 +83,8 @@ export class ShopComponent implements OnInit {
     this.foodService.getAllByShopId(id).subscribe(
       res => {
         if (res) {       
-          if (res.foods) {            
+          if (res.foods) {     
+            this.imagePlaceholder = false;       
             this.foods = res.foods;            
             this.foods.forEach((food, index) => {
               this.shopRate += food.average;
@@ -90,9 +92,10 @@ export class ShopComponent implements OnInit {
                 this.shopRate = +(this.shopRate / this.foods.length).toFixed(1)
               }
             })
-            this.getSubFoods(this.foods[0].shop)
+            this.getSubFoods(this.foods[0].shop);
           } else {
-            this.foodsMessage = res.message
+            this.imagePlaceholder = true;
+            this.foodsMessage = res.message;
           }
         }
       }

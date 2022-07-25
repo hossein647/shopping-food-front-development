@@ -4,8 +4,8 @@
         <div 
             class="shop-info overflow-hidden flex sm:flex-col items-center p-2 border border-t-0 sm:border-b">
             <img 
-                class="rounded-full w-16 h-16 sm:w-28 sm:h-28" 
-                [src]="baseApi + '/' + shop.userId + '/' + shop.image"
+                class="picture rounded-full w-16 h-16 sm:w-28 sm:h-28" 
+                [src]="imagePlaceholder ? './../../../../../assets/img/andy-hermawan-By43FHM_PJM-unsplash.jpg' : baseApi + '/' + shop.userId + '/' + shop.image"
                 alt="">
             <div class="info-detailes sm:flex sm:flex-col sm:items-center mr-3 sm:mr-0 sm:my-3">
                 <span class="text-xl font-semibold text-gray-600">{{shop.name}}</span>
@@ -66,8 +66,8 @@
                             >
                             <img 
                                 *ngIf="food.subFood === sub.name"
-                                class="w-[120px] sm:w-[150px] aspect-square hover:cursor-pointer"
-                                [src]="baseApi + '/' + food.userId + '/' + food.image"
+                                class="picture w-[120px] sm:w-[150px] aspect-square hover:cursor-pointer"
+                                [src]="imagePlaceholder ? './../../../../../assets/img/andy-hermawan-By43FHM_PJM-unsplash.jpg' : baseApi + '/' + food.userId + '/' + food.image"
                                 (click)="showMoreModal(food)"
                                 alt="">
                             <div 

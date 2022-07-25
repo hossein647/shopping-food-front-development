@@ -13,3 +13,7 @@
 .reverse-selected{
     background-color: #fff;
 }
+
+.picture::after {
+    content: url('./../../../../../assets/img/rate.png');
+}
