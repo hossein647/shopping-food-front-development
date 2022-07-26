@@ -2,7 +2,7 @@ import { CommonFormCreateComponent } from './common-form-create/common-form-crea
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UserProfileRoutingModule } from './user-profile-routing.module';
+import { dashboardRoutingModule } from './dashboard-routing.module';
 import { SettingComponent } from './setting/setting.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -43,10 +43,11 @@ import { SubFoodComponent } from './sub-category-food/sub-food/sub-food.componen
 import { MatChipsModule } from '@angular/material/chips';
 import { ReadShopCategoriesComponent } from './categories/read-shop-categories/read-shop-categories.component';
 import { ShopCategoriesComponent } from './categories/shop-categories/shop-categories.component';
-import { SpinnerModule } from '../___share/module/spinner/spinner.module';
+// import { SpinnerModule } from '../___share/module/spinner/spinner.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component'; 
 import { MatCardModule } from '@angular/material/card';
+import { SpinnerModule } from '../___share/module/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { MatCardModule } from '@angular/material/card';
   ],
   imports: [
     CommonModule,
-    UserProfileRoutingModule,
+    dashboardRoutingModule,
     MatSidenavModule,
     MatIconModule,
     MatFormFieldModule,
@@ -112,4 +113,4 @@ import { MatCardModule } from '@angular/material/card';
     },
   ],
 })
-export class UserProfileModule { }
+export class dashboardModule { }

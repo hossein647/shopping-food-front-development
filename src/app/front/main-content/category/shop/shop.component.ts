@@ -80,10 +80,11 @@ export class ShopComponent implements OnInit {
 
 
   getFoodsOfShop(id: number) {
-    this.foodService.getAllByShopId(14).subscribe(
+    this.foodService.getAllByShopId(id).subscribe(
       res => {
         if (res) {       
-          if (res.foods) {     
+          if (res.foods) {    
+            console.log(res); 
             this.imagePlaceholder = false;       
             this.foods = res.foods;            
             this.foods.forEach((food, index) => {
@@ -94,6 +95,7 @@ export class ShopComponent implements OnInit {
             })
             this.getSubFoods(this.foods[0].shop);
           } else {
+            console.log(res);
             this.imagePlaceholder = true;
             this.foodsMessage = res.message;
           }

@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { FrontModule } from './front/front.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserProfileModule } from './__dashboard/user-profile.module';
+import { dashboardModule } from './__dashboard/dashboard.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -50,12 +50,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   imports: [
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    CommonModule,
     BrowserModule,
     RouterModule,
     AppRoutingModule,
     FrontModule,
-    UserProfileModule,
+    dashboardModule,
     BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,

@@ -3,6 +3,7 @@
   "cli": {
     "analytics": "4754d240-e88f-4f1a-ae14-b377106a3dfd",
     "schematicCollections": [
+      "@angular-eslint/schematics",
       "@datorama/akita"
     ]
   },
@@ -114,6 +115,15 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
