@@ -27,7 +27,7 @@
             <img
                 *ngIf="upload"
                 class="rounded-full border"
-                [src]="baseApi + '/' + file?.userId + '/profile/' + file?.filename" 
+                [src]="baseApi + '/' + file.userId + '/profile/' + file.filename" 
                 alt="" #imgProfile>
                 <svg
                     *ngIf="!upload" 
