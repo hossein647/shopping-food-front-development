@@ -1,7 +1,6 @@
 @use '../../../___share/sass/button' as button;
 
 .custom-container {
-    // padding: 30px;
     width: 60%;
     margin: 30px auto 0;
     .select-files {
@@ -15,7 +14,6 @@
         form {
             display: flex;
             flex-direction: column;
-            // padding: 0 200px
         }
         
         label {
@@ -69,6 +67,11 @@
             margin: 3px 0;
             border-top-right-radius: 3px;
             border-bottom-right-radius: 3px;
+            justify-content: space-between;
+            .detail {
+                display: flex;
+                align-items: center;
+            }
             .image {
                 width: 48px;
                 height: 48px;
@@ -78,17 +81,19 @@
             .image-name {
                 margin: 5px 0 0;
                 padding: 5px 10px;
-                text-align: center;
-                word-break: break-all;
+                direction: ltr;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 200px;
             }
             .delete {
                 color: #525151cf;
-                // position: absolute;
                 border-radius: 50%;
                 height: 28px;
                 width: 28px;
                 font-size: 24px;
-                left: 20px;
+                margin-left: 20px;
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.2);
@@ -134,9 +139,7 @@ input::-webkit-inner-spin-button {
 }
 
 .disable-form {
-    // position: absolute;
     background-color: lightgrey;
-    // pointer-events: none;
 }
 
 @media(max-width: 991px) {
