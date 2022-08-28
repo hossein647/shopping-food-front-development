@@ -13,7 +13,11 @@
                     [src]="baseApi + '/' + category.userId + '/' + category.image" 
                     width="32" 
                     height="32">
-                <span class="name mr-3">{{category.name}}</span>
+                <span 
+                    class="name mr-3 text-[#606060f2] font-semibold"
+                    [ngClass]="{'text-color': category.alias === selected}">
+                    {{category.name}}
+                </span>
             </div>
             <ul 
                 class="sub-list" 
@@ -28,7 +32,11 @@
                         src="./../../../../../assets/img/eco-food.png" 
                         width="16" 
                         height="16">
-                    <span class="name mr-3">{{sub.name}}</span>
+                    <span 
+                        class="name mr-3 text-[#606060f2] font-medium"
+                        [ngClass]="{'text-color': subFoodCategories[i].name === subSelected}">
+                        {{sub.name}}
+                    </span>
                 </li>
             </ul>
         </li>

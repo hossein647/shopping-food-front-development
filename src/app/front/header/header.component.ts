@@ -1,5 +1,4 @@
-import {  ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { GlobalQuery } from 'src/app/state/global.query';
+import {  ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
@@ -16,15 +15,13 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Output() onToggleHamburger = new EventEmitter<Event>();
   @Output() openOrderFood = new EventEmitter<boolean>()
    
-  @ViewChild('lists') lists: ElementRef;
   @Input() orderFoodLength: number;
   @Input() sidebarShow    : boolean;
   @Input() scrolled       : boolean;
    
   constructor(
     private globalService: GlobalService,
-    private globalQuery: GlobalQuery,
-    private cdRef: ChangeDetectorRef  
+    private cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -33,14 +30,13 @@ export class HeaderComponent implements OnInit, OnChanges {
         if (key === 'loggedIn')  this.loggedIn = changes[key].currentValue;
         if (key === 'email')     this.email    = changes[key].currentValue;        
         this.cdRef.detectChanges();
-        this.globalService.update({ loggedIn: this.loggedIn });        
+        this.globalService.update({ loggedIn: this.loggedIn });       
       }
     }
-    
   }
 
   ngOnInit(): void {
-    document.body.style.overflowY = 'auto';
+    // document.body.style.overflowY = 'auto';
   }
 
 
@@ -62,7 +58,6 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   onLogoClick() {
-    document.body.style.overflowY = 'auto';
+    // document.body.style.overflowY = 'auto';
   }
-
 }

@@ -46,8 +46,7 @@ export class ReadShopsComponent implements OnInit {
   ngOnInit(): void {
     this.initDefaultValueTable(); 
     this.shopPaginateService.getAllShopWithPaginate(this.limit = 10, this.pageIndex = 0).subscribe();  
-    this.getDataSourceWithPageinate();
-    
+    this.getDataSourceWithPageinate();    
   }
 
    // init default create table

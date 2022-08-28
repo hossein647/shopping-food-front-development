@@ -1,5 +1,18 @@
+
+.container {
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  min-width: 100%;
+}
+
 table {
   width: 100%;
+}
+
+::ng-deep th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  min-width: 150px;
 }
 
 ::ng-deep mat-paginator {
@@ -7,6 +20,8 @@ table {
   .mat-paginator-range-actions,
   .mat-paginator-page-size {
     flex-direction: row-reverse;
+    border-bottom-left-radius : 6px;
+    border-bottom-right-radius: 6px;
   }
 }
 

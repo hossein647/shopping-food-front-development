@@ -1,5 +1,5 @@
 <div 
-    class="shops flex flex-col px-5 sm:px-10 lg:px-[95px] my-10 md:flex-row min-h-full">
+    class="shops flex flex-col px-5 sm:px-10 lg:px-[95px] mt-5 mb-10 md:flex-row min-h-full">
     <div class="sidebar md:w-1/4">
         <app-filter-sidebar 
                             (onSelectCategory)="selectCategory($event)"
@@ -13,12 +13,12 @@
                     [message]="message" >
         </app-shop-card>
         <div 
-            class="pagination flex flex-wrap overflow-hidden justify-center items-baseline mx-auto shadow w-full sm:w-1/2 mt-5 p-1" 
+            class="pagination bg-white flex flex-wrap overflow-hidden justify-center items-baseline mx-auto shadow w-full sm:w-1/2 mt-5 p-1 rounded-sm" 
             *ngIf="totalPages.length">
-            <div class="prev text-center text-xs py-1 px-2 hover:cursor-pointer ml-2"
+            <div class="prev text-center text-xs py-1 px-2 hover:cursor-pointer ml-2 font-semibold text-[#696969]"
                 (click)="changePagination(-1)">قبلی
             </div>
-            <div class="pages text-center text-xs py-1 px-2 mx-1 rounded-sm"
+            <div class="pages text-center text-xs py-1 px-2 mx-1 rounded-sm font-semibold"
                 *ngFor="let page of totalPages; let i = index;" 
                 [attr.selected]="page === paginate.shops.page"
                 [class.selected]="page === paginate.shops.page"
@@ -26,7 +26,8 @@
                 {{page}}
             </div>
             <div 
-                class="next text-center text-xs py-1 px-2 hover:cursor-pointer mr-2"
+                class="next text-center text-xs py-1 px-2 hover:cursor-pointer mr-2 font-semibold
+                text-[#696969]"
                 (click)="changePagination(+1)">
                 بعدی
             </div>

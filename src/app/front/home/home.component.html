@@ -1,7 +1,7 @@
-<div class="sidenav z-50" #sidenav [ngClass]="{'visibled': showSidebarMenu}">
+<div class="sidenav z-50 bg-white border-l" #sidenav [ngClass]="{'visibled': showSidebarMenu}">
   <div class="" *ngIf="loggedIn">
-    <div class="account flex justify-end m-5">
-      <div class="wrapper-cart flex ml-1 text-white">
+    <div class="account flex justify-end m-5 items-center">
+      <div class="wrapper-cart flex items-center ml-1 text-[#00000087]">
         <span 
             *ngIf="orderFoodLength > 0" 
             class="inline-block bg-lime-500 rounded-full pt-[3px] pl-[2px] pr-[3px] text-white 
@@ -9,7 +9,7 @@
           {{orderFoodLength}}
         </span>
         <svg 
-            class="cart h-8 w-8 rounded-full p-1 hover:cursor-pointer" 
+            class="cart h-8 w-8 rounded-full p-1 hover:cursor-pointer text-[#00000087]" 
             xmlns="http://www.w3.org/2000/svg"
             fill="none" 
             viewBox="0 0 24 24" 
@@ -20,10 +20,9 @@
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       </div>
-      <div class="profile text-white" (click)="showAccountDropdown()">
+      <div class="profile text-black" (click)="showAccountDropdown()">
         <svg 
-            class="h-8 w-8 
-            rounded-full m-auto p-1" 
+            class="h-8 w-8 text-[#00000087] rounded-full m-auto p-1" 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"
@@ -35,16 +34,16 @@
     </div>
     <div
       class="
-          dropdown-account flex flex-col items-start absolute bg-white left-8 p-3 rounded-[1px] top-16 transition-all duration-400 ease-in-out"
+          dropdown-account flex flex-col items-start absolute bg-white left-8 p-3 rounded-[1px] top-16 transition-all duration-400 ease-in-out shadow-lg"
       [ngClass]="{'opacity-0': !toggleDropdown, 'opacity-100': toggleDropdown}" 
       #dropdown>
-      <h6 class="email-title">{{email}}</h6>
+      <h6 class="email-title text-[#00000087] border-b">{{email}}</h6>
       <div 
           class="manage_accounts flex p-2 w-full hover:bg-slate-300 hover:text-white" 
           (click)="manageAccount()">
           <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              class="h-6 w-6" 
+              class="h-6 w-6 text-[#00000087]" 
               fill="none" 
               viewBox="0 0 24 24" stroke="currentColor"
               stroke-width="2">
@@ -53,12 +52,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
               {{orderFoodLength}}
         </svg>
-        <small class="mr-3">حساب کاربری</small>
+        <small class="mr-3 text-[#00000087] font-semibold">حساب کاربری</small>
       </div>
       <div class="logout flex p-2 w-full hover:bg-slate-300 hover:text-white" (click)="logout()">
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            class="h-6 w-6" 
+            class="h-6 w-6 text-[#00000087]" 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"
@@ -66,20 +65,22 @@
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
         </svg>
-        <small class="mr-3">خروج</small>
+        <small class="mr-3 text-[#00000087] font-semibold">خروج</small>
       </div>
     </div>
   </div>
   <ul class="list mr-40">
-    <li class="item" *ngIf="!loggedIn">
-      <div class="auth  text-center">
-        <a routerLink="login" class="customer item-link">ورود / عضویت</a>
+    <li class="item !m-[30px]" *ngIf="!loggedIn">
+      <div class="auth text-center">
+        <a routerLink="login" class="customer item-link !text-[#00000087] font-semibold">ورود / عضویت</a>
       </div>
     </li>
   </ul>
 </div>
-<div class="custom-container">
-  <div class="parent-header lg:py-3 lg:px-5">
+<div class="custom-container px-2 mt-6 lg:px-8">
+  <div 
+      class="parent-header bg-white rounded-md mx-5 sm:mx-10 lg:mx-[95px]" 
+      [ngClass]="{'home-page': homePage}">
     <app-header
               [loggedIn]="loggedIn" 
               [email]="email" 

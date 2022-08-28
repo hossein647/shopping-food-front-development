@@ -45,12 +45,9 @@ export class SellerLoginComponent implements OnInit {
     this.userService.login(requiredRoles).subscribe(
       res => {
         if (res) {     
-          console.log('seller login : ', res);
-               
           const result = JSON.parse(JSON.stringify(res));
           const auth: Global = { loggedIn: result.loggedIn };
           const expire: number = Number(new Date(result.expire));
-          console.log('expire login : ', expire);
           
           this.localStorageData.setLoginExpire(
             'elsfu', 

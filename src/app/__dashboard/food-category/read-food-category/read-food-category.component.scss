@@ -8,6 +8,7 @@
           display: flex;
           align-items: center;
           margin-top: 50px;
+          flex-wrap: wrap;
             .btn {
               @include button.btn
             }
@@ -24,7 +25,7 @@
             }
         }
         ::ng-deep .tabel-container {
-          width: 50%;
+          width: 100%;
           th:first-child {
             width: 30%;
           }

@@ -3,40 +3,25 @@
             flex 
             flex-col
             items-center
-            p-3
-            xs:p-8
+            p-8
             sm:p-10
-            lg:py-12 
-            lg:px-[75px] 
-            bg-gray-100">
-    <!-- <input  type="text" 
-            placeholder="نام یک غذا را جستجو کنید" 
-            class="
-                search 
-                border-2 
-                border-solid 
-                border-slate-200
-                rounded-md
-                p-2
-                w-full
-                sm:w-4/6
-                md:w-3/5
-                lg:w-1/2
-                xl:w-2/5
-                text-sm
-                focus:outline-none
-                focus:ring-indigo-500 
-                focus:border-indigo-500"> -->
-    <div class="wrapper-list w-full sm:w-4/6 md:w-3/5 lg:w-1/2 xl:w-2/5 mt-8">
-        <ul class="list flex justify-evenly flex-wrap">
+            lg:pt-16 
+            lg:pb-8 
+            lg:px-[75px]
+            bg-[#0000000d]">
+
+    <div class="wrapper-list w-full sm:w-4/6 md:w-3/5">
+        <ul class="list flex flex-wrap gap-y-1 gap-x-2">
             <a 
-                class=" text-center rounded-lg cursor-pointer" 
+                class="flex w-full xs:w-[48%] bg-[#505050] items-center rounded-md text-center cursor-pointer mb-1" 
                 *ngFor="let list of lists; let i = index;" 
                 (click)="goToPage(list.alias, list.name)">
-                    <img 
-                        class="w-16 h-16 rounded-md" 
-                        [src]="baseApi + '/'+list.userId+'/'+list.image" alt="">
-                    <span  class="list-item-link text-sm">{{list.name}}</span>
+                <span  class="list-item-link block text-white text-lg font-bold ml-auto mr-4">
+                    {{list.name}}
+                </span>
+                <img 
+                    class="w-[70px] h-[70px] rounded-l-md" 
+                    [src]="baseApi + '/'+list.userId+'/'+list.image" alt="">
             </a>
         </ul>
     </div>

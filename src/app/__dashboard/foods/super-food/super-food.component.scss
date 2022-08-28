@@ -1,6 +1,6 @@
-@use './../../../___share/sass/button' as button;
-@use './../../../___share/sass/general' as general;
-@use './../../../___share/sass/tabel' as tabel;
+@use './../../../___share/sass/_button.scss' as button;
+@use './../../../___share/sass/_general.scss' as general;
+@use './../../../___share/sass/_tabel.scss' as tabel;
 
 .super-food {
     .custom-container {
@@ -8,8 +8,11 @@
           display: flex;
           align-items: center;
           margin-top: 50px;
+          flex-wrap: wrap;
             .btn {
-              @include button.btn
+              @include button.btn;
+              width: 140px;
+              margin-left: 3px
             }
             .confirm {
               @include button.add;
@@ -19,11 +22,9 @@
             }
             .reject {
               @include button.remove;
-              margin-right: 3px;             
             }
             .reset {
               @include button.edit;
-              margin-right: 3px;             
             }
         }
         ::ng-deep .tabel-container {

@@ -1,9 +1,11 @@
-<div class="header py-3 px-5 sm:px-10 lg:px-0 lg:py-0 lg:mx-[75px]">
+<div 
+  class="header py-3 px-5 sm:px-10 lg:px-0 lg:mx-10" 
+  [ngClass]="{'md:py-0': loggedIn && orderFoodLength > 0}">
   <div class="row">
     <div class="menu flex justify-between w-full md:block md:w-auto">
       <div 
           class="hamburger-menu" 
-          [ngClass]="{'-mt-[25px]': ((!scrolled && sidebarShow) || (scrolled && sidebarShow))}">
+          [ngClass]="{'-mt-[37px]': ((!scrolled && sidebarShow) || (scrolled && sidebarShow))}">
         <div 
             class="hamburger" 
             [class.absolute]="((!scrolled && sidebarShow) || (scrolled && sidebarShow))" 
@@ -15,19 +17,11 @@
         </div>
       </div>
       <a class="title" routerLink="/" (click)="onLogoClick()">سفارش غذا</a>
-      <ul class="list">
-        <!-- <li>
-          <a class="" routerLink="foods">غذا</a>
-        </li> -->
-        <!-- <li>
-          <a class="" routerLink="contact-us">تماس با ما</a>
-        </li> -->
-      </ul>
     </div>
     <ul class="lists">
       <li *ngIf="!loggedIn" class="flex">
         <div class="auth">
-          <a routerLink="login" class="customer inline-block">ورود  /  عضویت</a>
+          <a routerLink="login" class="customer inline-block !text-white !bg-gray-500">ورود  /  عضویت</a>
         </div>
       </li>
       <li *ngIf="loggedIn" class="account flex items-center">
@@ -50,7 +44,7 @@
                         {{orderFoodLength}}
               </span>
           <svg 
-              class="cart h-8 w-8 rounded-full m-auto p-1 hover:cursor-pointer" 
+              class="cart h-8 w-8 rounded-full m-auto p-1 hover:cursor-pointer text-[#6b7280]" 
               xmlns="http://www.w3.org/2000/svg" 
               fill="none" 
               viewBox="0 0 24 24" 
@@ -63,7 +57,7 @@
         </div>
         <button class="profile" mat-icon-button [matMenuTriggerFor]="menu">
           <svg 
-              class="h-8 w-8 rounded-full m-auto p-1" 
+              class="h-8 w-8 rounded-full m-auto p-1 text-[#6b7280]" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"

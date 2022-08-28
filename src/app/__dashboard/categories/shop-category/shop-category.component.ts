@@ -153,7 +153,7 @@ export class ShopCategoryComponent implements OnInit {
 
 
   initError() {
-    this.nameError = 'فیلد نام نمی تواند خالی باشد.';
+    this.nameError  = 'فیلد نام نمی تواند خالی باشد.';
     this.aliasError = 'فیلد نام مستعار نمی تواند خالی باشد.';
     this.imageEmpty = 'فیلد انتخاب عکس نمی تواند خالی باشد.';
   }

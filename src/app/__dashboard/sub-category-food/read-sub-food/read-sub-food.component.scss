@@ -1,13 +1,14 @@
-@use '../../../___share/sass/button' as button;
-@use '../../../___share/sass/snackbar_color' as snackbar;
-@use '../../../___share/sass/general' as general;
-@use '../../../___share/sass/tabel' as tabel;
+@use '../../../___share/sass/_button.scss' as button;
+@use '../../../___share/sass/_snackbar_color.scss' as snackbar;
+@use '../../../___share/sass/_general.scss' as general;
+@use '../../../___share/sass/_tabel.scss' as tabel;
 
 .sub-foods {
     .toolbar {
         display: flex;
         align-items: center;
         margin-top: 50px;
+        flex-wrap: wrap;
         .btn {
             @include button.btn;
         }

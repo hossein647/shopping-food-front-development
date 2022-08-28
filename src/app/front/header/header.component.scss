@@ -35,7 +35,7 @@
             &.change {
               .rotated:nth-of-type(1) {
                   transform: rotate(45deg) translate(4px, 5px);
-                  background-color: white;
+                  background-color: #000000a1;
                   transition: all .4s ease-in-out;
                 }
                 .show:nth-of-type(2) {
@@ -43,7 +43,7 @@
                   transition: all .1s ease-out;
                 }
                 .rotated:nth-of-type(3) {
-                  background-color: white;
+                  background-color: #000000a1;
                   transform: rotate(-45deg) translate(6px, -7px);
                   transition: all .4s ease-in-out;
                 }
@@ -68,6 +68,7 @@
         @include stayle_tag_a();
         padding: 0;
         font-size: 28px;
+        color: rgb(152, 217, 68);
       }
       ul.list {
         @include style_ul_tag();
@@ -166,9 +167,3 @@
     }
   }
 }
-
-// @media (max-width: 600px) { 
-//     .sidenav {
-//         width: 100%;
-//     }
-// }

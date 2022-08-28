@@ -1,14 +1,19 @@
-<div class="payment !mt-[50px]">
+<div class="payment h-[calc(100vh-120px)] !mt-[50px]" >
         <app-table 
-                    [customColumnName]="columnName" 
-                    [dataSource]="dataSource" 
-                    [selection]="selection"
-                    [displayedColumns]="displayedColumns" 
-                    [length]="totalDocs" 
-                    [pageIndex]="pageIndex" 
-                    [pageSize]="limit"
-                    [pageSizeOptions]="pageSizeOptions" 
-                    (onChangePaginateValue)="changePaginateValue($event)"
-                    (changeEventCheckbox)="changeEventCheckbox($event)">
+                        [customColumnName]="columnName" 
+                        [dataSource]="dataSource" 
+                        [selection]="selection"
+                        [displayedColumns]="displayedColumns" 
+                        [length]="totalDocs" 
+                        [pageIndex]="pageIndex" 
+                        [pageSize]="limit"
+                        [pageSizeOptions]="pageSizeOptions" 
+                        (onChangePaginateValue)="changePaginateValue($event)"
+                        (changeEventCheckbox)="changeEventCheckbox($event)"
+                        *ngIf="totalDocs">
         </app-table>
+
+        <div class="no-data" *ngIf="totalDocs !== 0">
+                <h2>{{noData}}</h2>
+        </div>
 </div>

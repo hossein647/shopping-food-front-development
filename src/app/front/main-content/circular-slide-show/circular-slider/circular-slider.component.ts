@@ -129,9 +129,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
   updateToShowState() {
     this.circularService.getConfirmToday().subscribe(res => {
-      if (res) {
-        console.log(res);
-        
+      if (res) {        
         const result = JSON.parse(JSON.stringify(res)).superFoods;          
         result.forEach((food: any) => {   
           this.circularService.updateToShowState(food._id).subscribe()
@@ -156,8 +154,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
   setPositionImageCircularSlider() {
     const slider = this.slider.nativeElement;
-    this.renderer.setStyle(slider, 'outline', `${this.outlinWidthSlider}px solid rgb(212, 0, 255)`);
-
+    this.renderer.setStyle(slider, 'outline', `${this.outlinWidthSlider}px solid rgba(188, 203, 191, 0.19)`);
     this.imgCircular.changes.subscribe(images => {
       images.forEach((image: any, index: number) => {
         index++

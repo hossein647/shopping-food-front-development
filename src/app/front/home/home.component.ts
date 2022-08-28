@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/state/user.service';
 import { GlobalService } from 'src/app/state/global.service';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   windowWidth    : number;
   toggleDropdown : boolean = false;
   showSidebarMenu: boolean = false;
+  homePage           : boolean = false;
 
   @ViewChild('dropdown') dropdown: ElementRef;
   scrolled: boolean;
@@ -46,10 +47,12 @@ export class HomeComponent implements OnInit {
     private cdr               : ChangeDetectorRef,
     private orderFoodService  : OrderFoOdService,
     private elRef             : ElementRef,
-    ) { }
+    ) { 
+      this.setMarginExceptHomePage();
+    }
   
   ngOnInit(): void {     
-    this.hasCookie();  
+    this.hasCookie();      
     this.orderFood = this.elRef.nativeElement.querySelector('.order-food');
     this.getOrderList();    
     this.globalFrontService.lengthOrderFood().subscribe(length => this.orderFoodLength = length);
@@ -69,10 +72,11 @@ export class HomeComponent implements OnInit {
         this.globalService.update(result.loggedIn);
         this.removeUser();
         
-        const hamburger = this.elRef.nativeElement.querySelector('.hamburger');
+        const hamburger = this.elRef.nativeElement.querySelector('.hamburger');        
         this.showSidebarMenu = false;
-        if (hamburger.classList.contains('hamburger')) hamburger.classList.toggle('change');
-        if (hamburger.classList.contains('line')) hamburger.parentNode.classList.toggle('change');
+        
+        if (hamburger.classList.contains('line')) hamburger.parentNode.classList.remove('change');
+        if (hamburger.classList.contains('hamburger')) hamburger.classList.remove('change');
 
         this._snackbar.addSnackbar(result.message, result?.err, 3000);
         this.router.navigate(['/']);
@@ -143,20 +147,25 @@ export class HomeComponent implements OnInit {
       this.emptyPayList = Object.keys(global).length === 0 ? true : false;
       
       this.orderFoodList = [];  
+
       this.calculateFoodLength(global);
       this.calculateSumPrice(global);
-
       for (const key of Object.keys(global)) {
-        this.orderFoodList.push(global[key][0]);        
+        if (global[key].length > 0) {
+          this.orderFoodList.push(global[key][0]);        
+        }
       }             
+
     })
   }
 
 
   calculateSumPrice(orderFood: GlobalFront) {
-    this.sumPrice = 0
-    for (const key of Object.keys(orderFood)) {
-      this.sumPrice += orderFood[key].length * orderFood[key][0].price;
+    this.sumPrice = 0    
+    for (const key of Object.keys(orderFood)) {       
+      if (orderFood[key].length) {
+        this.sumPrice += orderFood[key].length * orderFood[key][0].price;
+      }
     }
   }
   
@@ -198,7 +207,7 @@ export class HomeComponent implements OnInit {
     const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]');
 
     Object(orderFood)[key].splice(0, 1);
-    
+    if (orderFood[key].length === 0) Reflect.deleteProperty(orderFood, key);
     window.localStorage.setItem(`orderFood_${email}`, JSON.stringify(orderFood));
     this.globalFrontService.updateOrderFood(orderFood);
 
@@ -258,8 +267,19 @@ export class HomeComponent implements OnInit {
   }
 
 
-  @HostListener('body:scroll', ['$event']) onScroll(event: any) {
+  setMarginExceptHomePage() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.url === '/') this.homePage = true;
+        else this.homePage = false;
+      }
+    })
+  }
+  
+  @HostListener('body:scroll', ['$event']) onScroll(event: any) {    
     if (event.target.scrollTop > 66) this.scrolled = true;
     else this.scrolled = false;
   }
+
+
 }

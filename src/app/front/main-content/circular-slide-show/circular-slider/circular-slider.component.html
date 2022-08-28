@@ -6,8 +6,10 @@
             lg:flex-row 
             justify-around 
             items-center 
-            overflow-y-clip" 
+            overflow-hidden
+            relative" 
             #container>
+    <div class="overlay-blur blur-[3px] w-full h-full absolute"></div>
     <div class="
                 circle-slider 
                 rounded-full 
@@ -51,7 +53,7 @@
                                 -translate-x-[420px]
                                 md:-translate-x-[720px]
                                 lg:-translate-x-[820px]
-                                text-[#8b008b]
+                                text-[#98d944]
                                 " #counter>
                                 {{foodIndex}}
                     </h4>
@@ -68,7 +70,7 @@
                                 break-all
                                 font-semibold
                                 overflow-hidden
-                                text-[#323232de]
+                                text-white
                                 hover:cursor-pointer"
                                 (click)="navigetToFood(foods, foodTitle)"
                                 #title>
@@ -92,20 +94,18 @@
                 mt-5 
                 lg:justify-evenly 
                 lg:w-[500px]
-                relative
-                
-                "
+                relative"
                 #linearSlider>
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    class="h-7 w-7 border-2 border-solid rounded-full" viewBox="0 0 20 20" 
+                    class="h-7 w-7 border-2 border-solid rounded-full text-white" viewBox="0 0 20 20" 
                     fill="currentColor"
                     (click)="onArrowRight($event)" #rightButton>
                         <path fill-rule="evenodd"
                         d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
                         clip-rule="evenodd" />
                 </svg>
-                <span class="cover absolute top-0 rounded-lg border shadow-md" #cover>
+                <span class="cover absolute top-0 rounded-lg shadow-md -z-10 bg-[#ffffff4d]" #cover>
                 </span>
                 <div 
                     class="box-image py-4 px-0 xs:px-2 rounded-md flex flex-col items-center"
@@ -114,11 +114,10 @@
                     <img 
                         class="rounded-full w-16 h-16" 
                         [src]="baseApi + '/' + food.userId + '/' + food.image"  alt="" #imgLinear>
-                    <!-- <span class="mt-2 block text-[10px] "></span> -->
                 </div>
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    class="h-7 w-7 border-2 border-solid rounded-full" 
+                    class="h-7 w-7 border-2 border-solid rounded-full text-white" 
                     viewBox="0 0 20 20" 
                     fill="currentColor"
                     (click)="onArrowLeft($event)"
@@ -131,6 +130,3 @@
         </div>
     </div>
 </div>
-                                <!-- translate-x-[500px]
-                                md:translate-x-[800px]
-                                lg:translate-x-[900px] -->

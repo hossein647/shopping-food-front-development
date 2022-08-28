@@ -37,8 +37,10 @@
         </div>
         <div class="read-files" *ngIf="files.length > 0">
             <div class="box-image"  *ngFor="let image of images; let i = index;"  >
-                <img class="image" [src]="image.url" [alt]="image.name">
-                <small class="image-name">{{image.name}}</small>
+                <div class="detail">
+                    <img class="image" [src]="image.url" [alt]="image.name">
+                    <small class="image-name">{{image.name}}</small>
+                </div>
                 <mat-icon class="delete" (click)="removePreviewFile(i, image.name)">delete</mat-icon>
             </div>
         </div>

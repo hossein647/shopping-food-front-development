@@ -4,7 +4,7 @@
         h-full
         sm:w-[600px] 
         sm:h-[400px] 
-        absolute 
+        fixed 
         bg-white
         top-[50%]
         left-[50%]
@@ -178,7 +178,7 @@
     </div>
     
     <div 
-        class="overlay-more w-screen h-screen absolute bg-gray-500 left-0 top-0 opacity-40"
+        class="overlay-more w-screen h-screen fixed bg-gray-500 left-0 top-0 opacity-40"
         [ngClass]="{'hidden': !showNotLoginModal}"
          #overlayMore>
     </div>

@@ -3,6 +3,7 @@
 
 .read-upload {
     .custom-container {
+        margin: 0 auto;
         .toolbar {
             display: flex;
             align-items: center;
@@ -10,56 +11,57 @@
             .btn.add {
                 @include button.btn;
                 @include button.add;
+                width: 130px;
                 margin-left: 3px
-            }
-            .btn.remove {
-                @include button.btn;
-                @include button.remove;
             }
         }
         .card-images {
             display: flex;
             flex-wrap: wrap;
+            flex-direction: column;
             box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
             padding: 15px;
             margin-top: 10px;
             height: 450px;
             overflow: auto;
+            background-color: white;
             .box-image {
-                // padding: 15px;
+                border-radius: 6px;
                 border: 1px solid #eee;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 margin: 5px 5px 0;
-                width: 248px;
-                height: 220px;
-                position: relative;
-                img {
-                   width: 248px;
-                   height: 150px;
-                   border: 1px solid #fbfbfb;
-                }
-                .image-name {
-                    margin: 10px 0 0;
-                    padding: 5px 10px;
-                    text-align: center;
-                    word-break: break-all;
+                min-width: 48%;
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+                justify-content: space-between;
+                
+                .detail {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    img {
+                       width: 48px;
+                       height: 48px;
+                       border-top-right-radius: 3px;
+                       border-bottom-right-radius: 3px;
+                       aspect-ratio: 1/1;
+                    }
+                    .image-name {
+                        padding: 5px 15px;
+                        direction: ltr;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        width: 200px;
+                    }
                 }
                 .delete {
-                        color: white;
-                        position: absolute;
-                        background-color: #f44336;
-                        border-radius: 50%;
-                        height: 25px;
-                        width: 25px;
-                        text-align: center;
-                        margin-right: -220px;
-                        margin-top: 5px;
-                        font-size: 20px;
-                        transition: all 0.3s ease-in-out;
-                        padding: 1px;
-                        margin-left: -10px;
+                    color: #525151cf;
+                    min-height: 28px;
+                    min-width: 28px;
+                    font-size: 24px;
+                    margin-left: 10px;
                     &:hover {
                         cursor: pointer;
                         transform: scale(1.2);
@@ -70,5 +72,21 @@
         .no-file {
             @include general.noData();
         }
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .card-images {
+        flex-wrap: nowrap !important;
+    }
+}
+
+
+@media (max-width: 319px) {
+    .box-image {
+        min-width: 240px !important;
     }
 }

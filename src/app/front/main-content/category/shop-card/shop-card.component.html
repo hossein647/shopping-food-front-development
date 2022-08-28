@@ -3,7 +3,7 @@
     [ngClass]="{'no-card': !shops.length}">
     <div 
         class="card flex flex-col items-center mb-3 xs:w-[49%] sm:w-[32%] border 
-                border-[#e5e7eb] shadow-sm rounded-md"
+                border-[#e5e7eb] shadow-sm rounded-md bg-white"
         *ngFor="let shop of shops; let i = index;">
         <div class="header-card flex justify-center">
             <img class="rounded-full xs:p-6 aspect-square p-6"
@@ -11,7 +11,9 @@
         </div>
         <div class="body-card flex flex-col items-center ">
             <div class="title text-center text-xl text-[#606060f2] font-semibold">{{shop.name}}</div>
-            <div class="description text-center mb-[10px] mt-1 text-[11px] font-bold">
+            <div 
+                class="description text-center mb-[10px] mt-1 text-[11px] font-bold 
+                text-[#606060f2]">
                 {{shop.description}}
             </div>
             <div class="rating">
@@ -20,7 +22,7 @@
             </div>
         </div>
         <div class="footer-card flex justify-center my-6">
-            <button class="order bg-blue-400 text-white px-6 py-[2px] text-sm rounded"
+            <button class="order bg-[#bcdf84] text-white px-6 py-[2px] text-sm rounded font-bold"
                 (click)="onClickDetails(shop)">سفارش</button>
         </div>
     </div>

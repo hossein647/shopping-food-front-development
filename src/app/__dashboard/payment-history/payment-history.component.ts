@@ -77,26 +77,29 @@ export class PaymentHistoryComponent implements OnInit {
 
 
   pipeOnResponseOrderFood(res: any) {
-    res.docs.forEach((payment: OrderFood, index: number) => {
-      if (typeof payment.createdAt === 'string') {
-        const localDate = new Date(payment.createdAt).toLocaleString(
-          'fa-IR',
-          { year: 'numeric', month: 'numeric', day: 'numeric' }
-        )
-
-        payment.createdAt = localDate;
-        payment.lengthName = payment.name.length;
-        payment.lengthPress = payment.press.reduce((prev, curr) => prev + curr);
-        payment.totalText = payment.total.toLocaleString() + '  تومان';
-      }
-
-      this.totalDocs = res?.totalDocs;
-      this.noData = res?.message;
-      if (res.status === 403) this.noData = res?.error?.message;
-
-      this.dataSource = new MatTableDataSource(res.docs);
-      this.pageSizeOptions = [5, 15, 25, 50, 100];
-    });
+    console.log(res);
+    if (res.docs.length) {
+      res.docs.forEach((payment: OrderFood, index: number) => {      
+        if (typeof payment.createdAt === 'string') {
+          const localDate = new Date(payment.createdAt).toLocaleString(
+            'fa-IR',
+            { year: 'numeric', month: 'numeric', day: 'numeric' }
+          )
+  
+          payment.createdAt = localDate;
+          payment.lengthName = payment.name.length;
+          payment.lengthPress = payment.press.reduce((prev, curr) => prev + curr);
+          payment.totalText = payment.total.toLocaleString() + '  تومان';
+        }
+  
+        this.totalDocs = res?.totalDocs;
+        if (res.status === 403) this.noData = res?.error?.message;      
+        this.dataSource = new MatTableDataSource(res.docs);
+        this.pageSizeOptions = [5, 15, 25, 50, 100];
+      });
+    } else {
+      this.noData = 'دیتایی وجود ندارد.'
+    }
   }
 
 }

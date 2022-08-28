@@ -82,7 +82,6 @@ export class SuperFoodComponent implements OnInit {
     this.displayedColumns = [
                               'select', 
                               'name', 
-                              'description', 
                               'category', 
                               'price', 
                               'super', 
@@ -91,7 +90,6 @@ export class SuperFoodComponent implements OnInit {
                             ];
     this.columnName = [
       { key: 'name', header: 'نام' },
-      { key: 'description', header: 'توضیحات' },
       { key: 'category', header: 'دسته بندی' },
       { key: 'price', header: 'قیمت' },
       { key: 'super', header: 'غذای ویژه' },

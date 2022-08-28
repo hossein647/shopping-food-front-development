@@ -17,7 +17,7 @@ export class SidebarPayComponent implements OnInit, OnChanges {
 
   @Input() openOrderFood: boolean = true;
   @Input() foodsLength  : number[];
-  @Input() orderFoodList: Food[];
+  @Input() orderFoodList: Food[] = [];
   @Input() sumPrice     : number;
   @Input() payList      : OrderFood;
   @Input() emptyPayList : boolean;
@@ -34,7 +34,7 @@ export class SidebarPayComponent implements OnInit, OnChanges {
         if (key === 'payList')       this.payList       =  element.currentValue;
         if (key === 'sumPrice')      this.sumPrice      =  element.currentValue;
         if (key === 'foodsLength')   this.foodsLength   =  element.currentValue;
-      }
+      }      
     }
     
   }
