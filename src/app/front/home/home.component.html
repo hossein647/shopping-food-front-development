@@ -1,6 +1,8 @@
-<div class="sidenav z-50 bg-white border-l" #sidenav [ngClass]="{'visibled': showSidebarMenu}">
+<div 
+    class="sidenav z-50 bg-white border-l !fixed !min-h-screen overflow-hidden" 
+    #sidenav [ngClass]="{'visibled': showSidebarMenu}">
   <div class="" *ngIf="loggedIn">
-    <div class="account flex justify-end m-5 items-center">
+    <div class="account flex justify-end mt-9 ml-9 items-center">
       <div class="wrapper-cart flex items-center ml-1 text-[#00000087]">
         <span 
             *ngIf="orderFoodLength > 0" 
@@ -69,8 +71,8 @@
       </div>
     </div>
   </div>
-  <ul class="list mr-40">
-    <li class="item !m-[30px]" *ngIf="!loggedIn">
+  <ul class="list m-0 !mt-[11px] absolute left-8">
+    <li class="item !m-[30px]" *ngIf="!loggedIn && showSidebarMenu">
       <div class="auth text-center">
         <a routerLink="login" class="customer item-link !text-[#00000087] font-semibold">ورود / عضویت</a>
       </div>
