@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/state/user.service';
 import { GlobalService } from 'src/app/state/global.service';
@@ -15,7 +15,7 @@ import { GlobalFront } from '../_interfaces/global-front.interface';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   orderFoodLength: number;
   openOrderFood  : boolean = true;
@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   showSidebarMenu: boolean = false;
   homePage           : boolean = false;
 
+  html = document.querySelector('html');   
   @ViewChild('dropdown') dropdown: ElementRef;
   scrolled: boolean;
 
@@ -50,8 +51,13 @@ export class HomeComponent implements OnInit {
     ) { 
       this.setMarginExceptHomePage();
     }
+  ngAfterViewInit(): void {
+    const overflow_hidden = this.html?.classList.contains('overflow-hidden');
+    if (overflow_hidden) this.render.removeClass(this.html, 'overflow-hidden');
+  }
   
-  ngOnInit(): void {     
+  ngOnInit(): void {    
+    
     this.hasCookie();      
     this.orderFood = this.elRef.nativeElement.querySelector('.order-food');
     this.getOrderList();    
@@ -92,16 +98,15 @@ export class HomeComponent implements OnInit {
 
   
   toggleHamburger(event: any) {
-    const html = document.querySelector('html');   
     const element = event.target;  
 
     this.showSidebarMenu = !this.showSidebarMenu;   
     
     if (this.showSidebarMenu) {
       this.closeSidebarFood();
-      this.render.setStyle(html, 'overflow', 'hidden');
+      this.render.addClass(this.html, 'overflow-hidden');
     }else {
-      this.render.removeStyle(html, 'overflow');
+      this.render.removeClass(this.html, 'overflow-hidden');
     }
 
     if (element.classList.contains('hamburger')) element.classList.toggle('change');
