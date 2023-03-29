@@ -24,7 +24,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChildren('imgCircular')         imgCircular: QueryList<ElementRef>;
   @ViewChild('imgLinear')                imgLinear: QueryList<ElementRef>;
   @ViewChildren('imgLinearParent') imgLinearParent: QueryList<ElementRef>;
-  @ViewChild('cover')                        cover: ElementRef;  
+  // @ViewChild('cover')                        cover: ElementRef;  
 
   
   linearFoodOnMoment = new Subject<{index: number, title: string}>();
@@ -199,14 +199,14 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
   calculatePositonCoverImage(parent: ElementRef) {
     const linearSlider = this.linearSlider.nativeElement.getBoundingClientRect();
-    const coverPosition = this.cover.nativeElement.getBoundingClientRect();
+    // const coverPosition = this.cover.nativeElement.getBoundingClientRect();
     const ParentPosition = parent.nativeElement.getBoundingClientRect();
-    const left = coverPosition.left - (coverPosition.left - ParentPosition.left) - linearSlider.left;
+    // const left = coverPosition.left - (coverPosition.left - ParentPosition.left) - linearSlider.left;
 
-    this.renderer.addClass(this.cover.nativeElement, 'selected')
-    this.renderer.setStyle(this.cover.nativeElement, 'width', `${ParentPosition.width}px`)
-    this.renderer.setStyle(this.cover.nativeElement, 'height', `${ParentPosition.height}px`)
-    this.renderer.setStyle(this.cover.nativeElement, 'left', `${left}px`);
+    // this.renderer.addClass(this.cover.nativeElement, 'selected')
+    // this.renderer.setStyle(this.cover.nativeElement, 'width', `${ParentPosition.width}px`)
+    // this.renderer.setStyle(this.cover.nativeElement, 'height', `${ParentPosition.height}px`)
+    // this.renderer.setStyle(this.cover.nativeElement, 'left', `${left}px`);
   }
 
   emitDateSelectedImage(degree: number) { 
