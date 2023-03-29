@@ -7,21 +7,22 @@
             sm:p-10
             lg:pt-16 
             lg:pb-8 
-            lg:px-[75px]">
+            lg:px-0">
 
-    <div class="wrapper-list w-full sm:w-4/6 md:w-3/5">
+    <div class="wrapper-list w-full sm:w-4/6 md:w-3/5 lg:w-10/12">
         <ul class="list flex flex-wrap gap-y-1 gap-x-2">
-            <a 
-                class="flex w-full xs:w-[48%] bg-[#505050] items-center rounded-md text-center cursor-pointer mb-1" 
+            <li 
+
+                class="relative flex w-full xs:w-[48%] bg-[#505050] items-center lg:justify-between rounded-md text-center cursor-pointer mb-1" 
                 *ngFor="let list of lists; let i = index;" 
                 (click)="goToPage(list.alias, list.name)">
-                <span  class="list-item-link block text-white text-lg font-bold ml-auto mr-4">
+                <span  class="list-item-link block text-white text-3xl font-bold ml-auto mr-4 absolute z-10">
                     {{list.name}}
                 </span>
-                <img 
-                    class="w-[70px] h-[70px] rounded-l-md" 
+                <img
+                    class=" w-full h-[150px] object-cover rounded-md opacity-60"
                     [src]="baseApi + '/'+list.userId+'/'+list.image" alt="">
-            </a>
+            </li>
         </ul>
     </div>
 </div>
