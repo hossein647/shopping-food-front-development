@@ -67,8 +67,9 @@
       .title {
         @include stayle_tag_a();
         padding: 0;
-        font-size: 28px;
-        color: rgb(152, 217, 68);
+        font-size: 36px;
+        color: #000000a1;
+        font-weight: 900
       }
       ul.list {
         @include style_ul_tag();
@@ -91,6 +92,10 @@
         background-color: white;
         border-radius: 3px;
         margin-right: 10px;
+      }
+      .customer {
+        font-size: 18px;
+        padding: 10px 20px;
       }
       li {
         button.profile {
