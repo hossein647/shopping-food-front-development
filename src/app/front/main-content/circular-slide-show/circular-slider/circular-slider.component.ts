@@ -234,26 +234,26 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   calculatePositionImage_1(slider: HTMLElement, image: HTMLElement, outlinWidthSlider: number) {
     this.offsetLeftImage = slider.offsetWidth - ((image.offsetHeight - outlinWidthSlider) / 2);
     this.offsetTopImage = (slider.offsetWidth / 2) - (image.offsetWidth / 2);
-    this.setPositionStyle(image, -90);
+    this.setPositionStyle(image, 90);
   }
 
   calculatePositionImage_2(slider: HTMLElement, image: HTMLElement, outlinWidthSlider: number) {
     this.offsetLeftImage = (slider.offsetWidth / 2) - (image.offsetWidth / 2);
     this.offsetTopImage = ((image.offsetHeight - outlinWidthSlider) / 2) + outlinWidthSlider;
-    this.setPositionStyle(image, -180, 'negative');
+    this.setPositionStyle(image, 0, 'negative');
   }
 
 
   calculatePositionImage_3(slider: HTMLElement, image: HTMLElement, outlinWidthSlider: number) {
     this.offsetLeftImage = -(((image.offsetHeight - outlinWidthSlider) / 2) + outlinWidthSlider);
     this.offsetTopImage = (slider.offsetWidth / 2) - (image.offsetWidth / 2);
-    this.setPositionStyle(image, 90);
+    this.setPositionStyle(image, 270);
   }
 
   calculatePositionImage_4(slider: HTMLElement, image: HTMLElement, outlinWidthSlider: number) {
     this.offsetLeftImage = (slider.offsetWidth / 2) - (image.offsetWidth / 2);
     this.offsetTopImage = slider.offsetWidth - ((image.offsetWidth - outlinWidthSlider) / 2);
-    this.setPositionStyle(image, 0);
+    this.setPositionStyle(image, -180);
   }
 
   changeWidthEffect(effect: string) {
