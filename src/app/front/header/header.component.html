@@ -4,8 +4,7 @@
   <div class="row">
     <div class="menu flex justify-between w-full md:block md:w-auto">
       <div 
-          class="hamburger-menu" 
-          [ngClass]="{'-mt-[37px]': ((!scrolled && sidebarShow) || (scrolled && sidebarShow))}">
+          class="hamburger-menu" >
         <div 
             class="hamburger" 
             [class.absolute]="((!scrolled && sidebarShow) || (scrolled && sidebarShow))" 
@@ -16,9 +15,9 @@
           <div class="line rotated"></div>
         </div>
       </div>
-      <a class="title" routerLink="/" (click)="onLogoClick()">ســفـارش غــذا</a>
+      <a class="title z-10" routerLink="/" (click)="onLogoClick()">ســفـارش غــذا</a>
     </div>
-    <ul class="lists">
+    <ul class="lists z-10">
       <li *ngIf="!loggedIn" class="flex">
         <div class="auth">
           <a routerLink="login" class="customer inline-block !text-white !bg-[#4d4d4d]">ورود   /   عضویت</a>

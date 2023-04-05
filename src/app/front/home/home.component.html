@@ -71,9 +71,12 @@
       </div>
     </div>
   </div>
-  <ul class="list mr-0">
-    <li class="item !mt-[90px] !mr-[35px] w-full" *ngIf="!loggedIn && showSidebarMenu">
-      <div class="auth">
+  <!-- <ul class="list m-0 !mt-[11px] absolute left-8">
+    - <li class="item !m-[30px]" *ngIf="!loggedIn && showSidebarMenu">
+      - <div class="auth text-center"> -->
+  <ul class="list m-0 !mt-[11px] absolute left-8">
+    <li class="item !m-[30px]" *ngIf="!loggedIn && showSidebarMenu">
+      <div class="auth text-center">
         <a routerLink="login" class="customer item-link !text-[#00000087] font-semibold">ورود / عضویت</a>
       </div>
     </li>
@@ -81,7 +84,7 @@
 </div>
 <div class="custom-container px-0 pt-3 lg:px-0">
   <div 
-      class="parent-header rounded-md mx-5 sm:mx-10 lg:mx-[95px] z-10 relative" 
+      class="parent-header rounded-md mx-5 sm:mx-10 lg:mx-[95px]" 
       [ngClass]="{'home-page': homePage}">
     <app-header
               [loggedIn]="loggedIn" 
