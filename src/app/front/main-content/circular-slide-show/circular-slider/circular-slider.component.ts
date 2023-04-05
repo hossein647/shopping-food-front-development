@@ -23,7 +23,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChild('title')                        title: ElementRef;
   @ViewChildren('imgCircular')         imgCircular: QueryList<ElementRef>;
   @ViewChild('imgLinear')                imgLinear: QueryList<ElementRef>;
-  @ViewChildren('imgLinearParent') imgLinearParent: QueryList<ElementRef>;
+  // @ViewChildren('imgLinearParent') imgLinearParent: QueryList<ElementRef>;
   // @ViewChild('cover')                        cover: ElementRef;  
 
   
@@ -183,18 +183,22 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   setPositionCoverImage() {
-    this.imgLinearParent.changes.subscribe(parents => {
-      parents.forEach((parent: ElementRef, index: number) => {
-        index++;        
+    // this.imgLinearParent.changes.subscribe(parents => {
+    //   console.log(parents);
+      
+    //   parents.forEach((parent: ElementRef, index: number) => {
+    //     console.log(parent);
+        
+    //     index++;        
         this.linearFoodOnMoment.subscribe(food => {   
-          if (food.index === index) {            
-            this.calculatePositonCoverImage(parent);
+          // if (food.index === index) {            
+            // this.calculatePositonCoverImage(parent);
             this.foodIndex = food.index + '#';
             this.foodTitle = food.title;
-          }
+          // }
         })
-      })
-    })
+      // })
+    // })
   }
 
   calculatePositonCoverImage(parent: ElementRef) {

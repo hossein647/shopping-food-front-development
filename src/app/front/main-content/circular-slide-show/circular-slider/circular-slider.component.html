@@ -2,15 +2,16 @@
             custom-container 
 
             flex 
-            flex-col 
+            flex-col-reverse
             lg:flex-row 
             justify-around 
             items-center 
             overflow-hidden
             relative
-            h-[400px]" 
+            h-[600px]
+            lg:h-[500px]" 
             #container>
-    <div class="overlay-blur blur-[3px] w-full h-full absolute"></div>
+    <div class="overlay-blur contrast-[.6] w-full h-full absolute"></div>
     <div class="
                 circle-slider 
                 rounded-full 
@@ -19,15 +20,16 @@
                 ease-in-out
                 w-[600px]
                 h-[600px]
-                -mt-[415px]
-                md:-mt-[550px]
-                md:w-[800px]
-                md:h-[800px]
-                lg:w-[370px]
-                lg:h-[370px]
-                xl:w-[500px]
-                xl:h-[500px]
-                lg:mt-[700px]"
+                md:w-[600px]
+                md:h-[600px]
+                lg:w-[530px]
+                lg:h-[530px]
+                xl:w-[600px]
+                xl:h-[600px]
+                -mb-[550px]
+                lg:mb-0
+                lg:mt-[720px]
+                lg:mr-32"
                 #slider>
         <div class="wrapper-images relative">
             <img 
@@ -40,9 +42,8 @@
                 #imgCircular>
         </div>
     </div>
-    <div class="details flex flex-col justify-center w-full xs:w-3/4 sm:w-4/5 md:w-11/12 mt-24 
-                lg:w-auto lg:mt-0 lg:justify-between">
-        <div class="data-food mt-24 lg:mr-6 list-none flex items-start px-10 xs:px-18 sm:px-24 md:px-64   lg:px-0">
+    <div class="details mt-24 lg:mt-0 lg:w-5/12">
+        <div class="data-food lg:mr-6 list-none flex items-start px-10 xs:px-18 sm:px-24 md:px-64 lg:px-0">
             <div class="flex flex-col justify-center items-center overflow-hidden">
                 <div class="parent-coutner w-full flex justify-start">
                     <h4 class="
@@ -54,22 +55,21 @@
                                 -translate-x-[420px]
                                 md:-translate-x-[720px]
                                 lg:-translate-x-[820px]
-                                text-[#98d944]
                                 " #counter>
                                 {{foodIndex}}
                     </h4>
                 </div>
-                <div class="parent-title w-full flex justify-start">
+                <div class="parent-title flex justify-start">
                     <h2 class="
                                 title 
                                 h-10
                                 mb-2 
                                 mt-2
-                                xs:h-[2.65rem]
+                                xs:h-14
                                 text-3xl
                                 xs:text-4xl
                                 lg:text-5xl
-                                
+                                whitespace-nowrap
                                 font-semibold
                                 overflow-hidden
                                 text-white
@@ -81,9 +81,9 @@
                 </div>
             </div>
         </div>
-        <div class="
+        <!-- <div class="
                 linear-slider 
-                flex 
+                none 
                 justify-center 
                 items-center
                 mb-5
@@ -97,7 +97,7 @@
                 lg:justify-evenly 
                 lg:w-[500px]
                 relative"
-                #linearSlider>
+                #linearSlider> -->
                 <!-- <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     class="h-7 w-7 border-2 border-solid rounded-full text-white" viewBox="0 0 20 20" 
@@ -107,16 +107,16 @@
                         d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
                         clip-rule="evenodd" />
                 </svg> -->
-                <span class="cover absolute top-0 rounded-lg shadow-md -z-10 bg-[#ffffff4d] none" #cover>
-                </span>
-                <div 
+                <!-- <span class="cover absolute top-0 rounded-lg shadow-md -z-10 bg-[#ffffff4d] none" #cover>
+                </span> -->
+                <!-- <div 
                     class="box-image py-4 px-0 xs:px-2 rounded-md flex flex-col items-center none"
                     *ngFor="let food of foods; let i = index" 
-                    #imgLinearParent>
+                    #imgLinearParent> -->
                     <!-- <img 
                         class="rounded-full w-16 h-16" 
                         [src]="baseApi + '/' + food.userId + '/' + food.image"  alt="" #imgLinear> -->
-                </div>
+                <!-- </div> -->
                 <!-- <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     class="h-7 w-7 border-2 border-solid rounded-full text-white" 
@@ -129,6 +129,6 @@
                         clip-rule="evenodd" 
                         />
                 </svg> -->
-        </div>
+        <!-- </div> -->
     </div>
 </div>

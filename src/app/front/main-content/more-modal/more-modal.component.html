@@ -29,30 +29,30 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
     <div class="min-card flex flex-col sm:flex-row">
-        <div class="wrapper-img w-full sm:w-fit">
+        <div class="wrapper-img w-full">
             <img 
                 [src]="baseApi + '/' + food.userId + '/' + food.image" 
                 alt="" 
-                class="w-full h-56 sm:w-[250px] sm:h-[150px] sm:rounded-tr-md">
+                class="w-full h-56 sm:w-[310px] sm:h-[185px] sm:rounded-tr-md">
         </div>
         <div class="description mx-5 flex flex-wrap sm:flex">
-            <div class="name flex w-1/2 mt-3 sm:mt-0 sm:w-full items-center">
-                <img src="./../../../../assets/img/salad.png" class="w-4 h-4" alt="">
-                <p class="name text-sm p-1 font-base mr-3">{{food.name}}</p>
+            <div class="name flex mt-3 sm:mt-0 w-full items-center">
+                <img src="./../../../../assets/img/salad.png" class="w-6 h-6" alt="">
+                <p class="name text-3xl text-[#6a6c72] font-semibold p-4 font-base mr-3">{{food.name}}</p>
             </div>
-            <div class="price flex w-1/2 mt-3 sm:mt-0 sm:w-full items-center">
-                <img src="./../../../../assets/img/dollar-tag.png" class="w-4 h-4" alt="">
-                <p class="price text-sm p-1 mr-3 mt-[4px]">{{food.price}} تومان</p>
+            <div class="price flex sm:mt-0 w-full items-center">
+                <img src="./../../../../assets/img/dollar-tag.png" class="w-[18px] h-[18px]" alt="">
+                <p class="price text-base px-4 font-bold text-[#6a6c72] mr-3 mt-[4px]">{{food.price}} تومان</p>
             </div>
-            <div class="discunt flex w-1/2 mt-3 mb-3 sm:mt-0 sm:mb-0 sm:w-full items-center">
-                <img src="./../../../../assets/img/discount.png" class="w-4 h-4" alt="">
-                <p class="copon text-sm p-1 mr-3">{{food.copon || 'بدون تخفیف'}}</p>
+            <div class="discunt flex sm:mt-0 sm:mb-0 w-full items-center">
+                <img src="./../../../../assets/img/discount.png" class="w-[18px] h-[18px]" alt="">
+                <p class="copon text-base px-4 font-bold text-[#6a6c72] mr-3">{{food.copon || 'بدون تخفیف'}}</p>
             </div>
-            <div class="discunt flex w-1/2 mt-3 mb-3 sm:mt-0 sm:mb-0 sm:w-full items-center">
-                <img src="./../../../../assets/img/rate.png" class="w-4 h-4" alt="">
+            <div class="discunt flex sm:mt-0 sm:mb-0 w-full items-center">
+                <img src="./../../../../assets/img/rate.png" class="w-[18px] h-[18px]" alt="">
                 <div class="flex items-center">
-                    <p class="copon text-sm p-1 mr-3 mt-1">{{rate}}</p>
-                    <p class="text-sm mt-1 mr-1">({{lengthRating }} نفر)</p>
+                    <p class="copon text-base pr-4 font-bold text-[#6a6c72] mr-3 mt-1">{{rate}}</p>
+                    <p class="text-base text-[#6a6c72] font-bold mt-1 mr-1">({{lengthRating }} نفر)</p>
                 </div>
             </div>
         </div>
