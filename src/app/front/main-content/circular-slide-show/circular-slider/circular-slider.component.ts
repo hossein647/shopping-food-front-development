@@ -166,7 +166,7 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
       })
       this.renderer.setStyle(this.counter.nativeElement, 'transform', 'translateX(0)');
       this.renderer.setStyle(this.title.nativeElement, 'transform', 'translateX(0)');
-      this.renderer.setStyle(this.linearSlider.nativeElement, 'transform', 'translateX(0)');
+      // this.renderer.setStyle(this.linearSlider.nativeElement, 'transform', 'translateX(0)');
     })
   }
 
