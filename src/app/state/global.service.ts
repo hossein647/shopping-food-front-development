@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
-import { tap } from 'rxjs/operators';
 import { Global } from './global.model';
 import { GlobalStore } from './global.store';
 

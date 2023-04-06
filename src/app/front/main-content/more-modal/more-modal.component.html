@@ -14,8 +14,10 @@
         flex-col
         items-center
         sm:rounded-md
-        z-[51]"
-        [ngClass]="{'hidden': !moreModalShow, 'overflow-hidden': showNotLoginModal, 'overflow-y-auto': !showNotLoginModal}"
+        z-[51]
+        transition-opacity
+        transition-delay-1000"
+        [ngClass]="{'opacity-0': !moreModalShow, 'overflow-hidden': showNotLoginModal, 'overflow-y-auto': !showNotLoginModal}"
         *ngIf="food"
         #modal>
     <svg 
@@ -83,7 +85,7 @@
                     placeholder="hello"
                     formControlName="text"></textarea>
                 <button 
-                        class="send mt-2 bg-lime-600 text-white py-1 px-4 rounded-sm disabled:bg-slate-400" 
+                        class="send mt-2 bg-lime-600 hover:bg-[#4e7e0a] transition-colors text-white py-1 px-4 rounded-sm disabled:bg-slate-400" 
                         type="submit"
                         [disabled]="commentForm.invalid">ارسال                  
                 </button>

@@ -1,7 +1,7 @@
 
 <div class="shop sm:flex border-gray-400 mx-5 sm:mx-10 lg:mx-[95px] ">
     <div 
-        class="sidebr bg-white sm:w-1/4 mt-3 rounded-md sm:rounded-l-none md:rounded-md sm:border-l md:border-none" 
+        class="sidebr bg-white sm:w-1/4 mt-3 rounded-md sm:rounded-l-none md:rounded-md border" 
         *ngIf="shop" 
         #sidebar>
         <div 
@@ -44,7 +44,7 @@
                         #selectedSubFood>
                     </div>
                    <span 
-                        class="text-sm font-semibold text-[#6b7280]"
+                        class="text-sm font-semibold text-[#6b7280] hover:cursor-pointer"
                         [ngClass]="{'text-white md:text-[#6b7280]': sub.name === subFoodSelected, 'text-[#6b7280]': sub.name !== subFoodSelected }">
                         {{sub.name}}
                     </span>
@@ -57,7 +57,7 @@
             class="food-menu absolute md:pr-1 w-full mt-0" 
             #foodMenu>
             <div 
-                class="section-bar h-[calc(100vh-106px)] overflow-auto bg-white rounded-md sm:rounded-r-none border-none md:rounded-md" 
+                class="section-bar h-[calc(100vh-106px)] overflow-auto bg-white border rounded-md sm:rounded-r-none  md:rounded-md" 
                 *ngFor="let sub of subFood; let i = index"
                 #sectionSubFood>
                 <span 
@@ -89,11 +89,25 @@
                                     </span>
                                 </div>
                                 <div class="shop-footer w-full flex justify-between items-center">
-                                    <span class="block text-sm mr-[5px] py-1 text-[#6b7280]         font-semibold text-[15px] ">
+                                    <span class="
+                                            block 
+                                            text-sm 
+                                            mr-[5px] 
+                                            py-1 
+                                            text-[#6b7280] 
+                                            font-semibold 
+                                            text-[15px]
+                                            ">
                                         {{food.price | priceDivider}} تومان
                                     </span>
                                     <button 
-                                            class="text-sm ml-3 bg-[#8fcf29c9] rounded-sm px-4 py-1 text-white font-semibold"
+                                            class="
+                                                text-sm ml-3 text-white 
+                                                bg-[#8fcf29c9] hover:bg-[#8fcf29] 
+                                                rounded-sm 
+                                                px-4 py-1 
+                                                font-semibold
+                                                transition-colors"
                                             (click)="addToCart($event, food)">
                                         افزودن
                                     </button>

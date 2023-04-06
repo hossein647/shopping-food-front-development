@@ -26,14 +26,15 @@
     </svg>
     <span class="px-16 mt-3 text-center">{{message}}</span>
     <div class="modal-footer flex justify-center w-full mt-7 mb-4 mx-2 xs:mx-0 xs:mt-10">
+        
         <button 
-                class="bg-sky-600 text-white py-1 px-2 text-[14px] rounded-tr rounded-br" 
+                class="bg-sky-600 text-white hover:bg-[#026fa7] transition-colors py-2 px-2 text-[14px] rounded ml-1 w-[100px]" 
                 (click)="closeNoLoginModal()">
-                متوجه شدم
+                انصراف
         </button>
         <a 
             routerLink="/login" 
-            class="bg-lime-600 text-white py-1 px-2 text-[14px] rounded-tl rounded-bl">
+            class="bg-lime-600 hover:bg-[#4e7e0a] text-white transition-colors py-2 px-2 text-[14px] rounded mr-1 w-[100px]">
             ورود به حساب
         </a>
     </div>
