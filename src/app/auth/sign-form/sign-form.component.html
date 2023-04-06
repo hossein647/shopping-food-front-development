@@ -28,13 +28,19 @@
           <div class="btn-submit">
             <button 
                     type="submit" 
-                    class="btn" 
+                    class="btn transition-colors" 
                     [disabled]="!userForm.valid"
-                    [class.radius]="loadingSpinner">
+                    [ngClass]="{'radius': loadingSpinner, '!bg-[#5a920b]': submitLabelHover}"
+                    (mouseenter)="submitLabelHover = true"
+                    (mouseleave)="submitLabelHover = false"
+                    #submitButton>
                     {{submitLabel}}
             </button>
           </div>
-          <div class="spinner" *ngIf="loadingSpinner" [class.animate]="loadingSpinner">
+          <div 
+            class="spinner transition-colors" 
+            *ngIf="loadingSpinner" 
+            [ngClass]="{'animate':loadingSpinner, '!bg-[#5a920b]': submitLabelHover}">
             <app-spinner></app-spinner>
           </div>
         </div>
