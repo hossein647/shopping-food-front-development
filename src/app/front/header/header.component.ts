@@ -1,4 +1,5 @@
 import {  ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
@@ -18,11 +19,21 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input() orderFoodLength: number;
   @Input() sidebarShow    : boolean;
   @Input() scrolled       : boolean;
+  currentRoute: string = '/';
    
   constructor(
     private globalService: GlobalService,
     private cdRef: ChangeDetectorRef,
-  ) {}
+    private router: Router,
+  ) {
+    this.router.events.subscribe(route => {
+      if (route instanceof NavigationEnd) {
+        this.currentRoute = route.url;
+        console.log(this.currentRoute);
+
+      }
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes) {
@@ -35,9 +46,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {
-    // document.body.style.overflowY = 'auto';
-  }
+  ngOnInit(): void {}
 
 
   manageAccount() {
