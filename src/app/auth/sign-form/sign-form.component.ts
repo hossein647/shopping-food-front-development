@@ -13,6 +13,7 @@ export class SignFormComponent implements OnInit {
   userForm: FormGroup;
   emailError: string;
   passwordError: string;
+  submitLabelHover: boolean = false;
 
   @Input() title         : string;
   @Input() submitLabel   : string;
