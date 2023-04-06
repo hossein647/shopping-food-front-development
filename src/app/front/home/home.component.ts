@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   toggleDropdown : boolean = false;
   showSidebarMenu: boolean = false;
   homePage           : boolean = false;
+  currentRoute = '';
 
   html = document.querySelector('html');   
   @ViewChild('dropdown') dropdown: ElementRef;
@@ -45,7 +46,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private localStorageData  : LocalStorageData,
     private render            : Renderer2,
     private globalFrontService: GlobalFrontService,
-    private cdr               : ChangeDetectorRef,
     private orderFoodService  : OrderFoOdService,
     private elRef             : ElementRef,
     ) { 
