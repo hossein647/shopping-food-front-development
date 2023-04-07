@@ -1,6 +1,6 @@
 <div 
-  class="header py-3 px-5 sm:px-10 lg:px-0 lg:mx-10 overflow-hidden" 
-  [ngClass]="{'md:py-0': loggedIn && orderFoodLength > 0}">
+  class="header py-3 overflow-hidden" 
+  [ngClass]="{'md:py-0': loggedIn && orderFoodLength > 0, 'px-5 lg:px-0 lg:mx-10': currentRoute === '/'}">
   <div class="row">
     <div class="menu flex justify-between w-full md:block md:w-auto">
       <div 
@@ -10,13 +10,22 @@
             [class.absolute]="((!scrolled && sidebarShow) || (scrolled && sidebarShow))" 
             (click)="toggleHamburger($event)" 
             #hamburger>
-          <div class="line rotated"></div>
-          <div class="line show"></div>
-          <div class="line rotated"></div>
+          <div 
+            class="line rotated" 
+            [ngClass]="(currentRoute === '/' && !sidebarShow) ? '!bg-white' : '!bg-black'">
+          </div>
+          <div 
+            class="line show" 
+            [ngClass]="(currentRoute === '/' && !sidebarShow) ? '!bg-white' : '!bg-black'">
+          </div>
+          <div 
+            class="line rotated" 
+            [ngClass]="(currentRoute === '/' && !sidebarShow) ? '!bg-white' : '!bg-black'">
+          </div>
         </div>
       </div>
       <a 
-        class="title z-10" 
+        class="title z-10 !text-[32px] xs:!text-4xl" 
         routerLink="/" 
         (click)="onLogoClick()"
         [ngClass]="currentRoute === '/' ? '!text-white' : '!text-black'">
