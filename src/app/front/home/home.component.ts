@@ -50,6 +50,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private elRef             : ElementRef,
     ) { 
       this.setMarginExceptHomePage();
+    this.getOrderList();
+    this.globalFrontService.lengthOrderFood().subscribe(length => this.orderFoodLength = length);
     }
   ngAfterViewInit(): void {
     const overflow_hidden = this.html?.classList.contains('overflow-hidden');
@@ -60,8 +62,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     
     this.hasCookie();      
     this.orderFood = this.elRef.nativeElement.querySelector('.order-food');
-    this.getOrderList();    
-    this.globalFrontService.lengthOrderFood().subscribe(length => this.orderFoodLength = length);
   }
 
 
@@ -148,7 +148,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
   getOrderList() {
-    this.globalFrontService.getOrderFood().subscribe(global => {       
+    this.globalFrontService.getOrderFood().subscribe(global => {
       this.emptyPayList = Object.keys(global).length === 0 ? true : false;
       
       this.orderFoodList = [];  
