@@ -4,6 +4,8 @@ import { ShopCategory } from 'src/app/front/_interfaces/shop-category.interface'
 import { RatingService } from 'src/app/front/_services/rating.service';
 import { ShopsService } from 'src/app/front/_services/shops.service';
 import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
+import { GlobalFrontService } from 'src/app/front/_services/global-front.service';
+import { GlobalFront } from 'src/app/front/_interfaces/global-front.interface';
 
 @Component({
   selector: 'app-shops',
@@ -19,12 +21,17 @@ export class ShopsComponent implements OnInit {
   ratesHelper : number[] = [];
   categoryName: string;
   message     : string;
+  orderList: any;
 
   constructor(
     private shopService  : ShopsService,
     private ratingService: RatingService,
     private router       : Router,
-  ) { }
+    private globalFrontService: GlobalFrontService,
+  ) { 
+    this.orderList = this.getCartLocalStorage(this.globalFrontService.getEmail());
+    this.globalFrontService.updateOrderFood(this.orderList);
+  }
 
   ngOnInit(): void {
     this.getShops();
@@ -111,5 +118,10 @@ export class ShopsComponent implements OnInit {
 
   changePage(page: number) {
     this.shopService.setShops(this.categoryName, 6, page)
+  }
+
+
+  getCartLocalStorage(email: string): GlobalFront {
+    return JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '{}');
   }
 }
