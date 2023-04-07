@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
@@ -10,19 +9,8 @@ import { NavigationEnd, Router } from '@angular/router';
 export class WrapperComponent implements OnInit {
 
 
-  constructor(
-    private router: Router
-  ) { 
-    this.router.events.subscribe(route => {
-      if (route instanceof NavigationEnd) {
-        console.log(route.url);
-  
-      }
-    })
+  constructor() { }
 
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }
