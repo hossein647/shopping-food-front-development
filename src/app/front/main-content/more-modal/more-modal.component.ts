@@ -195,7 +195,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
     this.foodService.getPopulatedComment(id).subscribe(
       res => {
         if (res) { 
-          this.food = res;
+          // this.food = res;
           this.comments = res.comment;
         }
       }
