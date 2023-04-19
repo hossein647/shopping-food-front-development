@@ -210,7 +210,7 @@ export class FormFoodsComponent implements OnInit {
             this.checked = this.food.super;          
           }
         } else {
-          this.router.navigate(['/__dashboard/foods']);
+          this.router.navigate(['/dashboard/foods']);
         }
       })
     });
