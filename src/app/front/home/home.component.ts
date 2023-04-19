@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
   manageAccount() {    
-    this.router.navigate(['/__dashboard']);
+    this.router.navigate(['/dashboard']);
   }
   
   
