@@ -146,8 +146,9 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
 
 
   getShowStateImages() {
-    this.circularService.getShowStates().subscribe(res => {
-      if (res) this.foods = JSON.parse(JSON.stringify(res)).foods;      
+    this.circularService.getShowStates().subscribe((res: any) => {   
+      if (res?.foods.length > 0) this.foods = JSON.parse(JSON.stringify(res)).foods;
+     this.foods = this.getDefaultSuperFoods() as  any;
     })
   }
 
@@ -285,6 +286,140 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
       }
     )
   }
+
+
+
+  getDefaultSuperFoods() {
+    return [
+      {
+        "comment": [
+          "62caa8654fb629cd46a35371"
+        ],
+        "rating": [
+          {
+            "userId": "62c1b8b388924809102e8e6b",
+            "rate": 5
+          }
+        ],
+        "reserved": {
+          "original": 1657999458057,
+          "local": "سه‌شنبه ۲۹ فروردین ۱۴۰۲ "
+        },
+        "state": "نمایش",
+        "super": true,
+        "_id": "62caa8344fb629cd46a35361",
+        "name": "چلو کباب کوبیده",
+        "description": "۲ سیخ ۱۰۰ گرمی مخلوط گوشت گوساله و گوسفندی، برنج ایرانی، فلفل، ترشی کلم، لیمو، نارنج، گوجه کبابی",
+        "category": "کباب گوشت",
+        "shop": "آزادی",
+        "subFood": "کباب گوشت",
+        "price": 57800,
+        "copon": 7900,
+        "image": "778-7784777_thumb-image-chicken-kabob-png-transparent-png-917b.png",
+        "imageId": "630b56731600371dc8e7169a",
+        "userId": "62c1b8ec88924809102e8e70",
+        "createdAt": "2022-07-10T10:21:40.157Z",
+        "updatedAt": "2023-04-13T14:22:59.278Z",
+        "__v": 0
+      },
+      {
+        "comment": [],
+        "rating": [
+          {
+            "userId": "62c1b8b388924809102e8e6b",
+            "rate": 1
+          }
+        ],
+        "reserved": {
+          "original": 1657999458057,
+          "local": "سه‌شنبه ۲۹ فروردین ۱۴۰۲ "
+        },
+        "state": "نمایش",
+        "super": false,
+        "_id": "62caddaf4fb629cd46a353be",
+        "name": "چلو کباب وزیری",
+        "description": "۲۰۰ گرم جوجه کباب، ۱۰۰ گرم کباب کوبیده، برنج ایرانی، فلفل، ترشی کلم، لیمو، نارنج، گوجه کبابی",
+        "category": "کباب گوشت",
+        "shop": "آزادی",
+        "subFood": "کباب گوشت",
+        "price": 75900,
+        "copon": null,
+        "image": "top-kabab-taste-of-persian-aed1.jpg",
+        "imageId": "62db07f0a979713969552cfd",
+        "userId": "62c1b8ec88924809102e8e70",
+        "createdAt": "2022-07-10T14:09:51.734Z",
+        "updatedAt": "2023-04-13T14:22:59.279Z",
+        "__v": 0
+      },
+      {
+        "comment": [],
+        "rating": [
+          {
+            "userId": "62c1b8b388924809102e8e6b",
+            "rate": 4
+          },
+          {
+            "userId": "62cb468f137b4ad8ef91cfaf",
+            "rate": 3
+          }
+        ],
+        "reserved": {
+          "original": 1657999462921,
+          "local": "سه‌شنبه ۲۹ فروردین ۱۴۰۲ "
+        },
+        "state": "نمایش",
+        "super": true,
+        "_id": "62cadde44fb629cd46a353e7",
+        "name": "چلو جوجه کباب ترش",
+        "description": "۲۳۰ گرمی، برنج ایرانی، فلفل، ترشی کلم، لیمو، نارنج، گوجه کبابی",
+        "category": "کباب جوجه",
+        "shop": "آزادی",
+        "subFood": "کباب جوجه",
+        "price": 73800,
+        "copon": null,
+        "image": "278-2789352_chicken-kabob-iranian-kebab-png-transparent-png-1b8c.png",
+        "imageId": "62dab454a979713969552c6a",
+        "userId": "62c1b8ec88924809102e8e70",
+        "createdAt": "2022-07-10T14:10:44.645Z",
+        "updatedAt": "2023-04-13T14:22:59.279Z",
+        "__v": 0
+      },
+      {
+        "comment": [],
+        "rating": [
+          {
+            "userId": "62c1b8b388924809102e8e6b",
+            "rate": 5
+          },
+          {
+            "userId": "62cb468f137b4ad8ef91cfaf",
+            "rate": 5
+          }
+        ],
+        "reserved": {
+          "original": 1657999458057,
+          "local": "سه‌شنبه ۲۹ فروردین ۱۴۰۲ "
+        },
+        "state": "نمایش",
+        "super": false,
+        "_id": "62cb1f81781babfa344d67a2",
+        "name": "چلو کباب بختیاری",
+        "description": "۱۲۰ گرم کباب برگ گوشت گوسفندی، ۱۲۵ گرم شنیسل مرغ، برنج ایرانی، فلفل، ترشی کلم، لیمو، نارنج، گوجه کبابی",
+        "category": "کباب گوشت",
+        "shop": "آزادی",
+        "subFood": "کباب گوشت",
+        "price": 97300,
+        "copon": null,
+        "image": "576-5762035_koobideh-kabob-kebab-png-top-view-transparent-png-93dc.png",
+        "imageId": "62dab42fa979713969552c5f",
+        "userId": "62c1b8ec88924809102e8e70",
+        "createdAt": "2022-07-10T18:50:41.748Z",
+        "updatedAt": "2023-04-13T14:22:59.279Z",
+        "__v": 0
+      }
+    ]
+  }
+
 
 
   ngOnDestroy(): void {
