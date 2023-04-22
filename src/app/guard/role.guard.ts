@@ -25,7 +25,7 @@ export class RoleGuard implements CanActivate {
       if (roles.some(role => user.role.includes(role))) return true;
     }
     
-    this.router.navigate(['/__dashboard']);
+    this.router.navigate(['/dashboard']);
     return false
   }
 }
