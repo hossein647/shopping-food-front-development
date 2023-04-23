@@ -2,7 +2,9 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": "4754d240-e88f-4f1a-ae14-b377106a3dfd",
-    "defaultCollection": "@datorama/akita"
+    "schematicCollections": [
+      "@datorama/akita"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -112,6 +114,5 @@
         }
       }
     }
-  },
-  "defaultProject": "shoping-food"
+  }
 }
