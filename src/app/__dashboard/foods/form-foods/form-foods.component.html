@@ -8,11 +8,11 @@
                 #firstForm="ngForm">
 
                 <ng-template matStepLabel>اطلاعات پایه</ng-template>
-                <h3>{{title}}</h3>
+                <h3 class="title-form">{{title}}</h3>
 
 
 
-                <mat-form-field appearance="standard" #matFormField>
+                <mat-form-field class="mt-3" appearance="standard" #matFormField>
                     <mat-label>نام</mat-label>
                     <input type="text" matInput placeholder="نام" formControlName="name">
                 </mat-form-field>
@@ -135,9 +135,7 @@
                 (ngSubmit)="submit()" 
                 #secondForm="ngForm">
 
-                <ng-template matStepLabel>غذای ویژه</ng-template>
-                <h3>{{title}}</h3>
-            
+                <ng-template class="mt-3" matStepLabel>غذای ویژه</ng-template>            
 
 
                 <mat-slide-toggle 

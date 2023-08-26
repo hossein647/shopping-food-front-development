@@ -1,7 +1,6 @@
 @use '../../../___share/sass/button' as button;
 
 .custom-container {
-    // padding: 30px;
     width: 60%;
     margin: 30px auto 0;
     .select-files {
@@ -10,10 +9,11 @@
         flex-direction: column;
         border: 1px solid #eee;
         box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+        background-color: white;
+        border-radius: 6px;
         form {
             display: flex;
             flex-direction: column;
-            // padding: 0 200px
         }
         
         label {
@@ -52,44 +52,48 @@
     .read-files {
         display: flex;
         flex-wrap: wrap;
-        margin: auto;
         margin-top: 20px;
         border: 1px solid #eee;
-        max-height: 400px;
+        padding: 10px;
+        border-radius: 6px;
         overflow-y: auto;
         position: relative;
+        background-color: white;
+        flex-direction: column;
         .box-image {
-            margin: 5px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             border: 1px solid #eee;
+            margin: 3px 0;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            justify-content: space-between;
+            .detail {
+                display: flex;
+                align-items: center;
+            }
             .image {
-                border-bottom: 1px solid #d3d3d3;
-                width: 180px;
-                height: 120px;
+                width: 48px;
+                height: 48px;
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
             }
             .image-name {
-                font-size: 10px;
-                margin: 10px 0 0;
-                border: 1px solid #fbfbfb;
-                border-radius: 3px;
-                background-color: #f3f3f394;
-                color: black;
+                margin: 5px 0 0;
+                padding: 5px 10px;
+                direction: ltr;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 200px;
             }
             .delete {
-                color: white;
-                position: absolute;
-                background-color: red;
+                color: #525151cf;
                 border-radius: 50%;
-                height: 18px;
-                width: 18px;
-                text-align: center;
-                margin-right: -150px;
-                margin-top: 2px;
-                font-size: 16px;
-                transition: all .3s ease-in-out;
-                padding: 2px;
+                height: 28px;
+                width: 28px;
+                font-size: 24px;
+                margin-left: 20px;
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.2);
@@ -135,9 +139,7 @@ input::-webkit-inner-spin-button {
 }
 
 .disable-form {
-    // position: absolute;
     background-color: lightgrey;
-    // pointer-events: none;
 }
 
 @media(max-width: 991px) {

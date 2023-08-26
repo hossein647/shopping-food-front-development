@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { dashboardModule } from './__dashboard/dashboard.module';
+import { UserProfileModule } from './__dashboard/user-profile.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,7 +16,6 @@ import { AlertComponent } from './___share/module/alert/alert.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guard/auth.guard';
-import { SignFormComponent } from './auth/sign-form/sign-form.component';
 import { SellerLoginComponent } from './auth/seller/login/seller-login.component';
 import { CustomerRegisterComponent } from './auth/customer/register/customer-register.component';
 import { SellerRegisterComponent } from './auth/seller/register/seller-register.component';
@@ -30,8 +29,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+// import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @NgModule({
@@ -39,7 +37,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     AppComponent,
     NotFoundComponent,
     AlertComponent,
-    SignFormComponent,
     CustomerLoginComponent,
     SellerLoginComponent,
     CustomerRegisterComponent,
@@ -55,7 +52,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     RouterModule,
     AppRoutingModule,
     FrontModule,
-    dashboardModule,
+    UserProfileModule,
     BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -64,11 +61,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     BarRatingModule,
     MatCardModule,
     MatButtonModule,
-    NgxSkeletonLoaderModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+    // NgxSkeletonLoaderModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

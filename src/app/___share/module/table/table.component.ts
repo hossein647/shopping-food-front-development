@@ -13,6 +13,7 @@ export class TableComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChildren('th') th               : QueryList<ElementRef>;
+  @ViewChild('paginator') paginatorElement: ElementRef;
 
   @Input() displayedColumns: string[];
   @Input() dataSource      : any;
@@ -28,6 +29,7 @@ export class TableComponent {
 
   constructor(
     private renderer: Renderer2,
+    private elRef   : ElementRef
   ) {}
 
   ngAfterViewInit() {    
@@ -38,6 +40,15 @@ export class TableComponent {
     this.paginator._intl.previousPageLabel = "صفحه قبلی";
 
     this.setFixWidthHeaderTable();
+    // const tableWidth = this.elRef.nativeElement.querySelector('table').getBoundingClientRect();
+    // const matPaginator = this.elRef.nativeElement.querySelector('mat-paginator').getBoundingClientRect();
+    // console.log(tableWidth);
+    // console.log(matPaginator);
+    // console.log(window.innerWidth);
+    // const paginatorWidth = tableWidth.width / window.innerWidth;
+    // console.log(paginatorWidth);
+    
+    // this.renderer.setStyle(matPaginator, 'width', `${paginatorWidth}vw`)
   }
 
 

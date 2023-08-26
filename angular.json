@@ -3,7 +3,10 @@
   "cli": {
     "analytics": "4754d240-e88f-4f1a-ae14-b377106a3dfd",
     "schematicCollections": [
+<<<<<<< HEAD
       "@angular-eslint/schematics",
+=======
+>>>>>>> up_to_14
       "@datorama/akita"
     ]
   },

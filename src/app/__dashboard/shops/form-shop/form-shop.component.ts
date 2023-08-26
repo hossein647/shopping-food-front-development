@@ -196,7 +196,7 @@ export class FormShopComponent implements OnInit {
             this.shopEdit.description.forEach(desc => this.newChip(desc))
           }
         } else {
-          this.router.navigate(['/__dashboard/shops'])
+          this.router.navigate(['/dashboard/shops'])
         }
       })
     })

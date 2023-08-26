@@ -25,7 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 
 const routes: Routes = [
-  { path: '__dashboard', component: HomeComponent, children: [
+  { path: '', component: HomeComponent, children: [
     { 
       path: 'profile', 
       component: ProfileComponent, 

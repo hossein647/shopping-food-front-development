@@ -113,4 +113,4 @@ import { SpinnerModule } from '../___share/module/spinner/spinner.module';
     },
   ],
 })
-export class dashboardModule { }
+export class UserProfileModule { }

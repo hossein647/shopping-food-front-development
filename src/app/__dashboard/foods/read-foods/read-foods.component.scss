@@ -13,7 +13,6 @@
             }
             .edit {
               @include button.edit;
-              margin-bottom: 4px;              
             }
             .add {
               @include button.add

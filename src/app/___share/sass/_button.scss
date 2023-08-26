@@ -6,10 +6,12 @@
   padding: 5px 30px;
   font-family: 'Vazir';
   background-color: yellowgreen;
+  margin: 0 0 2px 2px;
+  width: 108px;
+  font-weight: 500;
 }
 
 @mixin edit {
-  margin: 0 3px;
   background-color: #7158e2;
   padding: 5px 30px;
   font-weight: 500;

@@ -1,5 +1,5 @@
 import { UiService } from '../state/ui/ui.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UiQuery } from '../state/ui/ui.query';
 import { UserService } from 'src/app/auth/state/user.service';
@@ -28,18 +28,18 @@ export class HomeComponent implements OnInit {
   baseApi : string = environment.url;
 
   @ViewChild('cameraParent') cameraParent: ElementRef;
-  @ViewChild('imgProfile') imgProfile: ElementRef;
+  @ViewChild('imgProfile')   imgProfile  : ElementRef;
 
   
   constructor(
-    private router: Router,
-    private queryUi: UiQuery,
-    private uiService: UiService,
-    private userService: UserService,
-    private globalService: GlobalService,
-    private _snackbar: Snackbar,
+    private router          : Router,
+    private queryUi         : UiQuery,
+    private _snackbar       : Snackbar,
+    private uiService       : UiService,
+    private userService     : UserService,
+    private globalService   : GlobalService,
+    private uploadService   : UploadService,
     private localStorageData: LocalStorageData,
-    private uploadService: UploadService,
     ) {}
 
 
@@ -48,6 +48,10 @@ export class HomeComponent implements OnInit {
     this.queryUi.getVisibilityUi().subscribe(isOpen => {      
       this.open = isOpen;
     });
+    this.closeSidebar();
+    this.item = this.selectedListByCurrentRoute(this.router.url);
+    console.log(this.item);
+    
   }
   
   toggleSidebar() {
@@ -100,10 +104,15 @@ export class HomeComponent implements OnInit {
   changeFileSelect(event: any) {
     if (event.target.files.length > 0) {      
       this.uploadService.uploadProfileImage(event.target.files[0], this.file?._id).subscribe(
-        res => {
-          if (res && !res?.err) {
+        res => {          
+          if (res.file) {            
             this.file = res.file;
             this.upload = true;
+          } else {
+            const tooLarge = 'سایز تصویر بیش از یک مگابایت می باشد.';
+            console.log(res);
+            
+            if (res.error.statusCode === 413) this._snackbar.addSnackbar(tooLarge, true, 3000)
           }
         }
       )
@@ -115,11 +124,31 @@ export class HomeComponent implements OnInit {
     this.uploadService.getImageProfile().subscribe(
       res => {        
         if (res && !res?.err && !res.message) {
-          this.file = res   
+          this.file = res;          
           this.upload = true;       
         }
       }
     )
   }
 
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.closeSidebar(event)
+  }
+
+
+  closeSidebar(event?: any) {   
+    const screenWidth = event?.target.innerWidth || window.innerWidth;     
+    if ((screenWidth) <= 992) this.uiService.updateUiSidebar(false);
+    else this.uiService.updateUiSidebar(true);
+  }
+
+
+  selectedListByCurrentRoute(url: string): string {    
+    return  url.includes('create')    ? url.slice(13, -7) 
+            : url.includes('edit')    ? url.slice(13, -30)
+            : url.includes('/upload') ? url.slice(13, -7)
+            : url.slice(13)
+  }
 }

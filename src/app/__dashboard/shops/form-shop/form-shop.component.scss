@@ -28,9 +28,11 @@ $greenDefault: yellowgreen;
 }
 
 :host ::ng-deep h3 {
-  color: #6f6f6f;
+  color: #818181;
   text-align: center;
   margin-top: 0;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 
@@ -43,10 +45,11 @@ $greenDefault: yellowgreen;
 .form {
   box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
   margin-top: 50px;
-  border-radius: 2px;
+  border-radius: 6px;
   padding: 20px 80px 10px;
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .mat-form-field {
@@ -106,4 +109,11 @@ button[type= submit]:disabled {
 
 :host ::ng-deep .mat-chip-remove .mat-icon {
   margin-right: 10px;
+}
+
+
+@media (max-width: 360px) {
+  .custom-container {
+      overflow: auto;
+  }
 }
