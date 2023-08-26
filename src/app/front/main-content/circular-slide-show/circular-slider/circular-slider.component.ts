@@ -292,34 +292,31 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   getDefaultSuperFoods() {
     return [
       {
-        "_id": "62caa8344fb629cd46a35361",
+        "_id": "62d048ebd9d42f68727d4a5e",
         "comment": [
-          "62caa8654fb629cd46a35371"
+
         ],
         "rating": [
-          {
-            "userId": "62c1b8b388924809102e8e6b",
-            "rate": 5
-          }
+
         ],
         "reserved": {
-          "original": 1657999458057.0,
-          "local": "جمعه ۱ اردیبهشت ۱۴۰۲ "
+          "original": 1658085889976.0,
+          "local": "شنبه ۲۵ تیر ۱۴۰۱ "
         },
         "state": "کامل",
         "super": true,
-        "name": "چلو کباب کوبیده",
-        "description": "۲ سیخ ۱۰۰ گرمی مخلوط گوشت گوساله و گوسفندی، برنج ایرانی، فلفل، ترشی کلم، لیمو، نارنج، گوجه کبابی",
-        "category": "کباب گوشت",
-        "shop": "آزادی",
-        "subFood": "کباب گوشت",
-        "price": 57800,
-        "copon": 7900,
-        "image": "576-5762035_koobideh-kabob-kebab-png-top-view-transparent-png-85106-ac89.png",
-        "imageId": ("64e4cd349d81489e36815553"),
-        "userId": ("62c1b8ec88924809102e8e70"),
-        "createdAt": "2022-07-10T10:21:40.157+0000",
-        "updatedAt": "2023-08-22T15:01:21.764+0000",
+        "name": "خوراک ماهی قزل آلا کبابی",
+        "description": "۴۰۰ گرم ماهی، نان لواش، دورچین",
+        "category": "ماهی",
+        "shop": "لاله",
+        "subFood": "ماهی",
+        "price": 157000,
+        "copon": null,
+        "image": "main-qimg-3011cd9b472121fd69238b0e640d4c38-4e9f.jpg",
+        "imageId": "64ea04e09d81489e36815994",
+        "userId": "62cc46ae400cb71607efaf27",
+        "createdAt": "2022-07-14T16:48:43.425+0000",
+        "updatedAt": "2023-08-26T14:03:31.467+0000",
         "__v": 0
       },
       {
@@ -354,38 +351,31 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
         "__v": 0
       },
       {
-        "_id": "62cadde44fb629cd46a353e7",
+        "_id": "62cc061d486bbef38c06a717",
         "comment": [
 
         ],
         "rating": [
-          {
-            "userId": "62c1b8b388924809102e8e6b",
-            "rate": 4
-          },
-          {
-            "userId": "62cb468f137b4ad8ef91cfaf",
-            "rate": 3
-          }
+
         ],
         "reserved": {
-          "original": 1657999462921.0,
-          "local": "جمعه ۱ اردیبهشت ۱۴۰۲ "
+          "original": 1657999467646.0,
+          "local": "سه‌شنبه ۲۲ فروردین ۱۴۰۲ "
         },
         "state": "کامل",
         "super": true,
-        "name": "چلو جوجه کباب ترش",
-        "description": "۲۳۰ گرمی، برنج ایرانی، فلفل، ترشی کلم، لیمو، نارنج، گوجه کبابی",
-        "category": "کباب جوجه",
-        "shop": "آزادی",
-        "subFood": "کباب جوجه",
-        "price": 73800,
-        "copon": null,
-        "image": "Chenjeh-6bd2.jpg",
-        "imageId": "64e5cb469d81489e36815825",
-        "userId": "62c1b8ec88924809102e8e70",
-        "createdAt": "2022-07-10T14:10:44.645+0000",
-        "updatedAt": "2023-08-23T09:03:49.319+0000",
+        "name": "پیتزا مخلوط",
+        "description": "خمیر پیتزا کلاسیک ۳۰ سانتی متری، ژامبون گوشت و مرغ، هات داگ فرانکفورتر، قارچ، زیتون، گوجه فرنگی، فلفل دلمه‌ ای، پنیر موزارلا، سس مخصوص، سیب زمینی سرخ شده",
+        "category": "پیتزا",
+        "shop": "ستارخان",
+        "subFood": "پرطرفدار",
+        "price": 112000,
+        "copon": 128000,
+        "image": "pizza-da2a.png",
+        "imageId": "64ea0def9d81489e36816006",
+        "userId": "62cbfaf1486bbef38c06a649",
+        "createdAt": "2022-07-11T11:14:37.648+0000",
+        "updatedAt": "2023-08-26T14:37:03.409+0000",
         "__v": 0
       },
       {
