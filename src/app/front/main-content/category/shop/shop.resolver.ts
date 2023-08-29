@@ -4,7 +4,6 @@ import {
   Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot,
-  Router
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';

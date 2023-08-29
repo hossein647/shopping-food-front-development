@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Category } from './category.model';
 import { CategoryStore } from './category.store';
 import { environment } from './../../../../environments/environment'
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
@@ -58,14 +58,5 @@ export class CategoryService {
       })
     )
   }
-
-
-
-  // getPopulatedPrivateImages() {
-  //   return this.http.get(`${this.baseUrl}/shop-category/populated-private-image`, { withCredentials: true })
-  //     .pipe(
-  //       catchError(err => of(err))
-  //     )
-  // }
 
 }

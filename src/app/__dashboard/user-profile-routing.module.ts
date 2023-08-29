@@ -2,7 +2,6 @@ import { ShopsComponent } from './shops/shopes/shops.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { UsersComponent } from './users/users.component';
 import { ReadShopsComponent } from './shops/read-shops/read-shops.component';
 import { FoodsComponent } from './foods/foods/foods.component';
 import { ReadFoodsComponent } from './foods/read-foods/read-foods.component';
@@ -51,10 +50,6 @@ const routes: Routes = [
             data: { role: ['seller'] }
           },
         ]
-      },
-      { 
-        path: 'users', 
-        component: UsersComponent 
       },
       { path: 'categories', component: ShopCategoriesComponent,
         children: [

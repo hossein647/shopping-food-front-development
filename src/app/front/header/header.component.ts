@@ -65,6 +65,5 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   onLogoClick() {
-    // document.body.style.overflowY = 'auto';
   }
 }

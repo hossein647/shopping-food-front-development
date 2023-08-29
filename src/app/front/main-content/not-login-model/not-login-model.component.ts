@@ -1,5 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-not-login-model',
@@ -15,7 +14,6 @@ export class NotLoginModelComponent implements OnInit {
   @ViewChild('modal') modal: ElementRef;
 
   constructor(
-    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {}

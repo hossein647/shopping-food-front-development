@@ -95,7 +95,6 @@ export class UploadComponent implements OnInit {
     const index = this.files.findIndex((file: any) => file.name === name)
     this.images.splice(i, 1);
     this.files.splice(index, 1);
-    // this.limitSizeFile(this.files);
     if (this.files.length === 0) this.uploadForm.reset();
     
   }

@@ -1,7 +1,7 @@
 import { environment } from './../../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Shop } from './shop.model';
 import { ShopsStore } from './shops.store';
 import { of } from 'rxjs';
@@ -23,15 +23,6 @@ export class ShopsService {
       catchError(err => of(err))
     )
   }
-  
-  
-  
-  // getAllPublic() {
-  //   return this.http.get(`${this.baseUrl}/shops/public-shops`).pipe(
-  //     catchError(err => of(err))
-  //   )
-  // }
-
 
 
   getAllWithPaginate() {

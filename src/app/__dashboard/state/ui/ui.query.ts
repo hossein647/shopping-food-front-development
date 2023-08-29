@@ -9,7 +9,6 @@ export class UiQuery extends QueryEntity<UiState> {
 
   constructor(protected store: UiStore) {
     super(store);
-    // this.createUIQuery();
   }
 
   getVisibilityUi() {

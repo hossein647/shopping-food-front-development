@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserProfileRoutingModule } from './user-profile-routing.module';
-import { SettingComponent } from './setting/setting.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { UsersComponent } from './users/users.component';
 import { ShopsComponent } from './shops/shopes/shops.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -50,10 +48,8 @@ import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
-    SettingComponent,
     HeaderComponent,
     HomeComponent,
-    UsersComponent,
     FoodsComponent,
     ShopsComponent,
     ShopCategoryComponent,

@@ -1,8 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RatingService } from 'src/app/front/_services/rating.service';
-import { ShopCategoryService } from 'src/app/front/_services/shop-category.service';
-import { ShopsService } from 'src/app/front/_services/shops.service';
 import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +18,6 @@ export class CardShopComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private ratingservice: RatingService,
     private router: Router,
   ) { }
 

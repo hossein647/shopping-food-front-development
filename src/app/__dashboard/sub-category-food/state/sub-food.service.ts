@@ -2,7 +2,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { SubFood } from './sub-food.model';
 import { SubFoodStore } from './sub-food.store';
 import { of } from 'rxjs';
@@ -14,9 +14,8 @@ export class SubFoodService {
   apiAddress = environment.url;
 
   constructor(
-    private subFoodStore: SubFoodStore, 
     private http: HttpClient,
-    private foodService: FoodService) {
+    ) {
   }
 
 

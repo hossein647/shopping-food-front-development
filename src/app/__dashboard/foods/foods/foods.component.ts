@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/auth/state/user.service';
 import { LocalStorageData } from 'src/app/___share/helper/local-storage-data';
 
 @Component({

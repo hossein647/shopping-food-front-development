@@ -9,7 +9,6 @@ import { ShopPaginateService } from '../state/shop-paginate/shop-paginate.servic
 import { ShopPaginateQuery } from '../state/shop-paginate/shop-paginate.query';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
-import { CategoryService } from '../../categories/state/category.service';
 
 @Component({
   selector: 'app-read-shops',
@@ -38,7 +37,6 @@ export class ReadShopsComponent implements OnInit {
     private _snackbar          : Snackbar,
     private router             : Router,
     private activatedRoute     : ActivatedRoute,
-    private categoryService    : CategoryService,
   ) { 
     
   }

@@ -28,8 +28,7 @@ export class TableComponent {
   @Output() changeEventCheckbox   = new EventEmitter<CheckboxChange>();
 
   constructor(
-    private renderer: Renderer2,
-    private elRef   : ElementRef
+    private renderer: Renderer2
   ) {}
 
   ngAfterViewInit() {    
@@ -40,15 +39,6 @@ export class TableComponent {
     this.paginator._intl.previousPageLabel = "صفحه قبلی";
 
     this.setFixWidthHeaderTable();
-    // const tableWidth = this.elRef.nativeElement.querySelector('table').getBoundingClientRect();
-    // const matPaginator = this.elRef.nativeElement.querySelector('mat-paginator').getBoundingClientRect();
-    // console.log(tableWidth);
-    // console.log(matPaginator);
-    // console.log(window.innerWidth);
-    // const paginatorWidth = tableWidth.width / window.innerWidth;
-    // console.log(paginatorWidth);
-    
-    // this.renderer.setStyle(matPaginator, 'width', `${paginatorWidth}vw`)
   }
 
 
@@ -81,14 +71,6 @@ export class TableComponent {
 
 
   findColumnValue = (element: unknown, column: ColumnName): string => eval(`element.${column.key}`)
-  
-  // rowOnClcik(selection: SelectionModel<any>, row: any, index: number) {
-    
-  //   const selectedRow = Object.entries(selection);
-  //   selectedRow[2][1].forEach((element: any) => {
-  //   });
-    
-  // }
 
 
 

@@ -9,9 +9,3 @@ export interface Shop {
   imageId: number;
   userId: number;
 }
-
-// export function createShop(params: Partial<Shop>) {
-//   return {
-
-//   } as Shop;
-// }

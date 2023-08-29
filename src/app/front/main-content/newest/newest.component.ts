@@ -41,11 +41,9 @@ export class NewestComponent implements OnInit {
     const email = this.globalFrontService.getEmail();
     const currentUser = (!guest && !email) || guest ? 'guest' : email;
     this.orderList = this.getCartLocalStorage(currentUser);
-    console.log('orderList 1: ', this.orderList)
     this.globalFrontService.getOrderFood().subscribe(orderFood => {
       this.orderList = orderFood;
     })
-    console.log('orderList 2: ', this.orderList)
     this.updateGlobalFront(this.orderList);
   }
 

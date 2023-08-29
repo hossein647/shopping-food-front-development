@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { UserService } from '../auth/state/user.service';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { GlobalQuery } from '../state/global.query';
-import { GlobalService } from '../state/global.service';
 import { LocalStorageData } from '../___share/helper/local-storage-data';
 
 @Injectable({

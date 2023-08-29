@@ -3,9 +3,3 @@ export interface Ui {
     isOpen: boolean;
   }
 }
-
-// export function createUi(params: Partial<Ui>) {
-//   return {
-
-//   } as Ui;
-// }

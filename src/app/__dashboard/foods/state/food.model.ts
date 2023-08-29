@@ -22,9 +22,3 @@ export interface Food {
   length: number;
   descriptionConfirm?: string;
 }
-
-// export function createFood(params: Partial<Food>) {
-//   return {
-
-//   } as Food;
-// }

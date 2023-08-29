@@ -36,9 +36,6 @@
             </div>
           </div>
           <ul class="list border-t">
-            <!-- <li *ngIf="role === 'admin'">
-              <a routerLink="users" (click)="listSelected('users')" [ngClass]="{'selected': item === 'users'}">کاربران</a>
-            </li> -->
             <li *ngIf="role === 'admin' || role ==='seller' || role === 'customer'">
               <a routerLink="profile" (click)="listSelected('profile')"
                 [ngClass]="{'selected': item === 'profile'}">پروفایل</a>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import { Upload } from '../state/upload/upload.model';
@@ -32,11 +32,6 @@ export class ImageDialogBoxComponent implements OnInit {
   }
 
   selected(event: any, image: Upload) {
-    // this.imgElement.forEach((img: ElementRef) => {
-    //   if (img.nativeElement.classList.contains('selected'))
-    //     img.nativeElement.classList.remove('selected');
-    //   })
-    // event.target.classList.add('selected');
     this.imageNameSelected = image.filename
   }
 

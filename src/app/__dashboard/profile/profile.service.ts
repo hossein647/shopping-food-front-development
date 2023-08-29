@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, Subject } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -14,14 +14,6 @@ export class ProfileService {
   constructor(
     private http: HttpClient,
   ) { }
-
-  // showShop = new Subject<boolean>();
-  // show$ = this.showShop.asObservable();
-
-
-  // setShow(val: boolean) {
-  //   this.showShop.next(val);
-  // }
 
   updatePassword(body: any) {
     return this.http.put(`${this.apiAddress}/users/user/update/password`, 

@@ -78,7 +78,6 @@ export class ReadFoodsComponent implements OnInit {
     this.displayedColumns = [
       'select', 
       'name', 
-      // 'description', 
       'category', 
       'price', 
       'super', 
@@ -87,7 +86,6 @@ export class ReadFoodsComponent implements OnInit {
     ];
     this.customColumnName = [
       { key: 'name',           header: 'نام' },
-      // { key: 'description',    header: 'توضیحات' },
       { key: 'category',       header: 'دسته بندی' },
       { key: 'price',          header: 'قیمت' },
       { key: 'super',          header: 'غذای ویژه' },

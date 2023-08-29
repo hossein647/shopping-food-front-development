@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { Form } from 'src/app/___share/interface/form.interface';

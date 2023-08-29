@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/auth/state/user.service';
 import { GlobalService } from 'src/app/state/global.service';
@@ -90,16 +90,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if (hamburger.classList.contains('hamburger')) hamburger.classList.remove('change');
 
         const email = this.globalFrontService.getEmail();
-        console.log('email : ', email);
         
         if (email) {
           const orderListUser = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]');
-          console.log('orderListUser : ', orderListUser);
-          const arrayOrderList = Object.keys(orderListUser);
-          console.log('arrayOrderList : ', arrayOrderList);
-          
+          const arrayOrderList = Object.keys(orderListUser);          
           const isEmptyOrderList = arrayOrderList.length === 0;
-          console.log('isEmptyOrderList : ', isEmptyOrderList);
 
           if (!isEmptyOrderList) {
             this.globalFrontService.updateOrderFood(orderListUser);
