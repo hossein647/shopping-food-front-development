@@ -9,6 +9,7 @@ import { LocalStorageData } from 'src/app/___share/helper/local-storage-data';
 import { UploadService } from '../upload/state/upload/upload.service';
 import { Upload } from '../upload/state/upload/upload.model';
 import { environment } from 'src/environments/environment';
+import { GlobalFrontService } from 'src/app/front/_services/global-front.service';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
     private globalService   : GlobalService,
     private uploadService   : UploadService,
     private localStorageData: LocalStorageData,
+    private globalFrontService: GlobalFrontService,
     ) {}
 
 
@@ -68,10 +70,24 @@ export class HomeComponent implements OnInit {
     this.userService.logout().subscribe(res => {
       if (res) {
         const result = JSON.parse(JSON.stringify(res));
-        this.removeUser();
+        
         this.globalService.update(result.loggedIn);
 
         this._snackbar.addSnackbar(result.message, result?.err, 3000);
+
+        const email = this.globalFrontService.getEmail();
+        if (email) {
+          const orderListUser = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]')
+          const arrayOrderList = Object.keys(orderListUser);
+          const isEmptyOrderList = arrayOrderList.length === 0;
+          
+          if (!isEmptyOrderList) {
+            this.globalFrontService.updateOrderFood(orderListUser);
+            window.localStorage.setItem(`orderFood_guest`, JSON.stringify(orderListUser));
+          }
+          window.localStorage.removeItem(`orderFood_${email}`);
+        }
+        this.removeUser();
         if (!result?.err) this.router.navigate(['/']);
       }
     })

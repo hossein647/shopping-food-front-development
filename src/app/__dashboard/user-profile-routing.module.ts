@@ -25,133 +25,136 @@ import { ProfileComponent } from './profile/profile.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, children: [
-    { 
-      path: 'profile', 
-      component: ProfileComponent, 
-      canActivate: [RoleGuard], 
-      data: { role: ['seller', 'admin', 'customer']}
-    },
-    { path: 'shops', component: ShopsComponent,
-      children: [
-        { path: '', component: ReadShopsComponent },
-        {
-          path: 'create',
-          component: FormShopComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['seller']}
-        },
-        {
-          path: 'edit/:id',
-          component: FormShopComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['seller'] }
-        },
-      ]
-    },
-    { 
-      path: 'users', 
-      component: UsersComponent 
-    },
-    { path: 'categories', component: ShopCategoriesComponent,
-      children: [
-        { path: '', component: ReadShopCategoriesComponent },
-        {
-          path: 'create',
-          component: ShopCategoryComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['admin'] }
-        },
-        {
-          path: 'edit/:id',
-          component: ShopCategoryComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['admin'] }
-        },
-      ]
-    },
-    { path: 'foods', component: FoodsComponent,
-      children: [
-        { path: '', component: ReadFoodsComponent },
-        {
-          path: 'create',
-          component: FormFoodsComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['seller'] }
-        },
-        {
-          path: 'edit/:id',
-          component: FormFoodsComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['seller'] }
-        },
-      ]
-    },
-    { 
-      path: 'sub-foods', 
-      component: FoodsComponent,
+  { 
+    path: '', 
+    component: HomeComponent, 
+    children: [
+      { 
+        path: 'profile', 
+        component: ProfileComponent, 
+        canActivate: [RoleGuard], 
+        data: { role: ['seller', 'admin', 'customer']}
+      },
+      { path: 'shops', component: ShopsComponent,
         children: [
-          { path: '', component: ReadSubFoodComponent },
+          { path: '', component: ReadShopsComponent },
           {
             path: 'create',
-            component: SubFoodComponent,
+            component: FormShopComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['seller']}
+          },
+          {
+            path: 'edit/:id',
+            component: FormShopComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['seller'] }
+          },
+        ]
+      },
+      { 
+        path: 'users', 
+        component: UsersComponent 
+      },
+      { path: 'categories', component: ShopCategoriesComponent,
+        children: [
+          { path: '', component: ReadShopCategoriesComponent },
+          {
+            path: 'create',
+            component: ShopCategoryComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['admin'] }
+          },
+          {
+            path: 'edit/:id',
+            component: ShopCategoryComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['admin'] }
+          },
+        ]
+      },
+      { path: 'foods', component: FoodsComponent,
+        children: [
+          { path: '', component: ReadFoodsComponent },
+          {
+            path: 'create',
+            component: FormFoodsComponent,
             canActivate: [RoleGuard],
             data: { role: ['seller'] }
           },
           {
             path: 'edit/:id',
-            component: SubFoodComponent,
+            component: FormFoodsComponent,
             canActivate: [RoleGuard],
             data: { role: ['seller'] }
           },
         ]
-    },
-    {
-      path: 'super-food',
-      component: SuperFoodComponent,
-      canActivate: [RoleGuard],
-      data: { role: ['admin']}
-    },
-    {
-      path: 'food-category', component: FoodCategoryComponent,
-      children: [
-        { path: '', component: ReadFoodCategoryComponent },
-        {
-          path: 'create',
-          component: FoodCategoryFormComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['admin'] }  },
-        {
-          path: 'edit/:id',
-          component: FoodCategoryFormComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['admin'] }
-        },
-    ]},
-    { 
-      path: 'payment-history', 
-      component: PaymentHistoryComponent, 
-      canActivate: [RoleGuard],
-      data: { role: ['customer'] },
-    },
-    { 
-      path: 'home-upload', 
-      component: HomeUploadComponent, 
-      children: [
-        { 
-          path: '', 
-          component: ReadUploadComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['seller', 'admin', 'customer'] }
-        },
-        { 
-          path: 'upload', 
-          component: UploadComponent,
-          canActivate: [RoleGuard],
-          data: { role: ['seller', 'admin', 'customer'] }
-        }
-      ]
-    },
+      },
+      { 
+        path: 'sub-foods', 
+        component: FoodsComponent,
+          children: [
+            { path: '', component: ReadSubFoodComponent },
+            {
+              path: 'create',
+              component: SubFoodComponent,
+              canActivate: [RoleGuard],
+              data: { role: ['seller'] }
+            },
+            {
+              path: 'edit/:id',
+              component: SubFoodComponent,
+              canActivate: [RoleGuard],
+              data: { role: ['seller'] }
+            },
+          ]
+      },
+      {
+        path: 'super-food',
+        component: SuperFoodComponent,
+        canActivate: [RoleGuard],
+        data: { role: ['admin']}
+      },
+      {
+        path: 'food-category', component: FoodCategoryComponent,
+        children: [
+          { path: '', component: ReadFoodCategoryComponent },
+          {
+            path: 'create',
+            component: FoodCategoryFormComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['admin'] }  },
+          {
+            path: 'edit/:id',
+            component: FoodCategoryFormComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['admin'] }
+          },
+      ]},
+      { 
+        path: 'payment-history', 
+        component: PaymentHistoryComponent, 
+        canActivate: [RoleGuard],
+        data: { role: ['customer'] },
+      },
+      { 
+        path: 'home-upload', 
+        component: HomeUploadComponent, 
+        children: [
+          { 
+            path: '', 
+            component: ReadUploadComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['seller', 'admin', 'customer'] }
+          },
+          { 
+            path: 'upload', 
+            component: UploadComponent,
+            canActivate: [RoleGuard],
+            data: { role: ['seller', 'admin', 'customer'] }
+          }
+        ]
+      },
   ]},
 ];
 

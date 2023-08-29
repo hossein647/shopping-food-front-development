@@ -56,14 +56,13 @@ export class SellerLoginComponent implements OnInit {
             result.id, 
             result.email, 
             result.role
-            ); //  expire_loggedIn_shopping_food_user
+          ); //  expire_loggedIn_shopping_food_user
 
           this.loadingSpinner = false;
           this.allowRequest = true;
-
+          
           this.globalService.set(auth);
           this._snackbar.addSnackbar(result.error?.message || result?.message, result.error, 3000);
-
           if (!result.error) {
             this.router.navigate(['/']);
             data.ngForm.resetForm();

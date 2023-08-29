@@ -37,10 +37,15 @@ export class NewestComponent implements OnInit {
     this.notLoginModal = this.elRef.nativeElement.querySelector('.not-login-modal');
     this.buyMessage = 'برای خرید باید وارد حساب کاربری شوید.'
     this.newestFood();
-    this.orderList = this.getCartLocalStorage(this.globalFrontService.getEmail());
+    const guest = this.globalFrontService.isExistGuest();
+    const email = this.globalFrontService.getEmail();
+    const currentUser = (!guest && !email) || guest ? 'guest' : email;
+    this.orderList = this.getCartLocalStorage(currentUser);
+    console.log('orderList 1: ', this.orderList)
     this.globalFrontService.getOrderFood().subscribe(orderFood => {
       this.orderList = orderFood;
     })
+    console.log('orderList 2: ', this.orderList)
     this.updateGlobalFront(this.orderList);
   }
 
@@ -64,8 +69,12 @@ export class NewestComponent implements OnInit {
       if (!this.orderList[key]) this.orderList[key] = [];
       this.orderList[key].push(food);
 
-      this.setCartLocalStorage(this.orderList, this.globalFrontService.getEmail());
-      this.updateGlobalFront(this.getCartLocalStorage(this.globalFrontService.getEmail()));
+      const guest = this.globalFrontService.isExistGuest();
+      const email = this.globalFrontService.getEmail();
+      const currentUser = (!guest && !email) || guest ? 'guest' : email;
+
+      this.setCartLocalStorage(this.orderList, currentUser);
+      this.updateGlobalFront(this.getCartLocalStorage(currentUser));
 
 
       this._snackbar.addSnackbar('با موفقیت به سبد خرید اضافه شد', false, 3000);
@@ -82,7 +91,7 @@ export class NewestComponent implements OnInit {
 
 
   getCartLocalStorage(email: string): GlobalFront {
-    return JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '{}');
+    return JSON.parse(window.localStorage.getItem(`orderFood_${email}` || 'orderFood_guest') || '{}');
   }
 
 

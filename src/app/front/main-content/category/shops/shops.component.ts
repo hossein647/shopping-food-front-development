@@ -29,7 +29,10 @@ export class ShopsComponent implements OnInit {
     private router       : Router,
     private globalFrontService: GlobalFrontService,
   ) { 
-    this.orderList = this.getCartLocalStorage(this.globalFrontService.getEmail());
+    const guest = this.globalFrontService.isExistGuest();
+    const email = this.globalFrontService.getEmail();
+    const currentUser = (!guest && !email) || guest ? 'guest' : email;
+    this.orderList = this.getCartLocalStorage(currentUser);
     this.globalFrontService.updateOrderFood(this.orderList);
   }
 

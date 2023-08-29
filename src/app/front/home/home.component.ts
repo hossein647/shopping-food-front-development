@@ -9,6 +9,7 @@ import { GlobalFrontService } from '../_services/global-front.service';
 import { OrderFood } from '../_interfaces/order-food.interface';
 import { OrderFoOdService } from '../_services/order-food.service';
 import { GlobalFront } from '../_interfaces/global-front.interface';
+import { GlobalQuery } from 'src/app/state/global.query';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   showSidebarMenu: boolean = false;
   homePage           : boolean = false;
   currentRoute = '';
+  showNotLoginModal = false;
+  message: string;
+  showOverlay = false;
 
   html = document.querySelector('html');   
   @ViewChild('dropdown') dropdown: ElementRef;
@@ -48,10 +52,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private globalFrontService: GlobalFrontService,
     private orderFoodService  : OrderFoOdService,
     private elRef             : ElementRef,
+    private globalQuery: GlobalQuery,
     ) { 
       this.setMarginExceptHomePage();
-    this.getOrderList();
-    this.globalFrontService.lengthOrderFood().subscribe(length => this.orderFoodLength = length);
+      this.getOrderList();
+      this.globalFrontService.lengthOrderFood().subscribe(length => this.orderFoodLength = length);
     }
   ngAfterViewInit(): void {
     const overflow_hidden = this.html?.classList.contains('overflow-hidden');
@@ -59,7 +64,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   
   ngOnInit(): void {    
-    
+    this.message = 'برای خرید باید وارد حساب کاربری شوید.';
     this.hasCookie();      
     this.orderFood = this.elRef.nativeElement.querySelector('.order-food');
   }
@@ -76,7 +81,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const result = JSON.parse(JSON.stringify(res));
         this.loggedIn = result.loggedIn;
         this.globalService.update(result.loggedIn);
-        this.removeUser();
+        
         
         const hamburger = this.elRef.nativeElement.querySelector('.hamburger');        
         this.showSidebarMenu = false;
@@ -84,6 +89,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if (hamburger.classList.contains('line')) hamburger.parentNode.classList.remove('change');
         if (hamburger.classList.contains('hamburger')) hamburger.classList.remove('change');
 
+        const email = this.globalFrontService.getEmail();
+        console.log('email : ', email);
+        
+        if (email) {
+          const orderListUser = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]');
+          console.log('orderListUser : ', orderListUser);
+          const arrayOrderList = Object.keys(orderListUser);
+          console.log('arrayOrderList : ', arrayOrderList);
+          
+          const isEmptyOrderList = arrayOrderList.length === 0;
+          console.log('isEmptyOrderList : ', isEmptyOrderList);
+
+          if (!isEmptyOrderList) {
+            this.globalFrontService.updateOrderFood(orderListUser);
+            window.localStorage.setItem(`orderFood_guest`, JSON.stringify(orderListUser));
+          }
+          window.localStorage.removeItem(`orderFood_${email}`);
+        }
+        this.removeUser();
         this._snackbar.addSnackbar(result.message, result?.err, 3000);
         this.router.navigate(['/']);
 
@@ -182,38 +206,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  removeFood(index: number) {    
-    const email = this.globalFrontService.getEmail() ;
+  removeFood(index: number) { 
+    const guest = this.globalFrontService.isExistGuest();
+    const email = this.globalFrontService.getEmail();
+    const currentUser = guest ? 'guest' :  email;
     const key       = this.orderFoodList[index].name + '_' + this.orderFoodList[index]._id;   
-    const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]');
+    const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${currentUser}`) || '[]');
     
     Reflect.deleteProperty(orderFood, key);
-    window.localStorage.setItem(`orderFood_${email}`, JSON.stringify(orderFood));
+    window.localStorage.setItem(`orderFood_${currentUser}`, JSON.stringify(orderFood));
+    if (orderFood.length === 0) window.localStorage.removeItem(`orderFood_${currentUser}`);
     this.globalFrontService.updateOrderFood(orderFood);
 
   }
 
 
   upCounter(index: number) {
+    const guest = this.globalFrontService.isExistGuest();
     const email = this.globalFrontService.getEmail();
+    const currentUser = guest ? 'guest' :  email;
     const key = this.orderFoodList[index].name + '_' + this.orderFoodList[index]._id;
-    const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]');
+    const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${currentUser}`) || '[]');
     
     Object(orderFood)[key].push(orderFood[key][0]);
-    window.localStorage.setItem(`orderFood_${email}`, JSON.stringify(orderFood));
+    window.localStorage.setItem(`orderFood_${currentUser}`, JSON.stringify(orderFood));
     
     this.globalFrontService.updateOrderFood(orderFood);
   }
   
   
   downCounter(index: number) {
+    const guest = this.globalFrontService.isExistGuest();
     const email = this.globalFrontService.getEmail();
+    const currentUser = guest ? 'guest' :  email;
     const key = this.orderFoodList[index].name + '_' + this.orderFoodList[index]._id;
-    const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${email}`) || '[]');
+    const orderFood = JSON.parse(window.localStorage.getItem(`orderFood_${currentUser}`) || '[]');
 
     Object(orderFood)[key].splice(0, 1);
     if (orderFood[key].length === 0) Reflect.deleteProperty(orderFood, key);
-    window.localStorage.setItem(`orderFood_${email}`, JSON.stringify(orderFood));
+    window.localStorage.setItem(`orderFood_${currentUser}`, JSON.stringify(orderFood));
+    if (orderFood.length === 0) window.localStorage.removeItem(`orderFood_${currentUser}`);
     this.globalFrontService.updateOrderFood(orderFood);
 
   }
@@ -226,36 +258,42 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const price   : number[] = [];
     const press   : number[] = [];
 
-    for (let i = 0; i < this.orderFoodList.length; i++) {
-      sumPrice.push(this.orderFoodList[i].price * this.foodsLength[i]);
-      name.push(this.orderFoodList[i].name);
-      price.push(this.orderFoodList[i].price);
-      press.push(this.foodsLength[i]);
-      
-      this.payList = { 
-        name,
-        price,
-        press,
-        sumPrice,
-        total: sumPrice.reduce((prev, curr) => prev + curr)
-      }
-    }
-    
-    this.orderFoodService.create(this.payList).subscribe(
-      res => {
-        if (res) {
-          if (!res?.err) {
-            this._snackbar.addSnackbar(res.message, res?.err, 3000);
-            this.orderFoodList = [];
-            const email = this.globalFrontService.getEmail();
-            localStorage.removeItem(`orderFood_${email}`);
-            this.globalFrontService.updateOrderFood({});
-            this.openOrderFood = false;
-            this.render.setStyle(this.orderFood, 'transform', 'translateX(-100%)');
-          }
+    if (this.globalQuery.isLoggedIn) {
+      for (let i = 0; i < this.orderFoodList.length; i++) {
+        sumPrice.push(this.orderFoodList[i].price * this.foodsLength[i]);
+        name.push(this.orderFoodList[i].name);
+        price.push(this.orderFoodList[i].price);
+        press.push(this.foodsLength[i]);
+        
+        this.payList = { 
+          name,
+          price,
+          press,
+          sumPrice,
+          total: sumPrice.reduce((prev, curr) => prev + curr)
         }
       }
-    )
+      
+      this.orderFoodService.create(this.payList).subscribe(
+        res => {
+          if (res) {
+            if (!res?.err) {
+              this._snackbar.addSnackbar(res.message, res?.err, 3000);
+              this.orderFoodList = [];
+              
+              const email = this.globalFrontService.getEmail();
+              localStorage.removeItem(`orderFood_${email}`);
+              this.globalFrontService.updateOrderFood({});
+              this.openOrderFood = false;
+              this.render.setStyle(this.orderFood, 'transform', 'translateX(-100%)');
+            }
+          }
+        }
+      )
+    } else {
+      this.showNotLoginModal = true;
+      this.showOverlay = true;
+    }
   }
 
 
@@ -286,5 +324,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     else this.scrolled = false;
   }
 
+
+  closeNoLoginModal() {
+    this.showNotLoginModal = false;
+    this.showOverlay = false;
+  }
 
 }

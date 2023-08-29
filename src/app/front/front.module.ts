@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { FooterComponent } from './main-content/footer/footer.component';
 import { MainContentComponent } from './main-content/main-content/main-content.component';
@@ -63,7 +62,6 @@ import { PriceDividerPipe } from './main-content/food-card/price-divider.pipe';
     MatIconModule,
     MatMenuModule,
     MatFormFieldModule,
-    MatSnackBarModule,
     MatInputModule,
     BarRatingModule,
     SpinnerModule,

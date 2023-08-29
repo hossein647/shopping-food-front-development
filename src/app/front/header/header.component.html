@@ -1,6 +1,6 @@
 <div 
   class="header py-3 overflow-hidden" 
-  [ngClass]="{'md:py-0': loggedIn && orderFoodLength > 0, 'px-5 lg:px-0 lg:mx-10': currentRoute === '/'}">
+  [ngClass]="{'px-5 lg:px-0 lg:mx-10': currentRoute === '/'}">
   <div class="row">
     <div class="menu flex justify-between w-full md:block md:w-auto">
       <div 
@@ -32,7 +32,9 @@
         ســفـارش غــذا
       </a>
     </div>
-    <ul class="lists z-10">
+    <ul 
+      class="lists flex items-center flex-row-reverse bg-[#4d4d4d] px-6 rounded-md py-[10px] z-10"
+      [ngClass]="{'px-8': loggedIn}">
       <li *ngIf="!loggedIn" class="flex">
         <div class="auth">
           <a 
@@ -40,17 +42,17 @@
             class="
               customer 
               inline-block 
-              hover:!bg-[#242424] 
-              transition-colors 
+              transition-all 
               shadow-sm 
               !text-white 
-              !bg-[#4d4d4d]">
+              !bg-[#4d4d4d]
+              hover:scale-110">
             ورود   /   عضویت
           </a>
         </div>
       </li>
-      <li *ngIf="loggedIn" class="account flex items-center">
-        <div class="wrapper-cart flex ml-1">
+      <li  class="account flex items-center">
+        <div class="wrapper-cart flex ml-1 relative">
             <span *ngIf="orderFoodLength > 0" 
                   class="
                         inline-block
@@ -65,12 +67,14 @@
                         w-[22px] 
                         h-[22px] 
                         mb-[38px] 
-                        -ml-[10px]">
+                        -ml-[10px]
+                        absolute
+                        -top-4
+                        -right-4">
                         {{orderFoodLength}}
               </span>
           <svg 
-              class="cart h-8 w-8 rounded-full m-auto p-1 hover:cursor-pointer hover:scale-110 transition-transform shadow-sm" 
-              [ngClass]="currentRoute === '/' ? '!text-white' : '!text-black'"
+              class="cart h-8 w-8 rounded-full m-auto text-white p-1 hover:cursor-pointer hover:scale-110 transition-transform shadow-sm" 
               xmlns="http://www.w3.org/2000/svg" 
               fill="none" 
               viewBox="0 0 24 24" 
@@ -81,10 +85,9 @@
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         </div>
-        <button class="profile" mat-icon-button [matMenuTriggerFor]="menu">
+        <button *ngIf="loggedIn" class="profile" mat-icon-button [matMenuTriggerFor]="menu">
           <svg 
-              class="h-8 w-8 rounded-full m-auto p-1 hover:scale-110 transition-transform shadow-sm" 
-              [ngClass]="currentRoute === '/' ? '!text-white' : '!text-black'"
+              class="h-8 w-8 rounded-full m-auto p-1 text-white hover:scale-110 transition-transform shadow-sm" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"

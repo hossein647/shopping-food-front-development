@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { FrontModule } from './front/front.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserProfileModule } from './__dashboard/user-profile.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,6 +28,8 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -53,8 +53,6 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    FrontModule,
-    UserProfileModule,
     BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -63,6 +61,8 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
     BarRatingModule,
     MatCardModule,
     MatButtonModule,
+    HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

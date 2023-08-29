@@ -7,6 +7,7 @@ import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { Form } from 'src/app/___share/interface/form.interface';
 import { Role, User } from '../../state/user.model';
 import { UserService } from '../../state/user.service';
+import { GlobalFrontService } from 'src/app/front/_services/global-front.service';
 
 @Component({
   selector: 'app-customer-login',
@@ -29,6 +30,7 @@ export class CustomerLoginComponent implements OnInit {
     private router: Router,
     private globalService: GlobalService,
     private localStorageData: LocalStorageData,
+    private globalFrontService: GlobalFrontService,
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +63,18 @@ export class CustomerLoginComponent implements OnInit {
           this._snackbar.addSnackbar(result.error?.message || result?.message, result.error, 3000);
           
           if (!result.error) {
+            const guest = this.globalFrontService.isExistGuest();
+            if (guest) {
+              const orderListGuest = this.globalFrontService.getGuest();
+              const arrayOrderList = Object.keys(orderListGuest)
+              const isEmptyOrderList = arrayOrderList.length === 0;
+              if (!isEmptyOrderList) {
+                const email = this.globalFrontService.getEmail();
+                this.globalFrontService.updateOrderFood(orderListGuest);
+                window.localStorage.setItem(`orderFood_${email}`, JSON.stringify(orderListGuest));
+              }
+              window.localStorage.removeItem('orderFood_guest');
+            }
             this.router.navigate(['/']);
             data.ngForm.resetForm();
           }

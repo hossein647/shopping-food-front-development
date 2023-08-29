@@ -22,8 +22,11 @@
             </div>
         </div>
         <div class="footer-card flex justify-center my-6">
-            <button class="order bg-[#bcdf84] text-white px-6 py-[2px] text-sm rounded font-bold"
-                (click)="onClickDetails(shop)">سفارش</button>
+            <button 
+                    class="order bg-[#5b5b5b] text-white px-6 py-1 text-lg rounded font-bold"
+                    (click)="onClickDetails(shop)">
+                    سفارش
+            </button>
         </div>
     </div>
     <div class="no-data" *ngIf="!shops.length">

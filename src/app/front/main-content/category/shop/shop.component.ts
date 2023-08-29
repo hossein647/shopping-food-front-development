@@ -5,12 +5,9 @@ import { FoodService } from 'src/app/front/_services/food.service';
 import { GlobalFrontService } from 'src/app/front/_services/global-front.service';
 import { ShopsService } from 'src/app/front/_services/shops.service';
 import { SubFoodService } from 'src/app/front/_services/sub-food.service';
-import { GlobalQuery } from 'src/app/state/global.query';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 import { SubFood } from 'src/app/__dashboard/sub-category-food/state/sub-food.model';
-import { Upload } from 'src/app/__dashboard/upload/state/upload/upload.model';
-import { UploadService } from 'src/app/__dashboard/upload/state/upload/upload.service';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { environment } from 'src/environments/environment';
 
@@ -46,10 +43,8 @@ export class ShopComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private foodService: FoodService,
     private subFoodService: SubFoodService,
-    private uploadService: UploadService,
     private shopService: ShopsService,
     private renderer: Renderer2,
-    private globalQuery: GlobalQuery,
     private _snackbar: Snackbar,
     private globalFrontService: GlobalFrontService,
   ) { }
@@ -58,8 +53,10 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.message = 'برای خرید باید وارد حساب کاربری شوید.';
     this.getIdFromRoute();
-
-    this.orderList = this.getCartLocalStorage(this.globalFrontService.getEmail());
+    const guest = this.globalFrontService.isExistGuest();
+    const email = this.globalFrontService.getEmail();
+    const currentUser = (!guest && !email) || guest ? 'guest' : email;
+    this.orderList = this.getCartLocalStorage(currentUser);
     this.globalFrontService.getOrderFood().subscribe(orderFood => {
       this.orderList = orderFood;      
     })
@@ -117,7 +114,6 @@ export class ShopComponent implements OnInit {
         if (res) {
           this.subFood = res.subFood;        
           this.filterFoods = this.foods.filter(food => food.subFood === this.subFood[0]?.name);
-          // this.getFoodsImages(this.filterFoodsBySubFood(this.foods)[this.subFood[0]?.name]);
           this.subFoodSelected = this.subFood[0].name;
           this.sectionSubFood.forEach((section, index) => {
             if(index === 0) {
@@ -128,27 +124,6 @@ export class ShopComponent implements OnInit {
       }
     )
   }
-
-
-
-  // getFoodsImages(foods: Food[]) {
-  //   if (foods.length) {
-  //     this.uploadService.getAllPublicById(foods[0].userId, foods[0].shop).subscribe(
-  //       res => {
-  //         if (res) {          
-  //           let files : Upload[] = [];            
-  //           foods.forEach(food => {
-  //             res.files.forEach((file: Upload) => {
-  //               if (food.image === file.filename) {
-  //                 files.push(file);
-  //               }
-  //             });
-  //           })
-  //           this.foodsUrlImage = [];
-  //         }
-  //     })
-  //   }
-  // }
 
 
   onSubFoodClick(shapeSelctor: HTMLElement, borderSelector: HTMLElement, sub: SubFood, index: number) {
@@ -166,26 +141,24 @@ export class ShopComponent implements OnInit {
 
     setTimeout(() => {
       this.filterFoods = this.foods.filter(food => food.subFood === sub.name);
-      // this.getFoodsImages(this.filterFoodsBySubFood(this.foods)[sub.name])        
     }, 300);
     
   }
 
 
   addToCart(event: any, food: Food) {
-    if (this.globalQuery.isLoggedIn) {     
       const key: string = `${food.name}_${food._id}`;
 
       if (!this.orderList[key]) this.orderList[key] = [];
       this.orderList[key].push(food);
 
-      this.setCartLocalStorage(this.orderList, this.globalFrontService.getEmail());
-      this.updateGlobalFront(this.getCartLocalStorage(this.globalFrontService.getEmail()));
+      const guest = this.globalFrontService.isExistGuest();
+      const email = this.globalFrontService.getEmail();
+    const currentUser = (!guest && !email) || guest ? 'guest' : email;
+      this.setCartLocalStorage(this.orderList, currentUser);
+      this.updateGlobalFront(this.getCartLocalStorage(currentUser));
 
       this._snackbar.addSnackbar('با موفقیت به سبد خرید اضافه شد', false, 3000);
-    } else {
-      this.showNotLoginModal = true;
-    }
     
   }
 

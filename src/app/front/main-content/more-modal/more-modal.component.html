@@ -2,8 +2,8 @@
         more-modal
         w-full
         h-full
-        sm:w-[600px] 
-        sm:h-[400px] 
+        lg:w-[60%] 
+        lg:h-[500px] 
         fixed 
         bg-white
         top-[50%]
@@ -13,7 +13,7 @@
         shadow-2xl
         flex-col
         items-center
-        sm:rounded-md
+        lg:rounded-md
         z-[51]
         transition-opacity
         transition-delay-1000"
@@ -22,7 +22,7 @@
         #modal>
     <svg 
         xmlns="http://www.w3.org/2000/svg" 
-        class="h-8 w-8 mt-3 mr-3 absolute left-2 hover:cursor-pointer hover:scale-125 transition text-white sm:text-black"
+        class="h-8 w-8 mt-3 mr-3 absolute left-2 hover:cursor-pointer hover:scale-125 transition text-white bg-[#FF5722] rounded-full sm:border-none sm:bg-white sm:text-black"
         fill="none" 
         viewBox="0 0 24 24" 
         stroke="currentColor" 
@@ -31,27 +31,27 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
     <div class="min-card flex flex-col sm:flex-row">
-        <div class="wrapper-img w-full">
+        <div class="wrapper-img w-full h-[250px] sm:w-[60%] sm:h-[200px] p-4">
             <img 
                 [src]="baseApi + '/' + food.userId + '/' + food.image" 
                 alt="" 
-                class="w-full h-56 sm:w-[310px] sm:h-[185px] sm:rounded-tr-md">
+                class="w-full h-full sm:h-[185px] sm:rounded-tr-md border">
         </div>
         <div class="description mx-5 flex flex-wrap sm:flex">
-            <div class="name flex mt-3 sm:mt-0 w-full items-center">
+            <div class="name flex mt-4 w-full items-center">
                 <img src="./../../../../assets/img/salad.png" class="w-6 h-6" alt="">
-                <p class="name text-3xl text-[#6a6c72] font-semibold p-4 font-base mr-3">{{food.name}}</p>
+                <p class="name text-xl text-[#6a6c72] font-semibold px-4 font-base mr-3">{{food.name}}</p>
             </div>
-            <div class="price flex sm:mt-0 w-full items-center">
-                <img src="./../../../../assets/img/dollar-tag.png" class="w-[18px] h-[18px]" alt="">
-                <p class="price text-base px-4 font-bold text-[#6a6c72] mr-3 mt-[4px]">{{food.price}} تومان</p>
+            <div class="price flex mt-4 sm:mt-0 w-full items-center">
+                <img src="./../../../../assets/img/dollar-tag.png" class="w-6 h-6" alt="">
+                <p class="price text-base mt-4 px-4 font-bold text-[#6a6c72] mr-3 mt-[4px]">{{food.price}} تومان</p>
             </div>
-            <div class="discunt flex sm:mt-0 sm:mb-0 w-full items-center">
-                <img src="./../../../../assets/img/discount.png" class="w-[18px] h-[18px]" alt="">
+            <div class="discunt flex mt-4 sm:mt-0 sm:mb-0 w-full items-center">
+                <img src="./../../../../assets/img/discount.png" class="w-6 h-6" alt="">
                 <p class="copon text-base px-4 font-bold text-[#6a6c72] mr-3">{{food.copon || 'بدون تخفیف'}}</p>
             </div>
-            <div class="discunt flex sm:mt-0 sm:mb-0 w-full items-center">
-                <img src="./../../../../assets/img/rate.png" class="w-[18px] h-[18px]" alt="">
+            <div class="discunt flex mt-4 sm:mt-0 sm:mb-0 w-full items-center">
+                <img src="./../../../../assets/img/rate.png" class="w-6 h-6" alt="">
                 <div class="flex items-center">
                     <p class="copon text-base pr-4 font-bold text-[#6a6c72] mr-3 mt-1">{{rate}}</p>
                     <p class="text-base text-[#6a6c72] font-bold mt-1 mr-1">({{lengthRating }} نفر)</p>

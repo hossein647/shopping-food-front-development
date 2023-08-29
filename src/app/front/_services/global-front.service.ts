@@ -59,6 +59,15 @@ export class GlobalFrontService {
     }
     return '';
   }
+  
+  
+  isExistGuest(): boolean {
+    return window.localStorage.getItem('orderFood_guest') ? true : false;
+  }
+
+  getGuest() {
+    return JSON.parse(window.localStorage.getItem?.('orderFood_guest') || '[]');
+  }
 
 
 }

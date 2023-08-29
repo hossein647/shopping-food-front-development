@@ -74,12 +74,18 @@
   <ul class="list m-0 !mt-[11px] absolute left-8">
     <li class="item !m-[30px]" *ngIf="!loggedIn && showSidebarMenu">
       <div class="auth text-center">
-        <a routerLink="login" class="customer item-link !text-[#00000087] font-semibold">ورود / عضویت</a>
+        <a 
+          routerLink="login" 
+          class="customer item-link 
+          !text-[#00000087] 
+          font-semibold hover:bg-white hover:text-[#5b5b5b]">
+          ورود / عضویت
+        </a>
       </div>
     </li>
   </ul>
 </div>
-<div class="custom-container px-0 pt-3 lg:px-0">
+<div class="custom-container px-0 lg:px-0">
   <div 
       class="parent-header rounded-md mx-5 sm:mx-10 lg:mx-[95px]" 
       [ngClass]="{'home-page': homePage}">
@@ -112,3 +118,13 @@
                 (onUpCounter)="upCounter($event)"
                 (onPay)="pay()">
 </app-sidebar-pay>
+<app-not-login-model 
+                    [show]="showNotLoginModal" 
+                    (onModal)="closeNoLoginModal()" 
+                    [message]="message">
+</app-not-login-model>
+<div 
+    class="overlay-card w-screen h-screen fixed bg-gray-500 left-0 top-0 opacity-40 z-40"
+    [ngClass]="{'hidden': !showOverlay}" 
+    #overlay>
+</div>
