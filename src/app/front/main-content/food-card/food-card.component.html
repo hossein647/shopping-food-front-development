@@ -14,8 +14,11 @@
                     bg-white" 
                     *ngFor="let food of foods; let i = index;">
             <div class="card-hedear">
-                <img [src]="baseApi + '/' + food.userId + '/' + food.image"
-                    class="h-64 rounded-md w-full" alt="">
+                <img 
+                    [src]="baseApi + '/' + food.userId + '/' + food.image"
+                    class="h-64 rounded-md w-full" 
+                    alt=""
+                    (click)="showMoreModal(food, i)">
             </div>
             <div class="card-body relative bg-white -top-4 ">
                 <div class="cart text-center -mt-10 relative -top-[30px]">
