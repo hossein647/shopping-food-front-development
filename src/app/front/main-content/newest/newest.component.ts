@@ -61,7 +61,7 @@ export class NewestComponent implements OnInit {
 
 
   onCart(food: Food) {    
-    if (this.globalQuery.isLoggedIn) {
+
       const key: string = `${food.name}_${food._id}`;
 
       if (!this.orderList[key]) this.orderList[key] = [];
@@ -73,13 +73,7 @@ export class NewestComponent implements OnInit {
 
       this.setCartLocalStorage(this.orderList, currentUser);
       this.updateGlobalFront(this.getCartLocalStorage(currentUser));
-
-
       this._snackbar.addSnackbar('با موفقیت به سبد خرید اضافه شد', false, 3000);
-    } else {
-      this.showNotLoginModal = true;
-      this.showOverlay = true;
-    }
   }
 
 
