@@ -77,7 +77,13 @@
     </div>
     <div class="comment mx-3 mt-4" #commentAnchor>
         <div class="write-comment flex flex-col mb-10 mx-3">
-            <label for="comment" class="mb-1 text-sm">نظرتان را بنویسید : <span  *ngIf="!loggedIn"> (ورود به حساب کاربری لازم است) </span> </label>
+            <label 
+                    for="comment" 
+                    class="mb-1 text-sm"
+                    routerLink="/login">
+                    نظرتان را بنویسید : <span  *ngIf="!loggedIn" class="underline hover:cursor-pointer">
+                        (ورود به حساب کاربری) </span> 
+            </label>
             <form class="w-full" [formGroup]="commentForm" (ngSubmit)="submit(commentForm)">
                 <textarea 
                     class="write border p-2 w-full"
