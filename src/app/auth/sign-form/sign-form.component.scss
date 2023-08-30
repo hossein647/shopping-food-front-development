@@ -1,13 +1,8 @@
 .custom-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 10%;
   margin-bottom: 10%;
     .custom-card {
-      box-shadow: #ccc 5px 4px 12px 1px;
-      padding: 20px 50px 30px;
-      border-radius: 5px;
+      padding: 20px 110px 30px;
         h2 {
           text-align: center;
           color: #919191;;
@@ -35,9 +30,9 @@
                         border: none;
                         background: #6ab04c;
                         color: white;
-                        padding: 4px 30px;
+                        padding: 8px 50px;
                         border-radius: 3px;
-                        font-size: 14px;
+                        font-size: 18px;
                         &:disabled {
                           background-color: #afafaf;
                           cursor: default;
