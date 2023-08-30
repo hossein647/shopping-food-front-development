@@ -33,18 +33,28 @@
                 #slider>
         <div class="wrapper-images relative">
             <img 
-                class="absolute rounded-full w-48 h-48 lg:w-40 lg:h-40"
+                class="
+                        absolute rounded-full w-48 h-48 lg:w-40 lg:h-40 
+                        duration-300 ease-in-out 
+                        hover:cursor-pointer hover:!scale-110"
+                        [ngClass]="{
+                            'hover:rotate-[-90deg]': i === 0,
+                            'hover:rotate-[-180deg]': i === 1,
+                            'hover:rotate-[90deg]': i === 2,
+                            'hover:rotate-[0deg]': i === 3
+                        }"
                 *ngFor="let food of foods; let i = index"
                 [src]="baseApi + '/' + food.userId + '/' + food.image" 
                 width="100" 
                 height="100" 
-                alt="" 
+                alt=""
+                (click)="navigetToFood(foods, foodTitle)"
                 #imgCircular>
         </div>
     </div>
     <div class="details mt-24 lg:mt-0 lg:w-5/12">
         <div class="data-food lg:mr-6 list-none flex items-start px-10 xs:px-18 sm:px-24 md:px-64 lg:px-0">
-            <div class="flex flex-col justify-center items-center overflow-hidden">
+            <div class="flex flex-col justify-center items-center">
                 <div class="parent-coutner w-full flex justify-start">
                     <h4 class="
                                 counter
@@ -73,7 +83,9 @@
                                 font-semibold
                                 overflow-hidden
                                 text-white
-                                hover:cursor-pointer"
+                                hover:cursor-pointer
+                                hover:!scale-[1.02]
+                                transition-all"
                                 (click)="navigetToFood(foods, foodTitle)"
                                 #title>
                                 {{foodTitle}}
