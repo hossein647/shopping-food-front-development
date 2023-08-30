@@ -11,12 +11,16 @@
                     md:w-[31%]
                     lg:w-[23.4%]
                     overflow-hidden
-                    bg-white" 
+                    bg-white
+                    hover:scale-110
+                    transition-transform
+                    duration-300
+                    ease-in-out" 
                     *ngFor="let food of foods; let i = index;">
             <div class="card-hedear">
                 <img 
                     [src]="baseApi + '/' + food.userId + '/' + food.image"
-                    class="h-64 rounded-md w-full" 
+                    class="h-64 rounded-md w-full hover:cursor-pointer" 
                     alt=""
                     (click)="showMoreModal(food, i)">
             </div>
