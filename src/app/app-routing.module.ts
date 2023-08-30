@@ -9,11 +9,14 @@ import { AuthGuard } from './guard/auth.guard';
 import { LoggedInUserGuard } from './guard/logged-in-user.guard';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./front/front.module').then(m => m.FrontModule)},
+  { 
+    path: '', 
+    loadChildren: () => import('./front/front.module').then(m => m.FrontModule)
+  },
   { 
     path: 'dashboard', 
     loadChildren: () => import('./__dashboard/user-profile.module').then(m => m.UserProfileModule), 
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   { path: 'login',    component: LoginComponent,    canActivate: [LoggedInUserGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [LoggedInUserGuard] },

@@ -8,10 +8,11 @@ import { ShopsComponent } from './main-content/category/shops/shops.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, 
+    path: '', component: HomeComponent,
     children: [
-      { path: '', component: MainContentComponent},
-      { path: 'shops/:shop-category', component: WrapperComponent, 
+      { path: '', component: MainContentComponent },
+      {
+        path: 'shops/:shop-category', component: WrapperComponent,
         children: [
           { path: '', component: ShopsComponent },
           { path: ':id', component: ShopComponent }
@@ -26,3 +27,22 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class FrontRoutingModule { }
+
+
+
+
+// const routes: Routes = [
+//   {
+//     path: '', component: HomeComponent,
+//     children: [
+//       { path: '', component: MainContentComponent },
+//       {
+//         path: 'shops/:shop-category', component: WrapperComponent,
+//         children: [
+//           { path: '', component: ShopsComponent },
+//           { path: ':id', component: ShopComponent }
+//         ]
+//       },
+//     ]
+//   },
+// ];
