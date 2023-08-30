@@ -28,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -59,8 +60,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatDialogModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    {
+      provide: MatDialogRef,
+      useValue: {
+        colse: (dialogRef: any) => { }
+      }
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

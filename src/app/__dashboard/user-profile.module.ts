@@ -29,7 +29,7 @@ import { ReadFoodCategoryComponent } from './food-category/read-food-category/re
 import { ReadUploadComponent } from './upload/read-upload/read-upload.component';
 import { HomeUploadComponent } from './upload/home-upload/home-upload.component';
 import { ImageDialogBoxComponent } from './upload/image-dialog-box/image-dialog-box.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -97,15 +97,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonToggleModule,
     MatChipsModule,
     SpinnerModule,
-    MatCardModule
+    MatCardModule,
   ],
-  providers: [
-    {
-      provide: MatDialogRef,
-      useValue: {
-        colse: (dialogRef: any) => {}
-      }
-    },
-  ],
+  providers: [],
 })
 export class UserProfileModule { }
