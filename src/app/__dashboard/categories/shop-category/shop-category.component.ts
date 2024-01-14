@@ -24,6 +24,8 @@ export class ShopCategoryComponent implements OnInit {
   imageEmpty: string;
   idCategory: number;
   selectedImage: string;
+  uploadCenter: string = '';
+  url_liara: string = '';
 
   @ViewChild('form') form: NgForm;
 
@@ -38,7 +40,16 @@ export class ShopCategoryComponent implements OnInit {
     private uploadService: UploadService,
     private router: Router,
     private categroyService: CategoryService,
-    ) { }
+    ) {
+      this.uploadService.uploadCenter$.subscribe({
+        next: (res: any) => {
+          if (res?.setting?.uploadCenter) {
+            this.uploadCenter = res.setting.uploadCenter;
+          }
+        },
+        error: (err: any) => {}
+      })
+    }
 
   ngOnInit(): void {
     this.initForm();
@@ -60,7 +71,7 @@ export class ShopCategoryComponent implements OnInit {
 
   submitCreateForm(shopCategory: Category) {
     if (this.formCategory.valid) {
-      this.categroyService.create(shopCategory).subscribe(res => {
+      this.categroyService.create({ ...shopCategory, fileLiara: { url: this.url_liara }}).subscribe(res => {
         if (res) {
           const result = JSON.parse(JSON.stringify(res));
           this._snackbar.addSnackbar(result.message, result?.err, 3000);
@@ -76,7 +87,7 @@ export class ShopCategoryComponent implements OnInit {
 
   submintEditForm(shopCategory: Category) {
     if (this.formCategory.valid) {
-      this.categoryService.update(this.idCategory, shopCategory).subscribe(res => {
+      this.categoryService.update(this.idCategory, { ...shopCategory, fileLiara: { url: this.url_liara } }).subscribe(res => {
         if (res) {
           const result = JSON.parse(JSON.stringify(res));
           this._snackbar.addSnackbar(result.message, result.err, 3000);
@@ -95,7 +106,7 @@ export class ShopCategoryComponent implements OnInit {
 
 
   openDialog() {
-    this.uploadService.getAllPrivate().subscribe(res => {
+    this.uploadService.getAllGallery(this.uploadCenter).subscribe((res: any) => {
       if (res) {
         const result = JSON.parse(JSON.stringify(res));
         const images = result.files;
@@ -105,7 +116,8 @@ export class ShopCategoryComponent implements OnInit {
         const dialogRef = this.dialogHelper.openDialog(images, responseMessage, this.selectedImage);
         dialogRef.afterClosed().subscribe(image => {
           if (image) {
-            this.formCategory.patchValue({ image: image.filename, imageId: image._id})
+            this.url_liara = image.fileLiara?.Location;
+            this.formCategory.patchValue({ image: image.filename, imageId: image._id })
           }
         })
       }
@@ -126,7 +138,7 @@ export class ShopCategoryComponent implements OnInit {
             this.selectedImage = editCategory[0].image;
             this.formCategory.patchValue(editCategory[0]);
           } else {
-            this.categoryService.getAll().subscribe(res => {
+            this.categoryService.getAll(this.uploadCenter).subscribe(res => {
               if (res) {
                 const categories: Category[] = (JSON.parse(JSON.stringify(res))).shopCategories;
                 const editCategory = categories.filter((category) => category._id === this.idCategory);

@@ -16,8 +16,8 @@ export class ShopCategoryService {
   ) { }
 
 
-  getAll() {
-    return this.http.get(`${this.apiAddress}/shop-category/getAll`)
+  getAll(uploadCenter: string) {
+    return this.http.get(`${this.apiAddress}/shop-category/getAll-${uploadCenter}`)
     .pipe(
       catchError(err => of(err))
     )

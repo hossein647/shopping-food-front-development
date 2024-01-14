@@ -1,9 +1,18 @@
 export interface Upload {
-  _id: number;
+  id: string;
   userId: number;
   originalname: string;
   filename: string;
-  destination: string;
-  path: string;
   url: string;
+  statusCode: string;
+  message: string;
+  setting: {
+    id: string;
+    uploadCenter: string;
+  }
+  fileLiara?: {
+    Location: string,
+    Key: string,
+    Bucket: string
+  },
 }

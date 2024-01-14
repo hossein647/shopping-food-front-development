@@ -11,7 +11,7 @@
                     [matTooltip]="image.filename" 
                     matTooltipPosition="below">
                         <img 
-                            [src]="baseApi + '/' + image.userId + '/' + image.filename"
+                            [src]="image.fileLiara?.Location ? image.fileLiara?.Location : baseApi + '/' + image.userId + '/' + image.filename"
                             [alt]="image.filename" 
                             (click)="selected($event, image)"
                             [ngClass]="{'selected': image.filename === imageNameSelected}"

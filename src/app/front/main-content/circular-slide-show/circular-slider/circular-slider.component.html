@@ -11,7 +11,7 @@
             h-[600px]
             lg:h-[500px]" 
             #container>
-    <div class="overlay-blur contrast-[.6] w-full h-full absolute"></div>
+    <div class="overlay-blur contrast-[.6] w-full h-full absolute bg-cover"></div>
     <div class="
                 circle-slider 
                 rounded-full 
@@ -44,7 +44,7 @@
                             'hover:rotate-[0deg]': i === 3
                         }"
                 *ngFor="let food of foods; let i = index"
-                [src]="baseApi + '/' + food.userId + '/' + food.image" 
+                [src]="uploadCenter === 'liara' ? food.fileLiara?.url : baseApi + '/' + food.userId + '/' + food.image" 
                 width="100" 
                 height="100" 
                 alt=""

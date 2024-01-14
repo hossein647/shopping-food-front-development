@@ -18,11 +18,11 @@ export class CategoryPaginatorService {
   }
 
 
-  getAllCategoryWithPaginate(limit: number, page: number): Observable<any> {
+  getAllCategoryWithPaginate(limit: number, page: number, uploadCenter: string): Observable<any> {
     const params = new HttpParams()
       .set('page', page)
       .set('limit', limit)
-    return this.http.get<CategoryPaginator[]>(`${this.baseUrl}/shop-category/paginate`, { 
+    return this.http.get<CategoryPaginator[]>(`${this.baseUrl}/shop-category/paginate-${uploadCenter}`, { 
       params, 
       withCredentials: true,
     }).pipe(

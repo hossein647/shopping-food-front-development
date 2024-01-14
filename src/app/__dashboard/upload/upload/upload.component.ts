@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { UploadService } from '../state/upload/upload.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-upload',
@@ -18,6 +19,8 @@ export class UploadComponent implements OnInit {
   loadingSpinner: boolean = false;
   shopEmpty     : string;
   user          : any;
+  uploadCenter: string = '';
+  baseApi = environment.url;
 
   @ViewChild('inputFileSelect') input: ElementRef;
 
@@ -25,11 +28,20 @@ export class UploadComponent implements OnInit {
     private uploadService: UploadService,
     private _sncakbar: Snackbar,
     private location: Location,
-    ) { }
+    ) { 
+      this.uploadService.uploadCenter$.subscribe({
+        next: (res: any) => {   
+          if (res?.setting?.uploadCenter)        {
+            this.uploadCenter = res.setting.uploadCenter;
+          }
+        }
+      })
+    }
 
   
 
     ngOnInit(): void {
+      // if (this.uploadCenter)
       this.initForm();
       this.emptyImage = 'لطفا یک یا چند تصویر انتخاب کنید'
     }
@@ -64,7 +76,7 @@ export class UploadComponent implements OnInit {
     this.limitSizeFile(this.files);
 
     if (this.files.length > 0 && this.uploadForm.valid && !this.limitSizeFile(this.files)) {      
-      this.uploadService.uploadImage(this.files).subscribe(
+      this.uploadService.uploadImage(this.files, this.uploadCenter).subscribe(
         (res: any) => {
           if (res ) { 
             this.loadingSpinner = false;        
@@ -73,7 +85,9 @@ export class UploadComponent implements OnInit {
               this.images.splice(0);
               this.files.splice(0)
               this.uploadForm.reset();
-              this.location.back();
+              setTimeout(() => {
+                this.location.back();
+              }, 1000);
             }
           }
         },

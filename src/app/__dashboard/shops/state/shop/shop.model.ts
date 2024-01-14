@@ -8,4 +8,5 @@ export interface Shop {
   image: string;
   imageId: number;
   userId: number;
+  fileLiara?: { url: string }
 }

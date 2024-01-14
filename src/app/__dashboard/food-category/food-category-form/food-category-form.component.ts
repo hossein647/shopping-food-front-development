@@ -7,6 +7,7 @@ import { Category } from '../../categories/state/category.model';
 import { CategoryService } from '../../categories/state/category.service';
 import { FoodCategory } from '../state/food-category.model';
 import { FoodCategoryService } from '../state/food-category.service';
+import { UploadService } from '../../upload/state/upload/upload.service';
 
 @Component({
   selector: 'app-food-category-form',
@@ -22,6 +23,7 @@ export class FoodCategoryFormComponent implements OnInit {
   submitLabel!: string;
   nameError!: string;
   shopCategoryError!: string;
+  uploadCenter: string = '';
   
   @ViewChild('form') form!: NgForm;
   foodCategoryId: number;
@@ -35,7 +37,15 @@ export class FoodCategoryFormComponent implements OnInit {
     private location: Location,
     private router: Router,
     private foodCategroyService: FoodCategoryService,
-  ) { }
+    private uploadService: UploadService
+  ) {
+    this.uploadService.uploadCenter$.subscribe({
+      next: (res: any) => {
+        if (res?.setting?.uploadCenter)
+        this.uploadCenter = res.setting.uploadCenter;
+      },
+    })
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -136,7 +146,7 @@ export class FoodCategoryFormComponent implements OnInit {
 
 
   getShopCategories() {
-    this.shopCategoryService.getAll().subscribe(res => {
+    this.shopCategoryService.getAll(this.uploadCenter).subscribe(res => {
       if (res) {        
         this.shopCategories = (JSON.parse(JSON.stringify(res))).shopCategories;
       }

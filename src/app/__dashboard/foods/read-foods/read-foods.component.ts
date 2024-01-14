@@ -9,6 +9,7 @@ import { FoodService } from '../state/food.service';
 import { CheckboxChange } from '../../_share/interface/checkboxChange.interface';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { CategoryService } from '../../categories/state/category.service';
+import { UploadService } from '../../upload/state/upload/upload.service';
 
 @Component({
   selector: 'app-read-foods',
@@ -28,6 +29,7 @@ export class ReadFoodsComponent implements OnInit {
   selection       : any;
   dataSource      : any;
   noData          : string;
+  uploadCenter    : string = '';
   
   constructor(
     private foodService    : FoodService,
@@ -36,34 +38,46 @@ export class ReadFoodsComponent implements OnInit {
     private activatedRoute : ActivatedRoute,
     private _snackbar      : Snackbar,
     private categoryService: CategoryService,
-  ) { }
+    private uploadService  : UploadService,
+  ) {
+    this.uploadService.uploadCenter$.subscribe({
+      next: (res: any) => {
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.foodService.paginateFoods(this.limit = 5, this.pageIndex = 0, this.uploadCenter).subscribe();
+          this.categoryService.getAll(this.uploadCenter).subscribe(); // only for access state category for part edit food
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
-    this.foodService.paginateFoods(this.limit = 5, this.pageIndex = 0).subscribe();
-    this.categoryService.getAll().subscribe(); // only for access state category for part edit food
     this.initDefaultValueTable();
     this.getDataSourceWithPageinate();
   }
 
+  
   removeCategory() {
     this.foodService.remove(this.idFood).subscribe(res => {
       const result = JSON.parse(JSON.stringify(res));
       if (res) {
         this._snackbar.addSnackbar(result.message, result.err, 3000);
-        this.foodService.paginateFoods(this.limit, this.pageIndex).subscribe(); // request for refresh data
+        this.foodService.paginateFoods(this.limit, this.pageIndex, this.uploadCenter).subscribe(); // request for refresh data
         this.checked = false;
       }
     })
   }
 
+
   editCategory() {
     this.router.navigate(['edit', this.idFood], { relativeTo: this.activatedRoute })
   }
 
+  
   changePaginateValue(e: any) {
     this.limit = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.foodService.paginateFoods(this.limit, this.pageIndex).subscribe();
+    this.foodService.paginateFoods(this.limit, this.pageIndex, this.uploadCenter).subscribe();
   }
 
   changeEventCheckbox(checkboxChange: CheckboxChange){    

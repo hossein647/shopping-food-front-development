@@ -77,7 +77,6 @@ export class PaymentHistoryComponent implements OnInit {
 
 
   pipeOnResponseOrderFood(res: any) {
-    console.log(res);
     if (res.docs.length) {
       res.docs.forEach((payment: OrderFood, index: number) => {      
         if (typeof payment.createdAt === 'string') {

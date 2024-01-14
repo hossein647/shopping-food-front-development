@@ -13,6 +13,7 @@ export class FoodCardComponent implements OnInit {
   @Input() foods      : Food[];
   @Input() averageRate: number[];
   @Input() buyMessage : string;
+  @Input() uploadCenter : string;
 
   @Output() onCart = new EventEmitter();
   @Output() onShowOrModal = new EventEmitter<{food: Food, index: number}>();

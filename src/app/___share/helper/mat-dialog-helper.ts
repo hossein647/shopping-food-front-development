@@ -26,23 +26,7 @@ export class MatDialogHelper {
                 responseImage: responseImage,
             }
         }
-        const dialogRef = this.dialog.open(ImageDialogBoxComponent, config);        
+        const dialogRef = this.dialog.open(ImageDialogBoxComponent, config);     
         return dialogRef;
-    }
-
-    createUrl(blob: Blob, file: Upload): Observable<any> {
-        let images = new Subject();
-        const images$ = images.asObservable();
-        const reader = new FileReader();  
-
-        reader.readAsDataURL(blob);
-        reader.onload = (event) => {           
-            images.next ({
-                _id: file?._id,
-                url: event.target?.result,
-                name: file?.filename
-            });                        
-        };        
-        return images$;
     }
 }

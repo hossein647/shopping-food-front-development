@@ -10,6 +10,7 @@ import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 import { SubFood } from 'src/app/__dashboard/sub-category-food/state/sub-food.model';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { environment } from 'src/environments/environment';
+import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
   selector: 'app-shop',
@@ -35,6 +36,7 @@ export class ShopComponent implements OnInit {
   showModalClicked : boolean = false;
   indexSubFood     : number;
   baseApi          : string = environment.url;
+  uploadCenter: string = '';
 
   @ViewChildren('sectionSubFood') sectionSubFood: QueryList<ElementRef>;
   @ViewChild('foodMenu') foodMenu               : ElementRef;
@@ -47,12 +49,24 @@ export class ShopComponent implements OnInit {
     private renderer: Renderer2,
     private _snackbar: Snackbar,
     private globalFrontService: GlobalFrontService,
-  ) { }
+    private globalService: GlobalService,
+  ) {
+    this.globalService.uploadCenter$.subscribe({
+      next: (res) => {                
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.getIdFromRoute();
+        }
+      }
+    })
+  }
 
   
   ngOnInit(): void {
+    if (!this.uploadCenter) {
+      this.globalService.getSetting().subscribe()
+    }
     this.message = 'برای خرید باید وارد حساب کاربری شوید.';
-    this.getIdFromRoute();
     const guest = this.globalFrontService.isExistGuest();
     const email = this.globalFrontService.getEmail();
     const currentUser = (!guest && !email) || guest ? 'guest' : email;

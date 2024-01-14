@@ -4,42 +4,48 @@ import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
 import { Upload } from './upload.model';
 import { UploadStore } from './upload.store';
-import { of } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
+import { Setting } from 'src/app/___share/interface/setting.interface';
 
 @Injectable({ providedIn: 'root' })
 export class UploadService {
 
   baseApi = environment.url;
+  private uploadCenter = new BehaviorSubject<any>({ setting: { uploadCenter: '' } });
+  uploadCenter$ = this.uploadCenter.asObservable();
+
   constructor(
     private uploadStore: UploadStore, 
     private http: HttpClient
     ) {}
 
-  uploadImage(file: any) {
+
+  uploadImage(file: any, uploadCenter: string) {
     const formData = new FormData();
     for (let i = 0; i < file.length; i++) {
       formData.append('images', file[i]);
     }
-    return this.http.post<Upload>(`${this.baseApi}/file-upload/image`, formData, 
+    return this.http.post<Upload>(`${this.baseApi}/file-upload/image-${uploadCenter}`, formData, 
       { withCredentials: true });
   }
   
   
-  uploadProfileImage(file: any, id: number) {
-    const params = new HttpParams().set('id', id)
+  uploadProfileImage(file: any, dataImage: any) {
     const formData = new FormData();
     formData.append('image', file);
+    formData.append('dataImage', JSON.stringify(dataImage));
 
-    return this.http.post(`${this.baseApi}/file-upload/img-profile`, 
-    formData, { params, withCredentials: true })
+    return this.http.post(`${this.baseApi}/file-upload/img-profile-${dataImage.setting.uploadCenter}`, 
+    formData, { withCredentials: true })
     .pipe(
       catchError(err => of(err))
     )
   }
+  
 
 
-  getAllPrivate() {
-    return this.http.get<Upload[]>(`${this.baseApi}/file-upload/all-private`, { withCredentials: true })
+  getAllGallery(uploadCenter: string) {    
+    return this.http.get<Upload[]>(`${this.baseApi}/file-upload/all-gallery-${uploadCenter}`, { withCredentials: true })
     .pipe(
       tap(entitiesImage => {
         this.uploadStore.set(entitiesImage);
@@ -59,17 +65,33 @@ export class UploadService {
   }
   
 
-  remove(id: number) {
-    return this.http.delete<Upload>(`${this.baseApi}/file-upload/remove/${id}`, 
-      { withCredentials: true });
+  remove(id: string, uploadCenter: string, key?: string) {
+    const params = new HttpParams()
+    .set('id', id)
+    .set('key', key || '')
+    .set('uploadCenter', uploadCenter);
+
+    return this.http.delete<Upload>(`${this.baseApi}/file-upload/remove-${uploadCenter}`, { params, withCredentials: true })
+      .pipe(
+        catchError(err => throwError(() => of(err)))
+      );
   }
 
 
-  getImageProfile() {
-      return this.http.get(`${this.baseApi}/file-upload/profile-image`, { withCredentials: true })
+  getImageProfile(key: string) {
+    const params = new HttpParams().set('key', key);
+      return this.http.get(`${this.baseApi}/file-upload/profile-image/get`, { params, withCredentials: true })
       .pipe(
-        catchError(err => of(err))
+        tap((res: any) => {          
+          this.setUploadCenter(res.setting);
+          return res
+        }),
+        catchError(err => throwError(() => of(err)))
       )
   }
 
+
+  setUploadCenter(setting: Setting) {
+    this.uploadCenter.next({ setting });
+  }
 }

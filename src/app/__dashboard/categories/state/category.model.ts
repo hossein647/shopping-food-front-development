@@ -5,4 +5,7 @@ export interface Category {
   alias: string;
   image: string;
   imageId: number;
+  fileLiara?: {
+    url: string;
+  }
 }

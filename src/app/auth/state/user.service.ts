@@ -22,8 +22,8 @@ export class UserService {
   }
 
 
-  login(user: User) {
-    return this.http.post<User>(`${this.baseUrl}/auth/login`, user, {withCredentials: true}).pipe(
+  login(user: User, uploadCenter: string) {
+    return this.http.post<User>(`${this.baseUrl}/auth/login`, { ...user, uploadCenter }, {withCredentials: true}).pipe(
       tap(entity => this.userStore.set({entity})),
       catchError(err => of(err))
     );

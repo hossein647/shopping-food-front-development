@@ -8,6 +8,7 @@ import { Category } from '../state/category.model';
 import { CategoryService } from '../state/category.service';
 import { CategoryPaginatorQuery } from '../state/state/category-paginator.query';
 import { CategoryPaginatorService } from '../state/state/category-paginator.service';
+import { UploadService } from '../../upload/state/upload/upload.service';
 
 @Component({
   selector: 'app-read-shop-categories',
@@ -30,6 +31,7 @@ export class ReadShopCategoriesComponent implements OnInit {
   dataSource      : any;
   selection       : any;
   lastItemPage    : boolean;
+  uploadCenter    : string = '';
   
   constructor(
     private categoryService        :  CategoryService,
@@ -38,12 +40,22 @@ export class ReadShopCategoriesComponent implements OnInit {
     private _snackbar              : Snackbar,
     private router                 : Router,
     private activatedRoute         : ActivatedRoute,
-  ) { }
+    private uploadService          : UploadService,
+  ) {
+    this.uploadService.uploadCenter$.subscribe({
+      next: (res: any) => {        
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.getCategoryFromService();
+          this.getDataSourceWithPageinate();
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.initDefaultValueTable();
-    this.getCategoryFromService();
-    this.getDataSourceWithPageinate();
+
     
   }
 
@@ -54,7 +66,7 @@ export class ReadShopCategoriesComponent implements OnInit {
       if (res) {
         this._snackbar.addSnackbar(result.message, result.err, 3000);
         if (this.lastItemPage && this.pageIndex > 0) this.pageIndex -= 1;
-        this.categoryPaginateService.getAllCategoryWithPaginate(this.limit, this.pageIndex)
+        this.categoryPaginateService.getAllCategoryWithPaginate(this.limit, this.pageIndex, this.uploadCenter)
         .subscribe(); // request for refresh data
         this.checked = false;
       }
@@ -64,7 +76,7 @@ export class ReadShopCategoriesComponent implements OnInit {
   changePaginateValue(e: any) {    
     this.limit = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.categoryPaginateService.getAllCategoryWithPaginate(this.limit, this.pageIndex).subscribe(
+    this.categoryPaginateService.getAllCategoryWithPaginate(this.limit, this.pageIndex, this.uploadCenter).subscribe(
       res => {        
         this.lastItemPage = res.shopCategories?.docs.length === 1 ? true : false;        
       }
@@ -108,7 +120,7 @@ export class ReadShopCategoriesComponent implements OnInit {
   }
 
   getCategoryFromService() {
-    this.categoryPaginateService.getAllCategoryWithPaginate(this.limit = 5, this.pageIndex = 0)  // send request to server
+    this.categoryPaginateService.getAllCategoryWithPaginate(this.limit = 5, this.pageIndex = 0, this.uploadCenter)  // send request to server
     .subscribe()
   }
 

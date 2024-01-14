@@ -4,4 +4,7 @@ export interface ShopCategory {
     name : string;
     alias: string;
     image: string;
+    fileLiara?: {
+        url: string;
+    }
 }

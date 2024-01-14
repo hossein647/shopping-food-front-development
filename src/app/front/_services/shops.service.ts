@@ -32,7 +32,7 @@ export class ShopsService {
 
   setShops(category: string, limit: number, page: number) {                     
     this.getAll(category, limit, page).subscribe(
-      res => {
+      res => {        
         if (res) this.shops.next(res);
       }
     )

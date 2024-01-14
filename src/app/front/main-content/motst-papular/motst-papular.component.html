@@ -16,13 +16,15 @@
                 mx-[15px] 
                 sm:mx-[40px] 
                 lg:mx-[60px] 
-                xl:mx-[75px]">
+                xl:mx-[75px]"
+>
         محبوبترین
     </h2>
     <app-food-card 
                     [averageRate]="averageRate" 
                     [buyMessage]="buyMessage" 
                     [foods]="foods" 
+                    [uploadCenter]="uploadCenter"
                     (onCart)="onCart($event)"
                     (onShowOrModal)="showMoreModal($event)">
     </app-food-card>

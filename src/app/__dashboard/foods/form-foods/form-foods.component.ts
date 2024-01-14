@@ -47,6 +47,8 @@ export class FormFoodsComponent implements OnInit {
   foodCategories           : FoodCategory[] = [];
   loadingSpinner           : boolean = false;
   selectedImage: string;
+  uploadCenter: string = '';
+  url_liara: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,7 +63,14 @@ export class FormFoodsComponent implements OnInit {
     private location: Location,
     private shopService: ShopsService,
     private foodCategoryService: FoodCategoryService,
-  ) {}
+  ) {
+    this.uploadService.uploadCenter$.subscribe({
+      next: (res: any) => {
+        if (res?.setting?.uploadCenter) this.uploadCenter = res.setting.uploadCenter;
+      },
+      error: (err: any) => { }
+    })
+  }
 
 
 
@@ -96,9 +105,12 @@ export class FormFoodsComponent implements OnInit {
       ...this.stepSecondFood.value, 
       imageId: this.food.imageId,
       super: this.checked,
-      state: this.state
+      state: this.state,
+      fileLiara: {
+        url: this.url_liara
+      }
     };
-        
+    
     if (this.validForm()) {
       if(this.isCreateForm()) this.submitCreateForm(formValue)
       else this.submitEditForm(formValue)
@@ -106,7 +118,7 @@ export class FormFoodsComponent implements OnInit {
   }
 
 
-  submitCreateForm(food: Food) {
+  submitCreateForm(food: Food) {    
     this.foodService.create(food).subscribe(res => {
       if (res) {
         const result = JSON.parse(JSON.stringify(res));
@@ -159,8 +171,8 @@ export class FormFoodsComponent implements OnInit {
 
   openDialog() {
     this.loadingSpinner = true;
-    this.uploadService.getAllPrivate().subscribe(res => { 
-      if (res) {
+    this.uploadService.getAllGallery(this.uploadCenter).subscribe(res => { 
+      if (res) {        
         this.loadingSpinner = false;
         const result = JSON.parse(JSON.stringify(res));
         this.images = result.files;
@@ -170,7 +182,8 @@ export class FormFoodsComponent implements OnInit {
         const dialogRef = this.dialogHelper.openDialog(this.images, this.responseMessage, this.selectedImage);
         dialogRef.afterClosed().subscribe(image => {
           if (image) {          
-            this.food = { ...this.food, image: image.filename, imageId: image._id };          
+            this.food = { ...this.food, image: image.filename, imageId: image._id }; 
+            this.url_liara = image.fileLiara?.Location;     
             this.stepSecondFood.patchValue({ image: this.food.image });
           }
         })
@@ -197,17 +210,19 @@ export class FormFoodsComponent implements OnInit {
   getEditFormFood() {
     this.activatedRoute.params.subscribe(param => {      
       this.foodId = param.id
-      this.foodQuery.select(state => state.entities?.foods).subscribe(entityFood => {        
-        if (entityFood) {
+      this.foodQuery.select(state => {
+        return state.entities?.foods
+      }).subscribe(entityFood => {        
+        if (entityFood) {          
           const result = JSON.parse(JSON.stringify(entityFood));          
           if (result.docs?.length !== 0) {
             const foods: Food[] = Array.from(result.docs);
             this.food = foods.filter(food => food._id === this.foodId)[0];
-            
+            this.url_liara = this.food?.fileLiara?.url || '';
             this.selectedImage = this.food?.image;
             this.stepFirstFood.patchValue(this.food);
             this.stepSecondFood.patchValue(this.food);            
-            this.checked = this.food.super;          
+            this.checked = this.food?.super;          
           }
         } else {
           this.router.navigate(['/dashboard/foods']);

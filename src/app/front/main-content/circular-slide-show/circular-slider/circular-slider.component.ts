@@ -6,6 +6,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { environment } from 'src/environments/environment';
 import { CircularService } from '../state/circular.service';
+import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
   selector: 'app-circular-slider',
@@ -46,14 +47,26 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
   notSeenPage      : boolean = false;
   clickSliding     : boolean = true;
   baseApi          : string  = environment.url;
+  uploadCenter     : string = '';
   
 
   constructor(
     private renderer: Renderer2,
     private circularService: CircularService,
     private breakPoint: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private globalService: GlobalService,
     ) {
+      this.globalService.uploadCenter$.subscribe({
+        next: (res: any) => {
+          console.log(res);
+          
+          if (res?.setting?.uploadCenter) {
+            this.uploadCenter = res.setting.uploadCenter;
+            this.getShowStateImages();
+          }
+        }
+      })
     }
     
     
@@ -68,8 +81,17 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
     
     
   ngOnInit(): void {
+    if (!this.uploadCenter) {
+      this.globalService.getSetting().subscribe({
+        next: (res: any) => {
+          if (res?.setting?.uploadCenter) {
+            this.uploadCenter = res.setting.uploadCenter;
+          }
+        }
+      })
+    }
     this.updateToShowState(); // once in day
-    this.getShowStateImages();
+    
     this.completeYesterdaySuperFoods(); // once in day
     this.rotateSlider();
   }
@@ -300,6 +322,9 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
         "userId": "62c1b8ec88924809102e8e70",
         "createdAt": "2022-07-10T10:21:40.157+0000",
         "updatedAt": "2023-08-26T19:59:18.484+0000",
+        "fileLiara": {
+          "url": "https://rel-app.storage.iran.liara.space/order-food/62c1b8ec88924809102e8e70/images/1580728211618-822d.jpg"
+        }
         
       },
       {
@@ -335,6 +360,9 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
         "userId": "62c1b8ec88924809102e8e70",
         "createdAt": "2022-07-10T18:50:41.748+0000",
         "updatedAt": "2023-08-26T20:02:54.249+0000",
+        "fileLiara": {
+          "url": "https://rel-app.storage.iran.liara.space/order-food/62c1b8ec88924809102e8e70/images/Eggplant-Stew-f0f9.jpg"
+        }
         
       },
       {
@@ -363,6 +391,9 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
         "userId": "62cbfaf1486bbef38c06a649",
         "createdAt": "2022-07-11T11:14:37.648+0000",
         "updatedAt": "2023-08-26T19:54:45.525+0000",
+        "fileLiara": {
+          "url": "https://rel-app.storage.iran.liara.space/order-food/62cbfaf1486bbef38c06a649/images/pizza-56a3.png"
+        }
         
       },
       {
@@ -390,7 +421,10 @@ export class CircularSliderComponent implements OnInit, AfterViewInit, OnDestroy
         "imageId": "64ea04e09d81489e36815994",
         "userId": "62cc46ae400cb71607efaf27",
         "createdAt": "2022-07-14T16:48:43.425+0000",
-        "updatedAt": "2023-08-26T19:56:13.904+0000",
+        "updatedAt": "2023-08-26T19:56:13.904+0000", 
+        "fileLiara": {
+          "url": "https://rel-app.storage.iran.liara.space/order-food/62cc46ae400cb71607efaf27/images/images-f2104.jpg"
+        }
         
       }
     ]

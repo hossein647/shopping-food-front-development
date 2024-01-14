@@ -32,6 +32,7 @@ export class ImageDialogBoxComponent implements OnInit {
   }
 
   selected(event: any, image: Upload) {
+    
     this.imageNameSelected = image.filename
   }
 

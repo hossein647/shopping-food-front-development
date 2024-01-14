@@ -2,16 +2,16 @@
     <div class="wrapper-slider -mt-[90px] bg-[#eeeeee59] rounded-tl-md rounded-tr-md">
         <app-circular-slider></app-circular-slider>
     </div>
-    <div class="wrapper-search">
-        <app-search-bar (onGoToPage)="goToPage($event)" [lists]="lists">
+    <div class="wrapper-search 2xl:px-32">
+        <app-search-bar (onGoToPage)="goToPage($event)" [lists]="lists" [uploadCenter]="uploadCenter">
         </app-search-bar>
     </div>
     <div class="">
-        <div class="wrapper-papular">
-            <app-motst-papular></app-motst-papular>
+        <div class="wrapper-papular 2xl:px-32">
+            <app-motst-papular [uploadCenter]="uploadCenter" ></app-motst-papular>
         </div>
-        <div class="wrapper-newest">
-            <app-newest></app-newest>
+        <div class="wrapper-newest 2xl:px-32">
+            <app-newest [uploadCenter]="uploadCenter" ></app-newest>
         </div>
     </div>
     <app-footer></app-footer>

@@ -11,6 +11,7 @@ import { CardsService } from '../../_services/cards.service';
 import { CommentService } from '../../_services/comment.service';
 import { RatingService } from '../../_services/rating.service';
 import { UsernamePipe } from './username.pipe';
+import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
   selector: 'app-more-modal',
@@ -32,6 +33,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
   mainCommentId    : number;
   isReplay         : boolean = false;
   baseApi          : string = environment.url;
+  uploadCenter     : string = '';
 
   
   @Input() loggedIn        : boolean | undefined;
@@ -54,7 +56,16 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
     private foodService       : FoodService,
     private cardService       : CardsService,
     private renderer          : Renderer2,
-  ) {}
+    private globalService     : GlobalService,
+  ) {
+    this.globalService.uploadCenter$.subscribe({
+      next: (res) => {
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+        }
+      }
+    })
+  }
 
 
   ngAfterViewInit(): void {
@@ -75,7 +86,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
           this.setRateUser();
           this.foodPopulatedComment(); // inint comment
           this.user = this.getUserLocalStorage();
-      }
+      }      
     }
   }
 
@@ -121,7 +132,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
     if (this.food._id && this.globalQuery.isLoggedIn) {
       this.ratingService.setRateUser(this.food._id).subscribe(
         res => {
-          if (res) {       
+          if (res) {                   
             if (Array.isArray(res.rating)) {
               this.lengthRating = res.rating.length;
               const item = res.rating?.filter(
@@ -205,7 +216,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
 
   refreshFoodCard() {
     if (this.ref === 'most_popular') {
-      this.cardService.popular().subscribe(
+      this.cardService.popular(this.uploadCenter).subscribe(
         res => {
           if (res) {                      
             this.onSendDataToFoodCard.emit(res.foods);
@@ -214,7 +225,7 @@ export class MoreModalComponent implements OnInit, OnChanges, AfterViewInit {
         )
       }
       if (this.ref === 'newest') {
-      this.cardService.newest().subscribe(
+      this.cardService.newest(this.uploadCenter).subscribe(
         res => {
           if (res) {            
             this.onSendDataToFoodCard.emit(res.foods);

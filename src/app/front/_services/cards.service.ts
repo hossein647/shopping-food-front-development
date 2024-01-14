@@ -17,16 +17,16 @@ export class CardsService {
   ) { }
 
 
-  popular() {
-    return this.http.get<Food>(`${this.apiAddress}/foods/getAll/popular`)
+  popular(uploadCenter: string) {
+    return this.http.get<Food>(`${this.apiAddress}/foods/getAll/popular-${uploadCenter}`)
     .pipe(
       catchError(err => of(err))
     )
   }
   
   
-  newest() {
-    return this.http.get(`${this.apiAddress}/foods/getAll/newest`)
+  newest(uploadCenter: string) {
+    return this.http.get(`${this.apiAddress}/foods/getAll/newest-${uploadCenter}`)
     .pipe(
       catchError(err => of(err))
     )

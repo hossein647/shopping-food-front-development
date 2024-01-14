@@ -21,10 +21,14 @@
               </label>
               <input type="file" hidden id="upload" (change)="changeFileSelect($event)">
             </div>
-            <div class="profile-image ml-[15px] w-36 h-36">
-              <img *ngIf="upload" class="rounded-full border-4 border-[#f1f1f1]"
-                [src]="baseApi + '/' + file.userId + '/profile/' + file.filename" alt="" #imgProfile>
-              <svg *ngIf="!upload" xmlns="http://www.w3.org/2000/svg"
+            <div class="profile-image ml-[15px] w-36 h-36 relative -z-10">
+              <img 
+                  class="rounded-full border-4 border-[#f1f1f1] absolute"
+                  [src]="file.url" 
+                  alt="" 
+                  #imgProfile
+              >
+              <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-36 w-36 rounded-full border p-4 text-gray-400" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,6 +81,11 @@
             <li *ngIf="role === 'seller' ||  role === 'admin'">
               <a routerLink="home-upload" (click)="listSelected('home-upload')"
                 [ngClass]="{'selected': item === 'home-upload'}">آپلود تصاویر
+              </a>
+            </li>
+            <li *ngIf="role === 'admin'">
+              <a routerLink="setting" (click)="listSelected('setting')"
+                [ngClass]="{'selected': item === 'setting'}">تنظیمات
               </a>
             </li>
           </ul>

@@ -21,4 +21,7 @@ export interface Food {
   average: number;
   length: number;
   descriptionConfirm?: string;
+  fileLiara?: {
+    url: string;
+  }
 }

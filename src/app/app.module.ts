@@ -29,6 +29,7 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     MatButtonModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   providers: [
     AuthGuard,

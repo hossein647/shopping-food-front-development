@@ -15,31 +15,42 @@ export class ReadUploadComponent implements OnInit {
   responseMessage: string;
   nameImage: string;
   baseApi: string = environment.url;
+  uploadCenter: string = '';
+  urlImage: string = '';
 
   constructor(
     private uploadService: UploadService,
     private _snackbar: Snackbar,
-  ) { }
+  ) { 
+    this.uploadService.uploadCenter$.subscribe({
+      next: (res: any) => {
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.getUploadedDataForImage();
+        }
+      },
+      error: (err: any) => {}
+    })
+  }
 
   ngOnInit(): void {
-    this.getUploadedDataForImage();
   }
 
 
   getUploadedDataForImage() {
-    this.uploadService.getAllPrivate().subscribe(res => {
-      if (res) {        
+    this.uploadService.getAllGallery(this.uploadCenter).subscribe((res: any) => {
+      if ((res)) {          
         this.files = [];
         const result = JSON.parse(JSON.stringify(res));
-        this.files = result.files;    
+        this.files = result.files?.map((file: any) => ({ ...file, id: file?.['_id']  }));
       }
     })
   }
 
 
 
-  remove(i: number, id: number) {
-    this.uploadService.remove(id).subscribe(res => {
+  remove(i: number, id: string) {    
+    this.uploadService.remove(id, this.uploadCenter, this.files[i].fileLiara?.Key).subscribe(res => {
       if (res) {   
         this.getUploadedDataForImage();
         const result = JSON.parse(JSON.stringify(res));

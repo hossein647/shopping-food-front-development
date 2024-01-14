@@ -5,6 +5,8 @@ import { FoodCategoryService } from 'src/app/front/_services/food-category.servi
 import { ShopCategoryService } from 'src/app/front/_services/shop-category.service';
 import { SubFood } from 'src/app/__dashboard/sub-category-food/state/sub-food.model';
 import { environment } from 'src/environments/environment';
+import { UploadService } from 'src/app/__dashboard/upload/state/upload/upload.service';
+import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -20,16 +22,26 @@ export class FilterSidebarComponent implements OnInit {
   @Output() filterShops = new EventEmitter<any>();
   subSelected: string;
   nameCategory: string;
+  uploadCenter: string;
   baseApi: string = environment.url;
 
   constructor(
     private shopCategoryService: ShopCategoryService,
     private activatedRoute: ActivatedRoute,
     private foodCategoryService: FoodCategoryService,
-  ) { }
+    private globalService: GlobalService,
+  ) { 
+    this.globalService.uploadCenter$.subscribe({
+      next: (res: any) => {        
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;          
+          this.getShopCategory();
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
-    this.getShopCategory();
   }
   
   
@@ -37,8 +49,8 @@ export class FilterSidebarComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(
       (param: ParamMap) => {
         if (param.has('shop-category')) {
-          this.shopCategoryService.getAll().subscribe(
-            res => {              
+          this.shopCategoryService.getAll(this.uploadCenter).subscribe(
+            res => {                            
               if (res) {
                 const categoryName = param.get('shop-category')
                 this.categories = res.shopCategories;  

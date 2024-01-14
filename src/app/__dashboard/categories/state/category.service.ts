@@ -17,8 +17,8 @@ export class CategoryService {
     ) {}
 
 
-  getAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.baseUrl}/shop-category/getAll`, { withCredentials: true })
+  getAll(uploadCenter: string): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.baseUrl}/shop-category/getAll-${uploadCenter}`, { withCredentials: true })
     .pipe(
       tap(entities => {
         this.categoryStore.set(entities);

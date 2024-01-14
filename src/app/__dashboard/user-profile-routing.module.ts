@@ -22,6 +22,7 @@ import { ShopCategoryComponent } from './categories/shop-category/shop-category.
 import { FoodCategoryFormComponent } from './food-category/food-category-form/food-category-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   { 
@@ -149,6 +150,12 @@ const routes: Routes = [
             data: { role: ['seller', 'admin', 'customer'] }
           }
         ]
+      },
+      { 
+        path: 'setting', 
+        component: SettingComponent, 
+        canActivate: [RoleGuard],
+        data: { role: ['seller', 'admin', 'customer'] }
       },
   ]},
 ];

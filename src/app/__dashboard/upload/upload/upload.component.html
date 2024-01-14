@@ -38,7 +38,7 @@
         <div class="read-files" *ngIf="files.length > 0">
             <div class="box-image"  *ngFor="let image of images; let i = index;"  >
                 <div class="detail">
-                    <img class="image" [src]="image.url" [alt]="image.name">
+                    <img class="image" [src]="uploadCenter === 'liara' ? image.url : baseApi + '/' + image.userId + '/' + image.filename" [alt]="image.name">
                     <small class="image-name">{{image.name}}</small>
                 </div>
                 <mat-icon class="delete" (click)="removePreviewFile(i, image.name)">delete</mat-icon>

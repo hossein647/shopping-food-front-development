@@ -20,6 +20,7 @@ export class SellerLoginComponent implements OnInit {
   loadingSpinner: boolean;
   allowRequest  : boolean = true;
   @Input() show : boolean;
+  uploadCenter  : string;
 
   constructor(
     private userService: UserService,
@@ -27,7 +28,15 @@ export class SellerLoginComponent implements OnInit {
     private router: Router,
     private globalService: GlobalService,
     private localStorageData: LocalStorageData,
-  ) { }
+  ) {
+    globalService.uploadCenter$.subscribe({
+      next: (res: any) => {
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.title = 'ورود فروشندگان'
@@ -42,7 +51,7 @@ export class SellerLoginComponent implements OnInit {
       password: data.formGroup.value.password,
       role: Role.Seller,
     };
-    this.userService.login(requiredRoles).subscribe(
+    this.userService.login(requiredRoles, this.uploadCenter).subscribe(
       res => {
         if (res) {     
           const result = JSON.parse(JSON.stringify(res));

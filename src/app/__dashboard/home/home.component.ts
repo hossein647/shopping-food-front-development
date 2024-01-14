@@ -1,5 +1,5 @@
 import { UiService } from '../state/ui/ui.service';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UiQuery } from '../state/ui/ui.query';
 import { UserService } from 'src/app/auth/state/user.service';
@@ -10,6 +10,7 @@ import { UploadService } from '../upload/state/upload/upload.service';
 import { Upload } from '../upload/state/upload/upload.model';
 import { environment } from 'src/environments/environment';
 import { GlobalFrontService } from 'src/app/front/_services/global-front.service';
+import { first, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -24,36 +25,52 @@ export class HomeComponent implements OnInit {
   expire  : any;
   loggedIn: boolean;
   role    : string;
-  file    : Upload;
-  upload  : boolean = false;
+  file    : Upload = { filename: '', id: '', originalname: '', setting: {id: '', uploadCenter: ''}, url: '', statusCode: '', userId: 0, message: '' };
   baseApi : string = environment.url;
+  keyImage: string = '';
+  uploadCenter: string = '';
 
   @ViewChild('cameraParent') cameraParent: ElementRef;
   @ViewChild('imgProfile')   imgProfile  : ElementRef;
 
   
   constructor(
-    private router          : Router,
-    private queryUi         : UiQuery,
-    private _snackbar       : Snackbar,
-    private uiService       : UiService,
-    private userService     : UserService,
-    private globalService   : GlobalService,
-    private uploadService   : UploadService,
-    private localStorageData: LocalStorageData,
+    private router            : Router,
+    private queryUi           : UiQuery,
+    private _snackbar         : Snackbar,
+    private uiService         : UiService,
+    private userService       : UserService,
+    private globalService     : GlobalService,
+    private uploadService     : UploadService,
+    private localStorageData  : LocalStorageData,
     private globalFrontService: GlobalFrontService,
-    ) {}
+    ) {
+      this.globalService.uploadCenter$.subscribe({
+        next: (res: any) => {
+          if (res?.setting?.uploadCenter) {
+            this.uploadCenter = res.setting.uploadCenter;
+          }
+        }
+      })
+    }
 
 
   ngOnInit(): void {
+    if (!this.uploadCenter) {
+      this.globalService.getSetting().subscribe({
+        next: (res: any) => {
+          if (res?.setting?.uploadCenter) {
+            this.uploadCenter = res.setting.uploadCenter;
+          }
+        }
+      })
+    }
     this.hasCookie();
     this.queryUi.getVisibilityUi().subscribe(isOpen => {      
       this.open = isOpen;
     });
     this.closeSidebar();
-    this.item = this.selectedListByCurrentRoute(this.router.url);
-    console.log(this.item);
-    
+    this.item = this.selectedListByCurrentRoute(this.router.url);    
   }
   
   toggleSidebar() {
@@ -118,33 +135,48 @@ export class HomeComponent implements OnInit {
 
 
   changeFileSelect(event: any) {
-    if (event.target.files.length > 0) {      
-      this.uploadService.uploadProfileImage(event.target.files[0], this.file?._id).subscribe(
-        res => {          
-          if (res.file) {            
-            this.file = res.file;
-            this.upload = true;
-          } else {
-            const tooLarge = 'سایز تصویر بیش از یک مگابایت می باشد.';
-            console.log(res);
-            
-            if (res.error.statusCode === 413) this._snackbar.addSnackbar(tooLarge, true, 3000)
-          }
-        }
-      )
+    if (event.target.files.length > 0) {   
+      this.uploadService.uploadCenter$.subscribe({
+        next: (resSetting) => {
+          const repairImageName = this.removeSpaceChar(event.target.files[0].name)
+          
+          const file = new File([event.target.files[0]], repairImageName, { type: event.target.files[0].type })
+            const oldDataImage = {
+              id:       this.file.id,
+              filename: this.file.filename || '',
+              setting:  resSetting.setting,
+            }  
+          this.uploadService.uploadProfileImage(file, oldDataImage).subscribe(
+            res => {                        
+              if (res?.setting?.uploadCenter === 'host') {
+                if (res) {            
+                  this.file = res;
+                    this.file.url = this.baseApi + '/' + this.file.url;
+                } else {
+                  const tooLarge = 'سایز تصویر بیش از یک مگابایت می باشد.';            
+                  if (res.error.statusCode === 413) this._snackbar.addSnackbar(tooLarge, true, 3000)
+                }
+            } else if (res?.setting?.uploadCenter === 'liara') {
+              this.file = res;
+              }
+            }
+          )
+        },
+        error: (err) => {}
+      })
     }
   }
 
 
-  getImageProfile() {
-    this.uploadService.getImageProfile().subscribe(
-      res => {        
-        if (res && !res?.err && !res.message) {
-          this.file = res;          
-          this.upload = true;       
-        }
-      }
-    )
+  async getImageProfile() {    
+    const key = this.keyImage;
+    this.uploadService.getImageProfile(key).subscribe({
+      next: (res: any) => {        
+        this.file = res;        
+        if (res?.setting?.uploadCenter === 'host' && res.statusCode === 200) this.file.url = this.baseApi + '/' + res.url;        
+      },
+      error: (err) => {}
+    })
   }
 
 
@@ -166,5 +198,11 @@ export class HomeComponent implements OnInit {
             : url.includes('edit')    ? url.slice(13, -30)
             : url.includes('/upload') ? url.slice(13, -7)
             : url.slice(13)
+  }
+
+
+  removeSpaceChar(str: string) {
+    const arr: string[] = str.split('');
+    return (arr.map((char, index) => char == ' ' ? char = '_' : char)).join('')
   }
 }

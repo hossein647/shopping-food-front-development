@@ -12,6 +12,7 @@ export class SearchBarComponent implements OnInit {
 
   @Input() lists: ShopCategory[];
   @Input() images: Upload[];
+  @Input() uploadCenter: string;
   @Output() onGoToPage = new EventEmitter<{alias: string, name: string}>();
   baseApi: string = environment.url;
 

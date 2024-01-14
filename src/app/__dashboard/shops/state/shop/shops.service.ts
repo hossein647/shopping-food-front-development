@@ -25,11 +25,11 @@ export class ShopsService {
   }
 
 
-  getAllWithPaginate() {
-    return this.http.get<Shop[]>(`${this.baseUrl}/shops/public-paginate`).pipe(
-      catchError(err => of(err))
-    )
-  }
+  // getAllWithPaginate() {
+  //   return this.http.get<Shop[]>(`${this.baseUrl}/shops/public-paginate`).pipe(
+  //     catchError(err => of(err))
+  //   )
+  // }
 
 
 

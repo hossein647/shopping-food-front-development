@@ -21,6 +21,7 @@ export class CustomerLoginComponent implements OnInit {
   goToForget    : string;
   loadingSpinner: boolean;
   allowRequest  : boolean = true;
+  uploadCenter  : string = '';
 
   @Input() show : boolean;
 
@@ -31,14 +32,22 @@ export class CustomerLoginComponent implements OnInit {
     private globalService: GlobalService,
     private localStorageData: LocalStorageData,
     private globalFrontService: GlobalFrontService,
-  ) { }
+  ) {
+    this.globalService.uploadCenter$.subscribe({
+      next: (res: any) => {
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.title = 'ورود کاربران'
     this.submitLabel="ورود";
   }
 
-  submit(data: Form){    
+  submit(data: Form){        
     this.loadingSpinner = true;
     this.allowRequest = false;   
     const requiredRoles: User = {
@@ -46,7 +55,7 @@ export class CustomerLoginComponent implements OnInit {
       password: data.formGroup.value.password,
       role: Role.Customer,
     };
-    this.userService.login(requiredRoles).subscribe(
+    this.userService.login(requiredRoles, this.uploadCenter).subscribe(
       res => {        
         if (res) {          
           const result = JSON.parse(JSON.stringify(res));

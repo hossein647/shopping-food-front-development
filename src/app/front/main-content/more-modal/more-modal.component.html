@@ -33,7 +33,7 @@
     <div class="min-card flex flex-col sm:flex-row">
         <div class="wrapper-img w-full h-[250px] sm:w-[60%] sm:h-[200px] p-4">
             <img 
-                [src]="baseApi + '/' + food.userId + '/' + food.image" 
+                [src]="uploadCenter === 'liara' ? food.fileLiara?.url : baseApi + '/' + food.userId + '/' + food.image" 
                 alt="" 
                 class="w-full h-full sm:h-[185px] sm:rounded-tr-md border">
         </div>
@@ -108,7 +108,7 @@
                         <div class="profile flex items-center">
                             <img 
                                 *ngIf="comment.userId.image"
-                                [src]="baseApi + '/' + comment.userId._id + '/profile/' + comment.userId.image"
+                                [src]="uploadCenter === 'liara' ? food.fileLiara?.url : baseApi + '/' + comment.userId._id + '/profile/' + comment.userId.image"
                                 class="border w-6 h-6 rounded-full" 
                                 alt="" 
                                 width="24" 
@@ -146,7 +146,7 @@
                         <div class="header-comment flex justify-between items-center py-2 px-3">
                             <div class="profile flex items-center">
                                 <img *ngIf="replay.userId?.image"
-                                    [src]="baseApi + '/' + replay.userId._id + '/profile/' + replay.userId.image"
+                                    [src]="uploadCenter === 'liara' ? food.fileLiara?.url : baseApi + '/' + replay.userId._id + '/profile/' + replay.userId.image"
                                     class="border w-6 h-6 rounded-full" 
                                     alt="" 
                                     width="24" 

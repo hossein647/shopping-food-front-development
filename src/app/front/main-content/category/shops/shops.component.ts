@@ -6,6 +6,7 @@ import { ShopsService } from 'src/app/front/_services/shops.service';
 import { Shop } from 'src/app/__dashboard/shops/state/shop/shop.model';
 import { GlobalFrontService } from 'src/app/front/_services/global-front.service';
 import { GlobalFront } from 'src/app/front/_interfaces/global-front.interface';
+import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
   selector: 'app-shops',
@@ -22,32 +23,53 @@ export class ShopsComponent implements OnInit {
   categoryName: string;
   message     : string;
   orderList: any;
+  uploadCenter: string = '';
 
   constructor(
     private shopService  : ShopsService,
     private ratingService: RatingService,
     private router       : Router,
     private globalFrontService: GlobalFrontService,
+    private globalService: GlobalService,
   ) { 
     const guest = this.globalFrontService.isExistGuest();
     const email = this.globalFrontService.getEmail();
     const currentUser = (!guest && !email) || guest ? 'guest' : email;
     this.orderList = this.getCartLocalStorage(currentUser);
     this.globalFrontService.updateOrderFood(this.orderList);
+    globalService.uploadCenter$.subscribe({
+      next: (res) => {
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.getShops();
+        }
+        //  else {
+        //   this.router.navigate(['/shops'])
+        // }
+      }
+    })
   }
 
   ngOnInit(): void {
-    this.getShops();
-    
+    if (!this.uploadCenter) {
+      this.globalService.getSetting().subscribe({
+        next: (res) => {
+          if (res?.setting?.uploadCenter) {
+            this.uploadCenter = res.setting.uploadCenter;
+            this.getShops();
+          }
+        }
+      })
+    }
     if (this.shops.length === 0) {
-      const category = JSON.parse(window.localStorage.getItem('onc') || '');      
+      const category = JSON.parse(window.localStorage.getItem('onc') || '');            
       this.shopService.setShops(category.name, 6, 0);
     }
   }
 
   getShops() {
     this.shopService.getShops().subscribe(
-      res => {        
+      res => {                
         if (res?.shops?.docs) {
           this.shops = res.shops?.docs;          
           this.paginate = res;
@@ -110,7 +132,7 @@ export class ShopsComponent implements OnInit {
   getShopsFromSidebarFilter(data: any) {
     this.shopService.getAllByCategoryAndDescription(data.category, data.subFoodSelected, 6, 0)
       .subscribe(
-        res => {
+        res => {          
           if (res) {            
             this.shopService.setSubFoodCategory(res);
           }

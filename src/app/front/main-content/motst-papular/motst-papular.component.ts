@@ -1,16 +1,17 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
 import { GlobalFront } from '../../_interfaces/global-front.interface';
 import { GlobalFrontService } from '../../_services/global-front.service';
 import { CardsService } from '../../_services/cards.service';
+import { GlobalService } from 'src/app/state/global.service';
 
 @Component({
   selector: 'app-motst-papular',
   templateUrl: './motst-papular.component.html',
   styleUrls: ['./motst-papular.component.scss']
 })
-export class MotstPapularComponent implements OnInit {
+export class MotstPapularComponent implements OnInit, OnChanges {
 
   @ViewChildren('price')  price : QueryList<ElementRef>;
   @ViewChildren('copon')  copon : QueryList<ElementRef>;
@@ -30,19 +31,33 @@ export class MotstPapularComponent implements OnInit {
   showOverlay      : boolean = false;
   changeZIndex     : boolean = false;
   loggedIn         : boolean | undefined;
+  @Input() uploadCenter: string = '';
   
   constructor(
     private cardsService      : CardsService,
     private globalFrontService: GlobalFrontService,
     private _snackbar         : Snackbar,
     private elRef             : ElementRef,
-  ) { }
+    private globalService     : GlobalService,
+  ) {
+
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const key in changes) {
+      const element = changes[key];
+      
+      if (key === 'uploadCenter' && element.currentValue) {
+        this.uploadCenter = element.currentValue;
+        this.mostPopularFood();
+      }
+    }
+  }
 
   
   ngOnInit(): void {
+    
     this.notLoginModal = this.elRef.nativeElement.querySelector('.not-login-modal');
     this.buyMessage = 'برای خرید باید وارد حساب کاربری شوید.'
-    this.mostPopularFood();
     const guest = this.globalFrontService.isExistGuest();
     const email = this.globalFrontService.getEmail();
     const currentUser = (!guest && !email) || guest ? 'guest' : email;
@@ -55,10 +70,10 @@ export class MotstPapularComponent implements OnInit {
 
 
   mostPopularFood() {
-    this.cardsService.popular().subscribe(
+    this.cardsService.popular(this.uploadCenter).subscribe(
       res => {
-        if (res) {                                        
-          this.foods = res.foods;          
+        if (res) {                                                  
+          this.foods = res.foods;                    
           this.getAverageRate(this.foods);        
         }
       }

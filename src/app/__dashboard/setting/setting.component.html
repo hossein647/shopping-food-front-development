@@ -1,0 +1,8 @@
+<div class="setting">
+    <section class="upload-center">
+        <label class="title">مرکز آپلود فایل :</label>
+        <mat-radio-group (change)="changeUploadCenter($event)">
+            <mat-radio-button class="radio-item" value="liara" [checked]="setting.uploadCenter === 'liara'" >لیارا</mat-radio-button>
+            <mat-radio-button class="radio-item" value="host" [checked]="setting.uploadCenter === 'host'" >هاست ( پارس وب سرور )</mat-radio-button>
+        </mat-radio-group>    </section>
+</div>

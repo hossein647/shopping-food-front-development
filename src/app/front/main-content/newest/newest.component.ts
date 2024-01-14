@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GlobalQuery } from 'src/app/state/global.query';
 import { Food } from 'src/app/__dashboard/foods/state/food.model';
 import { Snackbar } from 'src/app/___share/helper/snackbar';
@@ -11,7 +11,7 @@ import { GlobalFrontService } from '../../_services/global-front.service';
   templateUrl: './newest.component.html',
   styleUrls: ['./newest.component.scss']
 })
-export class NewestComponent implements OnInit {
+export class NewestComponent implements OnInit, OnChanges {
 
   foods            : Food[];
   food             : Food;
@@ -24,6 +24,7 @@ export class NewestComponent implements OnInit {
   showNotLoginModal: boolean = false;
   showOverlay      : boolean = false;
   loggedIn         : boolean | undefined = false;
+  @Input() uploadCenter: string;
   
   constructor(
     private _snackbar         : Snackbar,
@@ -32,11 +33,19 @@ export class NewestComponent implements OnInit {
     private elRef             : ElementRef,
     private globalQuery       : GlobalQuery,
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const key in changes) {
+      const element = changes[key];
+      if (key === 'uploadCenter' && element.currentValue) {        
+        this.uploadCenter = element.currentValue;
+        this.newestFood();
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.notLoginModal = this.elRef.nativeElement.querySelector('.not-login-modal');
     this.buyMessage = 'برای خرید باید وارد حساب کاربری شوید.'
-    this.newestFood();
     const guest = this.globalFrontService.isExistGuest();
     const email = this.globalFrontService.getEmail();
     const currentUser = (!guest && !email) || guest ? 'guest' : email;
@@ -49,7 +58,7 @@ export class NewestComponent implements OnInit {
 
 
   newestFood() {
-    this.cardsService.newest().subscribe(
+    this.cardsService.newest(this.uploadCenter).subscribe(
       res => {
         if (res) {
           this.foods = res.foods;

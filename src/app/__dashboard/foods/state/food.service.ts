@@ -17,11 +17,11 @@ export class FoodService {
   }
 
 
-  paginateFoods(limit: number, page: number) {
+  paginateFoods(limit: number, page: number, uploadCenter: string) {
     const params = new HttpParams()
     .set('limit', limit)
     .set('page', page);
-    return this.http.get<Food[]>(`${this.baseUrl}/foods/getAll/paginate-food`, { params, withCredentials: true })
+    return this.http.get<Food[]>(`${this.baseUrl}/foods/getAll/paginate-food-${uploadCenter}`, { params, withCredentials: true })
     .pipe(
       catchError(err => of(err)),
       tap(entities => this.foodStore.set(entities)));

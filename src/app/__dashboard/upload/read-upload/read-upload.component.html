@@ -9,10 +9,10 @@
                 *ngFor="let file of files; 
                 let i = index;">
                <div class="detail">
-                    <img [src]="baseApi + '/' + file.userId + '/' + file.filename" alt="">
+                    <img [src]="uploadCenter === 'liara' ? file.fileLiara?.Location : baseApi + '/' + file.userId + '/' + file.filename" alt="">
                     <small class="image-name">{{file.filename}}</small>
                </div>
-                <mat-icon class="delete" (click)="remove(i, file._id)">delete</mat-icon>
+                <mat-icon class="delete" (click)="remove(i, file.id)">delete</mat-icon>
             </div>
         </div>
         <div *ngIf="files.length === 0">

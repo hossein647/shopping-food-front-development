@@ -19,7 +19,7 @@
                     *ngFor="let food of foods; let i = index;">
             <div class="card-hedear">
                 <img 
-                    [src]="baseApi + '/' + food.userId + '/' + food.image"
+                    [src]="uploadCenter === 'liara' ? food?.fileLiara?.url : baseApi + '/' + food.userId + '/' + food.image"
                     class="h-64 rounded-md w-full hover:cursor-pointer" 
                     alt=""
                     (click)="showMoreModal(food, i)">

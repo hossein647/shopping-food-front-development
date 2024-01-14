@@ -37,6 +37,8 @@ export class FormShopComponent implements OnInit {
   shopId          : number;
   loadingSpinner  : boolean = false;
   selectedImage   : string;
+  uploadCenter: string = '';
+  url_liara: string = '';
   
   
   @ViewChild('form') form: NgForm;
@@ -53,15 +55,25 @@ export class FormShopComponent implements OnInit {
     private dialogHelper: MatDialogHelper,
     private location: Location,
     private categoryService: CategoryService,
-    ) {}
-
-     
+    ) {
+    this.uploadService.uploadCenter$.subscribe({
+      next: (res: any) => {        
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.getCategoryState();
+        }
+      },
+      error: (err: any) => { }
+    })
+  }
+  
+  
   ngOnInit(): void {
     this.initValueForm();
     this.initErrorForm();
     this.initLabel();
-    this.getCategoryState();
-    if (!this.isCreateForm()) this.getShopEditFrom();
+    if (!this.isCreateForm()) this.getShopEditFrom(); 
+    
   }
 
 
@@ -83,7 +95,14 @@ export class FormShopComponent implements OnInit {
 
 
   onSubmit() {
-    const formValue = { ...this.shopForm.value, imageId: this.shopEdit.imageId }
+    const formValue = { 
+      ...this.shopForm.value, 
+      imageId: this.shopEdit.imageId,
+      fileLiara: {
+        url: this.url_liara
+      }
+     }    
+
     if (this.isCreateForm()) this.submitCreateForm(formValue)
     else this.submitEditForm(formValue);
   }
@@ -99,7 +118,7 @@ export class FormShopComponent implements OnInit {
 
   submitCreateForm(shop: Shop) {
     if (this.shopForm.valid) {
-      this.shopService.create(shop).subscribe(res => {
+      this.shopService.create(shop).subscribe(res => {        
         if (res) {
           const result = JSON.parse(JSON.stringify(res))
           this._snackbar.addSnackbar(result.message, result?.err, 3000);
@@ -145,8 +164,8 @@ export class FormShopComponent implements OnInit {
   
   openDialog() {
     this.loadingSpinner = true;
-    this.uploadService.getAllPrivate().subscribe(res => {
-      if (res) {
+    this.uploadService.getAllGallery(this.uploadCenter).subscribe(res => {
+      if (res) {        
         this.loadingSpinner = false;
         const result = JSON.parse(JSON.stringify(res))
         const images = result.files;
@@ -156,6 +175,7 @@ export class FormShopComponent implements OnInit {
         const dialogRef = this.dialogHelper.openDialog(images, responseImage, this.selectedImage);
         dialogRef.afterClosed().subscribe(image => {
           if (image) {
+            this.url_liara = image.fileLiara?.Location;
             this.shopEdit = {
               ...this.shopEdit, image: image.filename, imageId: image._id
             }
@@ -185,13 +205,16 @@ export class FormShopComponent implements OnInit {
   getShopEditFrom() {
     this.activatedRoute.params.subscribe(param => {
       this.shopId = param.id;
-      this.shopPaginateQuery.select(state => state.entities?.shops).subscribe(data => {
+      this.shopPaginateQuery.select(state => state.entities?.shops).subscribe((data: any) => {
         if (data) {
+          
           const shops: Shop[] = JSON.parse(JSON.stringify(data))?.docs;
           this.shopEdit       = shops?.filter(shop => shop._id === this.shopId)[0];
-
+          
           if (this.shopEdit) {
-            this.shopForm.patchValue({ ...this.shopEdit })
+            this.shopForm.patchValue({ ...this.shopEdit });
+            this.url_liara = shops[0].fileLiara?.url || '';
+            
             this.selectedImage        = this.shopEdit.image;
             this.shopEdit.description.forEach(desc => this.newChip(desc))
           }
@@ -209,8 +232,8 @@ export class FormShopComponent implements OnInit {
   }
   
 
-  getCategoryState() {
-    this.categoryService.getAll().subscribe(
+  getCategoryState() {    
+    this.categoryService.getAll(this.uploadCenter).subscribe(
       res => {
         if (res) {
           const result = JSON.parse(JSON.stringify(res));

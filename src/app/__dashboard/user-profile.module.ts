@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReadShopsComponent } from './shops/read-shops/read-shops.component';
 import { LayoutModule} from '@angular/cdk/layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from '../___share/module/table/table.module';
@@ -45,6 +45,9 @@ import { SpinnerModule } from '../___share/module/spinner/spinner.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component'; 
 import { MatCardModule } from '@angular/material/card';
+import { SettingComponent } from './setting/setting.component';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -75,6 +78,7 @@ import { MatCardModule } from '@angular/material/card';
     FormShopComponent,
     ProfileComponent,
     PaymentHistoryComponent,
+    SettingComponent,
   ],
   imports: [
     CommonModule,
@@ -98,6 +102,8 @@ import { MatCardModule } from '@angular/material/card';
     MatChipsModule,
     SpinnerModule,
     MatCardModule,
+    MatRadioModule,
+    FormsModule,
   ],
   providers: [],
 })

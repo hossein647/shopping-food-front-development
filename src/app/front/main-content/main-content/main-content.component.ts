@@ -4,6 +4,8 @@ import { ShopCategoryService } from '../../_services/shop-category.service';
 import { ShopCategory } from '../../_interfaces/shop-category.interface'
 import { Upload } from 'src/app/__dashboard/upload/state/upload/upload.model';
 import { User } from 'src/app/auth/state/user.model';
+import { GlobalService } from 'src/app/state/global.service';
+
 
 @Component({
   selector: 'app-main-content',
@@ -16,14 +18,24 @@ export class MainContentComponent implements OnInit {
   images: Upload[] = [];
   users : User[];
   categoryName: string;
+  uploadCenter: string = '';
   
   constructor(
     private router: Router,
     private shopCategoryService: ShopCategoryService,
-  ) { }
+    private golbalService: GlobalService,
+  ) {
+    this.golbalService.getSetting().subscribe({
+      next: (res: any) => { 
+        if (res?.setting?.uploadCenter) {
+          this.uploadCenter = res.setting.uploadCenter;
+          this.getShopCategory();
+        }       
+      }
+    })
+  }
 
   ngOnInit(): void {
-    this.getShopCategory();
   }
 
   goToPage(category: { alias: string, name: string }) {
@@ -33,9 +45,9 @@ export class MainContentComponent implements OnInit {
 
 
   getShopCategory() {
-    this.shopCategoryService.getAll().subscribe(
+    this.shopCategoryService.getAll(this.uploadCenter).subscribe(
       res => {
-        if (res) {
+        if (res) {          
           this.lists = res.shopCategories;
         }            
       })
